@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>聊天窗口</title>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css">
+    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+        <link rel="icon" href="/images/xingshixiaowo.ico">
+
+    <link href="/css/style_chat.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+</head>
+<body>
+{% include '/home/xuanfukuang.html' %}
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <img alt="image" class="rounded-circle" style="height: 80px;weight:80px"
+                             src='/chat_room/images/{{ avatar }}'/>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="/home/{{session.get('userid')}}">
+                            <span class="block m-t-xs font-bold">{{session.get('nickname')}}</span>
+                        </a>
+
+                    </div>
+                    <div class="logo-element">
+                        <img alt="image" class="rounded-circle" style="height: 40px;weight:40px"
+                             src='/chat_room/images/{{avatar }}'/>
+                    </div>
+                </li>
+
+
+                <li class="active">
+                    <a href="/chatroom/index"><i class="fa fa-address-card"></i> <span
+                            class="nav-label">联系人</span></a>
+                </li>
+                <li class="active">
+                    <a href="/chatroom/chatroom"><i class="fa fa-wechat"></i> <span class="nav-label">聊天室</span></a>
+                </li>
+                  <li class="active">
+                    <a href="/sixin/{{session.get('userid')}}"><i class="fa fa-book"></i> <span class="nav-label">私信板</span></a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i>
+                    </a>
+
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">欢迎您，{{session.get('nickname')}}</span>
+                    </li>
+                    <li>
+                        <a href="/home/{{session.get('userid')}}">
+                            <i class="fa fa-sign-out"></i> 回到首页
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>聊天窗口| {{ find_userid(follow_userid).nickname}}</h2>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+
+
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12 ">
+
+                    <div class="ibox chat-view">
+
+                        <div class="ibox-title">
+                            <small class="float-right text-muted" style="font-weight: bold;font-size: 165%">
+                                一对一聊天室</small>
+                            <button class="btn btn-danger" id="clear-messages"
+                                    style="float:right;border: 1px solid green;font-size: 13px">清除历史信息
+                            </button>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div class="row">
+
+                                <div class="col-md-9 ">
+                                    <div class="chat-discussion" style="height: 700px">
+                                        {% for message in message_one %}
+                                        <div class="chat-message left">
+                                            {% if message.user_id == session.get("userid") %}
+                                            <img class="message-avatar" src='/chat_room/images/{{message.avatar}}'
+                                                 alt="">
+                                            {% else%}
+
+                                            <img class="message-avatar"
+                                                 src='/chat_room/images/{{ find_userid(message.user_id).avatar}}'
+                                                 alt="">
+                                            {% endif %}
+
+                                            <div class="message">
+                                                {% if message.user_id == session.get("userid") %}
+
+                                                <a class="message-author"> {{ message.nickname }} </a>
+                                                <span class="message-date">  {{message.create_time}} </span>
+                                                <span class="message-content">{{message.content}}</span>
+                                                {% else%}
+                                                <a class="message-author"> {{ find_userid(message.user_id).nickname
+                                                    }} </a>
+                                                <span class="message-date">  {{message.create_time}} </span>
+                                                <span class="message-content">{{message.content}}</span>
+                                                {% endif %}
+
+                                                {% if message.user_id == session.get("userid") or session.role=='admin' %}
+                                                <button class="delete-chedi btn btn-outline-success"
+                                                        data-messageid="{{ message.message_id }}">❌
+                                                </button>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="chat-users" style="height: 500px">
+                                        <div class="users-list">
+
+                                            {% for row in user_guanzhu %}
+                                            <div class="chat-user">
+                                                <!--                                                <span class="float-right label label-primary">在线</span>-->
+                                                <img class="chat-avatar" src='/chat_room/images/{{ row.avatar }}'
+                                                     style="border-radius: 50%; width: 40px"/>
+                                                <!--                                                <span class="float-right label label-primary" style="border:1px solid #beec18; margin-left: 200px">在线</span>-->
+
+                                                <div class="chat-user-name">
+                                                    <a href="/chatroom/{{session.get('userid')}}--{{row.userid}}"
+                                                       style="font-weight: bold;font-size: 15px">{{row.nickname}}</a>
+                                                </div>
+
+                                            </div>
+
+                                            {% endfor %}
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row" style=" margin-top: 50px">
+                                <div class="col-lg-12">
+
+                                    <div class="chat-message-form">
+                                        {# <a class="fa fa-smile-o fa-2x"
+                                              style="margin-top: 12px;margin-left: 12px"></a>#}
+                                        <select style="margin-left: 0;outline: none;border: none" id="Emoji">
+                                            <option selected="selected" value="0">&#128512;</option>
+                                            <option value="&#128513;">&#128513;</option>
+                                            <option value="&#128514;">&#128514;</option>
+                                            <option value="&#128515;">&#128515;</option>
+                                            <option value="&#128516;">&#128516;</option>
+                                            <option value="&#128517;">&#128517;</option>
+                                            <option value="&#128518;">&#128518;</option>
+                                            <option value="&#128519;">&#128519;</option>
+                                            <option value="&#128520;">&#128520;</option>
+                                            <option value="&#128521;">&#128521;</option>
+                                            <option value="&#128522;">&#128522;</option>
+                                            <option value="&#128523;">&#128523;</option>
+                                            <option value="&#128524;">&#128524;</option>
+                                            <option value="&#128525;">&#128525;</option>
+                                            <option value="&#128526;">&#128526;</option>
+                                            <option value="&#128527;">&#128527;</option>
+                                            <option value="&#128528;">&#128528;</option>
+                                            <option value="&#128529;">&#128529;</option>
+                                            <option value="&#128530;">&#128530;</option>
+                                            <option value="&#128531;">&#128531;</option>
+                                            <option value="&#128532;">&#128532;</option>
+                                            <option value="&#128533;">&#128533;</option>
+                                            <option value="&#128534;">&#128534;</option>
+                                            <option value="&#128535;">&#128535;</option>
+                                            <option value="&#128536;">&#128536;</option>
+                                            <option value="&#128537;">&#128537;</option>
+                                            <option value="&#128538;">&#128538;</option>
+                                            <option value="&#128539;">&#128539;</option>
+                                            <option value="&#128540;">&#128540;</option>
+                                            <option value="&#128541;">&#128541;</option>
+                                            <option value="&#128542;">&#128542;</option>
+                                            <option value="&#128543;">&#128543;</option>
+                                            <option value="&#128544;">&#128544;</option>
+                                            <option value="&#128545;">&#128545;</option>
+                                            <option value="&#128546;">&#128546;</option>
+                                            <option value="&#128547;">&#128547;</option>
+                                            <option value="&#128548;">&#128548;</option>
+                                            <option value="&#128549;">&#128549;</option>
+                                        </select>
+                                        <button href="#" class="fa fa-file-picture-o "
+                                                style="margin-top: 12px;margin-left: 12px; border: none;color: orange;background: none"
+                                                onclick="selectFile();"></button>
+                                        <input type="file" id="file" onchange="getFilePath()"
+                                               style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;"/>
+
+                                        <div class="form-group">
+
+                                            <input type="text" class="enter" id="enter"
+                                                   style="margin-top: 10px;height: 150px;width: 75%; border: none;padding-top:0px;outline:none"
+                                                   placeholder="输入聊天消息" value="">
+                                            <br>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+<script src="/chat_room/js/popper.min.js"></script>
+<script src="/chat_room/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/chat_room/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- Custom and plugin javascript -->
+<script src="/chat_room/js/inspinia.js"></script>
+<script src="/chat_room/js/plugins/pace/pace.min.js"></script>
+<script src="/chat_room/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script> -->
+<script src="/chat_room/js/socket.io.js"></script>
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>-->
+
+<script type="text/javascript" charset="utf-8">
+
+    //删除历史信息(直接从数据库中进行删除,与下面不一样)
+    $(function () {
+        $('.delete-chedi').click(function () {
+            var messageId = $(this).data('messageid');
+            // alert(messageId)
+            bootbox.confirm({
+                title: "删除信息",
+                message: "您确定要删除这则聊天信息吗？",
+                buttons: {
+                    confirm: {
+                        label: '确认',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: '取消',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: '/delete-message',
+                            type: 'POST',
+                            data: {message_id: messageId},
+                            success: function (data) {
+                                if (data === 'delete-success') {
+                                    bootbox.alert({
+                                        title: "信息提示",
+                                        message: "信息删除成功.",
+                                        callback: function () {
+                                            location.reload();
+                                        }
+                                    }).find('.modal-dialog').addClass('success-dialog');
+                                } else {
+                                    bootbox.alert({title: "错误提示", message: "删除失败，请重试！"});
+                                }
+                            },
+                            error: function (xhr, textStatus, errorThrown) {
+                                bootbox.alert({title: "错误提示", message: "删除失败，请重试！！"});
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    });
+
+
+    //清除历史信息（不会从数据库中直接删除信息,防止后悔,这样每次刷新页面后依然会展示所有记录在数据库中的聊天记录
+    document.getElementById('clear-messages').addEventListener('click', function () {
+        // 获取聊天容器元素
+        var chatContainer = document.getElementsByClassName('chat-discussion')[0];
+        if (!chatContainer) {
+            // alert("聊天容器未找到！");
+            bootbox.alert({title: "错误提示", message: "聊天容器未找到！"});
+
+            return;
+        }
+
+        // 获取聊天消息元素
+        var messages = chatContainer.getElementsByClassName('chat-message');
+        if (messages.length === 0) {
+            // alert("没有消息可以清除！");
+            bootbox.alert({title: "错误提示", message: "没有消息可以清除！"});
+
+            return;
+        }
+
+        var numberOfMessagesToClear = 5; // 指定要清除的消息数量
+
+        // 使用一个数组来保存要删除的消息的引用
+        var messagesToDelete = Array.prototype.slice.call(messages);
+
+        // 从前往后删除指定数量的消息
+        for (var i = 0; i < Math.min(messagesToDelete.length, numberOfMessagesToClear); i++) {
+            chatContainer.removeChild(messagesToDelete[i]);
+        }
+    });
+
+
+    // 获取当前页面的完整URL
+    var currentUrl = window.location.href;
+
+    // 查找`--`在URL中的位置
+    var index = currentUrl.indexOf('--');
+
+    // 如果找到`--`，则截取`--`后面的内容
+    if (index !== -1) {
+        var extractedContent = currentUrl.substring(index + 2);
+        console.log(extractedContent); // 输出截取的内容
+        // alert(extractedContent)
+    } else {
+        console.log("URL中未找到`--`");
+    }
+    //     var parts = currentUrl.split('/'); // 使用斜杠分割 URL
+    // var lastPart = parts[parts.length - 1]; // 获取最后一个部分
+    // var userAndContent = lastPart.split('--'); // 使用'--'分割最后一个部分
+    // var userid = userAndContent[0]; // 获取'--'前面的部分，即用户ID
+
+
+    var filepath;
+    var log = function () {
+        console.log.apply(console, arguments)
+    }
+
+    var socket;
+
+    var current_channel = ''
+
+    var clear_board = function () {
+        $('.enter').val('');
+        log('清空')
+    }
+
+    $(document).ready(function () {
+
+        //   // 直接发送AJAX POST请求给后端
+        // $.ajax({
+        //     // url: "/chatroom/{{session.get('userid')}}--" + extractedContent,
+        //       url: "/chatroom/" + userid + "--" + extractedContent,
+        //     type: 'POST',
+        //     data: {
+        //         communicate_user: parseInt(extractedContent, 10)
+        //     },
+        //     success: function (response) {
+        //         // 请求成功时执行的函数
+        //         // alert("/chatroom/" + userid + "--" + extractedContent)
+        //         // alert( "/chatroom/{{session.get('userid')}}--" + extractedContent)
+        //         console.log(response);
+        //     },
+        //     error: function (xhr, status, error) {
+        //         // 请求失败时执行的函数
+        //         console.error("AJAX Error: " + error);
+        //     }
+        // });
+
+
+        //创建实例
+        socket = io.connect('ws://' + document.domain + ':' + location.port + "/chatroom/chatroom_one");
+        log('qqq', socket)
+        socket.on('connect', function () {
+            log('连接成功');
+
+        });
+
+
+        socket.on('message', function (data) {
+            Username = data.nickname
+            text = data.text
+            userid = data.userid
+            create_time = data.create_time
+            var avatar_url = data.avatar
+            log(Username + ':' + text)
+             var deleteButton = "";
+    // if (userid === session.get("userid")) {
+        deleteButton = "<button class='delete-chedi btn btn-outline-success' data-messageid='" + data.message_id + "'>❌</button>";
+    // }
+
+    if (filepath) {
+        $(".chat-discussion").append("<div class='chat-message left'> <img class='message-avatar' src='/chat_room/images/" + avatar_url + "' alt=''> <div class='message'><a class='message-author'> " + Username + "</a> <span class='message-date'>" + create_time + "</span><span class='message-content'> <img src='" + filepath + "' class='imgchat' style='height: 100px;width:100px'/>" + text + "</span> " + deleteButton + " </div> </div>");
+        $(".img").attr("src", '');
+    } else {
+        $(".chat-discussion").append("<div class='chat-message left'> <img class='message-avatar' src='/chat_room/images/" + avatar_url + "' alt=''> <div class='message'><a class='message-author'> " + Username + "</a> <span class='message-date'>" + create_time + "</span><span class='message-content'>" + text + "</span> " + deleteButton + " </div> </div>");
+    }
+            // if (filepath) {
+            //     $(".chat-discussion").append("<div class='chat-message left'> <img class='message-avatar' src='/chat_room/images/" + avatar_url + "' alt=''> <div class='message'><a class='message-author'> " + Username + "</a> <span class='message-date'>" + create_time + "</span><span class='message-content'> <img src='" + filepath + "' class='imgchat' style='height: 100px;width:100px'/>" + text + "</span> </div> </div>");
+            //     $(".img").attr("src", '');
+            // } else {
+            //     $(".chat-discussion").append("<div class='chat-message left'> <img class='message-avatar' src='/chat_room/images/" + avatar_url + "' alt=''> <div class='message'><a class='message-author'> " + Username + "</a> <span class='message-date'>" + create_time + "</span><span class='message-content'>" + text + "</span> </div> </div>");
+            // }
+        });
+
+        $('.enter').keypress(function (e) {
+            var code = e.keyCode || e.which;
+            if (code == 13) {
+                //获取聊天框聊天内容
+                var Texttext = $('.enter').val();
+                //清空聊天框
+                $('.enter').val('');
+                //向后端发送聊天内容
+                socket.emit('text', {'text': Texttext, 'follow_userid': extractedContent,});
+            }
+        });
+        $('#Emoji').change(function () {
+            //一:
+            console.log($(this).val());
+            //二:
+            $("#Emoji").val();//获取当前选择项的值.
+
+            var options = $("#Emoji option:selected");//获取当前选择项.
+            options.val();//获取当前选择项的值.
+            $('.enter').val($('.enter').val() + options.val());
+            console.log(options.val());
+        })
+
+
+    });
+
+    function selectFile() {
+        //触发 文件选择的click事件
+        $("#file").trigger("click");
+        //其他code如 alert($("#file").attr("value")
+    }
+
+    /* 获取 文件的路径 ，用于测试*/
+    $("#file").change(function () {
+        $(".img").attr("src", URL.createObjectURL($(this)[0].files[0]));
+        filepath = URL.createObjectURL($(this)[0].files[0]);
+        console.log(URL.createObjectURL($(this)[0].files[0]))
+    })
+</script>
+
+<script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js">
+</script>
+<script>
+    /*https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json*/
+    L2Dwidget.init({
+        "model": {
+            jsonPath:
+                "https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json",
+            "scale": 1
+        }, "display": {
+            "position": "right", "width": 110, "height": 150,
+            "hOffset": 0, "vOffset": -20
+        }, "mobile": {"show": true, "scale": 0.5},
+        "react": {"opacityDefault": 0.8, "opacityOnHover": 0.1}
+    });
+</script>
+
+</body>
+
+</html>

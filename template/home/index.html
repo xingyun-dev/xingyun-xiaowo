@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>星云小窝🔥首页</title>
+    <link rel="icon" href="/home/img/favicon.ico">
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="/css/mymodal.css">
+        <link rel="icon" href="/images/xingshixiaowo.ico">
+
+    <script type="text/javascript" src="/js/mymodal.js"></script>
+
+
+    <link rel="stylesheet" href="/home/css/style.css"/>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+</head>
+
+
+<body>
+{% include '/home/xuanfukuang.html' %}
+
+<!-- Dashboard -->
+<div class="dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar flex-c flex-sb">
+        <div class="brand" style="color: #6b6b4b;font-weight: 2000"><a href="/">STAR💫CLOUD</a></div>
+
+        <div class="side-nav">
+            <a href="/home/{{user_ziji.userid}}">
+                <div class="menu-item flex active">
+                    <div class="icon">
+                        <svg t="1704095380210" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" p-id="12243" width="32" height="32">
+                            <path d="M768.032085 199.133867V95.982933c0-17.646933 14.336-31.982933 31.982934-31.982933h64.034133c17.646933 0 31.982933 14.336 31.982933 31.982933v212.855467l105.642667 90.555733a64 64 0 0 1-83.285333 97.211734L512.032085 148.309333 105.674752 496.605867A64 64 0 1 1 22.389419 399.36L470.389419 15.394133a64 64 0 0 1 83.285333 0l214.357333 183.739734zM128.032085 576L512.032085 256l384 320v416.017067c0 17.646933-14.336 31.982933-32.017066 31.982933h-192a31.982933 31.982933 0 0 1-31.982934-31.982933v-160.017067a128 128 0 0 0-256 0v160.017067c0 17.646933-14.336 31.982933-31.982933 31.982933H160.049152a31.982933 31.982933 0 0 1-32.017067-31.982933V576z"
+                                  fill="#d81e06" p-id="12244"></path>
+                        </svg>
+                    </div>
+                    <p>首页</p>
+                </div>
+            </a>
+
+            <a href="/notebook" target="_blank">
+                <div class="menu-item flex">
+
+                    <div class="icon">
+                        <svg t="1704098375171" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" p-id="21854" width="32" height="32">
+                            <path d="M295.581454 931.441151 92.254451 728.115155l562.02665-562.031684 203.325996 203.325996L295.581454 931.441151 295.581454 931.441151zM295.581454 931.441151M988.661735 143.042181 880.643352 35.02984c-26.31967-26.31967-70.851666-24.461989-99.461973 4.153353L679.701633 140.662939l203.325996 203.325996L984.507375 242.510195C1013.111641 213.893847 1014.976371 169.360844 988.661735 143.042181L988.661735 143.042181zM988.661735 143.042181M73.372554 760.101509 1.485823 1022.19971l262.070009-71.887738L73.372554 760.101509zM73.372554 760.101509"
+                                  fill="#272636" p-id="21855"></path>
+                        </svg>
+                    </div>
+                    <p>星云笔记</p>
+
+                </div>
+            </a>
+
+
+            <a href="/person/{{user_id}}">
+                <div class="menu-item flex">
+                    <div class="icon">
+                        <svg t="1704098418013" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" p-id="22861" width="32" height="32">
+                            <path d="M561.975362 570.009567c118.779087-25.056318 207.964552-130.953221 207.408227-256.993438C768.740563 168.848374 650.929627 52.070613 506.761871 52.720864c-144.174981 0.643025-260.938291 118.453962-260.295265 262.614492 0.56355 126.047442 90.681041 231.142369 209.684103 255.143837-179.563057 26.559119-317.445058 182.048458-316.606957 368.73537a38.104678 38.104678 0 0 0 38.270853 37.931278l666.102138-2.962252a38.111903 38.111903 0 0 0 37.931278-38.270854c-0.830876-186.694137-140.092853-340.940775-319.872659-365.903168z"
+                                  fill="" p-id="22862"></path>
+                        </svg>
+                    </div>
+                    <p>数据中心</p>
+                </div>
+            </a>
+
+            <a href="/chatroom/index" target="_blank">
+                <div class="menu-item flex">
+                    <div class="icon">
+                        <svg t="1704098459606" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" p-id="23931" width="32" height="32">
+                            <path d="M891.22304 663.06048h-394.9056l-222.17728 200.07424v-200.07424H128.80896c-48.16384 0-87.12192-38.95808-87.12192-87.12192V89.4976c0-48.16384 38.9632-87.12192 87.12192-87.12192h762.41408c48.16384 0 87.12192 38.95296 87.12192 87.12192v486.43584c0 48.16384-38.9632 87.12192-87.12192 87.12192zM276.1984 275.69152c-21.46304 0-38.9632 17.4592-38.9632 38.95808 0 21.49376 17.50016 38.95296 38.9632 38.95296a38.9632 38.9632 0 0 0 0-77.91104z m155.8272-1.59744c-21.45792 0-38.95808 17.4592-38.95808 38.95808 0 21.5296 17.50016 38.95808 38.9632 38.95808a38.9376 38.9376 0 0 0 38.95296-38.9632 38.9632 38.9632 0 0 0-38.95808-38.95296z m156.66688 0.79872a38.9376 38.9376 0 0 0-38.95808 38.95808 38.9376 38.9376 0 0 0 38.95808 38.95808 38.9376 38.9376 0 0 0 38.95808-38.9632 38.93248 38.93248 0 0 0-38.9632-38.95296z m154.99264 0.79872c-21.45792 0-38.95808 17.4592-38.95808 38.95808 0 21.49376 17.50016 38.95296 38.95808 38.95296a38.9632 38.9632 0 0 0 0-77.91104z"
+                                  fill="#272636" p-id="23932"></path>
+                        </svg>
+                    </div>
+                    <p>交流评论</p>
+                </div>
+            </a>
+
+            <div class="border"></div>
+
+            <a href="/tools">
+                <div class="menu-item flex">
+                    <div class="icon">
+                        <svg t="1704098512810" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" p-id="26689" width="32" height="32">
+                            <path d="M664.21 553.22s-95.19 25.1-161.39 135.87c4.32 0.86 176.1 174.8 176.1 174.8 30.72 29.85 80.91 29.85 111.63 0l44.57-43.27c30.72-29.85 30.72-78.31 0-108.17L664.21 553.22z m77.45 280.81c-7.79 7.35-20.33 7.35-27.69 0L570.75 695.14c-7.79-7.36-7.79-19.47 0-26.83 7.79-7.35 20.33-7.35 27.69 0L741.66 807.2c7.36 6.92 7.36 19.04 0 26.83z m62.74-61.01c-7.79 7.35-20.33 7.35-27.69 0L633.06 634.13c-7.79-7.36-7.79-19.47 0-26.83 7.79-7.35 20.33-7.35 27.69 0l143.22 138.9c8.22 6.92 8.22 19.03 0.43 26.82zM302.49 378.42l116.39 115.96 55.82-54.52-116.39-115.52L386 297.08 230.23 145.64 118.6 253.81l156.2 151.43z"
+                                  fill="#040000" p-id="26690"></path>
+                            <path d="M670.27 470.58c4.33 1.3 7.79 2.6 12.12 4.33 20.77 6.49 43.27 8.65 64.47 6.92 39.37-3.46 78.31-19.9 108.17-50.19 35.48-35.05 52.35-83.07 50.19-130.24 0-1.73 0-3.46-0.43-5.19h-77.01l-30.72 30.72-23.37 23.36-23.8 23.8-64.04-16.87-17.31-64.04 23.8-23.8 23.36-23.37 30.72-30.72v-77.01c-1.73 0-4.32-0.43-6.06-0.43-46.29-1.73-93.89 14.71-129.8 50.19-30.29 30.29-47.16 68.8-50.19 108.17-1.73 23.8 0.86 47.59 8.65 70.09 0 0.43 0.43 0.86 0.43 1.73 2.16 7.79 2.6 17.31-6.92 27.26C549.98 407.4 179.18 759.6 179.18 759.6c-30.72 26.4-28.56 75.29 0 104.28 28.99 28.56 77.45 30.29 104.28-0.43 0 0 349.17-369.51 364.31-384.65 7.79-7.79 16.01-9.09 22.5-8.22zM249.71 828.41c-9.95 9.95-25.1 9.95-35.05 0-9.95-9.95-9.95-25.1 0-35.05 9.95-9.95 25.1-9.95 35.05 0a25.955 25.955 0 0 1 0 35.05z"
+                                  fill="#040000" p-id="26691"></path>
+                        </svg>
+                    </div>
+                    <p>工具仓库</p>
+                </div>
+            </a>
+
+
+            <a href="#">
+                <div class="menu-item flex">
+                    <div class="icon">
+                        <svg t="1704098542314" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" p-id="27682" width="32" height="32">
+                            <path d="M995.60064 419.50336l-152.71424-28.13696c-14.82112-2.72128-20.04096-15.15648-11.63392-27.64288l87.61984-129.88416c8.41856-12.4864 6.58944-31.41376-4.04992-42.07104l-84.04608-84.01152c-10.64576-10.65728-29.57952-12.48-42.07104-4.05632l-129.88416 87.61344c-12.49152 8.42496-24.94336 3.1808-27.66464-11.61088L603.04128 26.92608C600.30336 12.12288 585.74848 0 570.6944 0l-118.87488 0c-15.05408 0-29.61408 12.12288-32.33408 26.92608l-28.11392 152.75392c-2.73792 14.79808-15.18464 20.04736-27.67616 11.6224L233.83424 103.70176c-12.47488-8.42496-31.40352-6.60096-42.05952 4.05632l-84.0512 84.02944c-10.65728 10.6624-12.47488 29.60768-4.04992 42.05952l87.5968 129.87776c8.41344 12.4864 3.19872 24.9216-11.6288 27.64288L26.92096 419.50336C12.09984 422.22976 0 436.78976 0 451.85408l0 118.8352c0 15.05408 12.09984 29.61408 26.92096 32.352l152.77696 28.11392c14.79296 2.73792 20.02432 15.18464 11.60576 27.65952L103.67232 788.71424c-8.42496 12.49152-6.60608 31.40864 4.04992 42.06592l84.0512 84.02944c10.65728 10.6624 29.58464 12.4864 42.05952 4.04992l129.86112-87.57376c12.49152-8.4416 24.93824-3.1808 27.67616 11.59424l28.11392 152.73088c2.72128 14.8096 17.28128 26.91456 32.33408 26.91456l118.87488 0c15.05408 0 29.60768-12.10496 32.3456-26.91456l28.11392-152.7424c2.72128-14.79808 15.17312-20.04736 27.66464-11.58912l129.88416 87.57888c12.49152 8.4352 31.42528 6.61248 42.07104-4.04992l84.02944-84.0064c10.65728-10.6688 12.47488-29.58464 4.04992-42.07104l-87.62496-129.91744c-8.42496-12.47488-3.19232-24.9216 11.59936-27.65952l152.77056-28.11392c14.82112-2.73792 26.92608-17.29792 26.92608-32.352l0-118.8352C1022.52672 436.78976 1010.42176 422.22976 995.60064 419.50336zM511.18976 696.43776c-102.02496 0-184.7424-82.71104-184.7424-184.74752 0-102.03136 82.71616-184.7424 184.7424-184.7424 102.03648 0 184.74752 82.71104 184.74752 184.7424C695.93728 613.72672 613.22624 696.43776 511.18976 696.43776z"
+                                  fill="#272636" p-id="27683"></path>
+                        </svg>
+                    </div>
+
+                    <p>权限设置</p>
+                </div>
+            </a>
+
+        </div>
+
+
+        <a class="logout" onclick="confirmLogout();">
+            <div class="log-out">
+                <div class="menu-item flex">
+                    <div class="icon" style="color: #ee82db">
+                        <svg t="1704097902324" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" p-id="18195" width="32" height="32">
+                            <path d="M952.532295 495.269967 767.686357 310.423005c-9.060353-9.060353-23.75196-9.060353-32.81743 0l-37.363979 37.362956c-9.060353 9.060353-9.060353 23.757077 0 32.81743l81.538061 81.538061L407.384337 462.141452c-12.812817 0-23.199375 10.386558-23.199375 23.199375l0 52.845579c0 12.815887 10.386558 23.204491 23.199375 23.204491l371.479593 0-81.538061 81.538061c-9.060353 9.060353-9.060353 23.757077 0 32.81743l37.368072 37.363979c9.060353 9.05933 23.75503 9.05933 32.815383 0l147.653875-147.653875c0-0.005117 0.005117-0.005117 0.005117-0.005117l37.368072-37.368072C961.592648 519.020904 961.592648 504.33032 952.532295 495.269967L952.532295 495.269967zM634.083499 64.754816l-499.803213 0c-38.441521 0-69.608358 31.166837-69.608358 69.608358l0 754.806002c0 38.446637 31.166837 69.608358 69.608358 69.608358l499.803213 0c38.441521 0 69.608358-31.16172 69.608358-69.608358l0-97.937566c0-12.811794-10.386558-23.204491-23.204491-23.204491l-50.29243 0c-12.812817 0-23.205515 10.392698-23.205515 23.204491l0 37.257555c0 34.328853 0 34.328853-34.791387 34.328853L195.199751 862.818017c-34.801621 0-34.801621 0.00614-34.801621-34.806737L160.39813 194.712657c0-34.900881-0.074701-34.802644 34.801621-34.802644l376.99726 0c34.798551 0 34.791387 0.285502 34.791387 34.329876l0 38.353516c0 12.815887 10.392698 23.204491 23.205515 23.204491l50.29243 0c12.817933 0 23.204491-10.388605 23.204491-23.204491L703.690834 134.363174C703.691857 95.921653 672.52502 64.754816 634.083499 64.754816L634.083499 64.754816zM634.083499 64.754816"
+                                  fill="#d4237a" p-id="18196"></path>
+                        </svg>
+                    </div>
+                    <p>退出登录</p>
+
+                </div>
+            </div>
+        </a>
+
+
+    </div>
+
+
+    <!-- End Sidebar -->
+
+    <!-- Dashboard content -->
+    <div class="dashboard-content ">
+        <!-- Topbar -->
+        <div class="topbar flex flex-sb">
+            <div class="search flex">
+                <svg t="1704098742012" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                     xmlns="http://www.w3.org/2000/svg" p-id="28741" width="25" height="25">
+                    <path d="M756.565333 697.258667c2.133333 1.493333 4.224 3.157333 6.101334 5.12l241.664 241.621333c16.256 16.256 16.512 43.52-0.128 60.16a42.453333 42.453333 0 0 1-60.202667 0.170667l-241.664-241.664a41.429333 41.429333 0 0 1-5.034667-6.101334A424.917333 424.917333 0 0 1 426.666667 853.333333C191.018667 853.333333 0 662.314667 0 426.666667S191.018667 0 426.666667 0s426.666667 191.018667 426.666666 426.666667c0 102.698667-36.266667 196.949333-96.768 270.592zM426.666667 768a341.333333 341.333333 0 1 0 0-682.666667 341.333333 341.333333 0 0 0 0 682.666667z"
+                          fill="#3D3D3D" p-id="28742"></path>
+                </svg>
+                <input type="text" class="search blue-input" id="keyuser" placeholder="寻找其他更多小伙伴"
+                       onkeyup="doSearch_byuser(event)">
+                <div id="autocomplete-list"></div>
+            </div>
+
+            <div class="theme flex">
+                <div class="dark flex">
+                    <svg t="1704098874143" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                         xmlns="http://www.w3.org/2000/svg" p-id="29806" width="25" height="25">
+                        <path d="M554.84811 298.412549h-85.226521a21.366313 21.366313 0 0 1 0-42.732626h85.226521a21.366313 21.366313 0 0 1 0 42.732626z"
+                              fill="#F6BB42" p-id="29807"></path>
+                        <path d="M810.527675 724.664522A511.59786 511.59786 0 0 1 331.993886 33.064429 511.35913 511.35913 0 1 0 990.768638 692.316641a509.449292 509.449292 0 0 1-180.240963 32.347881z"
+                              fill="#FFCE54" p-id="29808"></path>
+                        <path d="M554.84811 980.344087a511.35913 511.35913 0 0 1-381.967604-850.832838 511.239765 511.239765 0 1 0 721.441312 721.799407A509.329927 509.329927 0 0 1 554.84811 980.344087z"
+                              fill="#F6BB42" p-id="29809"></path>
+                        <path d="M767.914414 277.284966a21.366313 21.366313 0 1 1-21.366313-21.366313 21.366313 21.366313 0 0 1 21.366313 21.366313z"
+                              fill="#4A89DC" p-id="29810"></path>
+                        <path d="M661.440945 490.35127a21.366313 21.366313 0 1 1-21.366313-21.366313 21.366313 21.366313 0 0 1 21.366313 21.366313z"
+                              fill="#48CFAD" p-id="29811"></path>
+                        <path d="M1023.593979 234.31361a21.366313 21.366313 0 1 1-21.366313-21.246948 21.366313 21.366313 0 0 1 21.366313 21.246948z"
+                              fill="#ED5564" p-id="29812"></path>
+                        <path d="M640.074632 21.247306A21.366313 21.366313 0 1 1 618.827684 0.000358a21.366313 21.366313 0 0 1 21.246948 21.246948z"
+                              fill="#AC92EB" p-id="29813"></path>
+                        <path d="M512.234849 192.058444a21.366313 21.366313 0 0 0-21.246948 21.366313v127.720418a21.366313 21.366313 0 1 0 42.613261 0v-127.720418a21.366313 21.366313 0 0 0-21.366313-21.366313z"
+                              fill="#FFCE54" p-id="29814"></path>
+                        <path d="M874.387884 426.371696a21.366313 21.366313 0 0 0-21.246948 21.366313v127.839783a21.366313 21.366313 0 0 0 42.613261 0V447.738009a21.366313 21.366313 0 0 0-21.366313-21.366313z"
+                              fill="#F6BB42" p-id="29815"></path>
+                        <path d="M917.001145 532.964531H831.774623a21.366313 21.366313 0 0 1 0-42.613261h85.226522a21.366313 21.366313 0 1 1 0 42.613261z"
+                              fill="#FFCE54" p-id="29816"></path>
+                    </svg>
+                </div>
+                <div class="light flex active">
+                    <!--                    <ion-icon name="sunny-outline"></ion-icon>-->
+                    <svg t="1704098962505" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                         xmlns="http://www.w3.org/2000/svg" p-id="30983" width="30" height="30">
+                        <path d="M501.48 493.55m-233.03 0a233.03 233.03 0 1 0 466.06 0 233.03 233.03 0 1 0-466.06 0Z"
+                              fill="#F9C626" p-id="30984"></path>
+                        <path d="M501.52 185.35H478.9c-8.28 0-15-6.72-15-15V87.59c0-8.28 6.72-15 15-15h22.62c8.28 0 15 6.72 15 15v82.76c0 8.28-6.72 15-15 15zM281.37 262.76l-16 16c-5.86 5.86-15.36 5.86-21.21 0l-58.52-58.52c-5.86-5.86-5.86-15.36 0-21.21l16-16c5.86-5.86 15.36-5.86 21.21 0l58.52 58.52c5.86 5.86 5.86 15.35 0 21.21zM185.76 478.48v22.62c0 8.28-6.72 15-15 15H88c-8.28 0-15-6.72-15-15v-22.62c0-8.28 6.72-15 15-15h82.76c8.28 0 15 6.72 15 15zM270.69 698.63l16 16c5.86 5.86 5.86 15.36 0 21.21l-58.52 58.52c-5.86 5.86-15.36 5.86-21.21 0l-16-16c-5.86-5.86-5.86-15.36 0-21.21l58.52-58.52c5.85-5.86 15.35-5.86 21.21 0zM486.41 794.24h22.62c8.28 0 15 6.72 15 15V892c0 8.28-6.72 15-15 15h-22.62c-8.28 0-15-6.72-15-15v-82.76c0-8.28 6.72-15 15-15zM706.56 709.31l16-16c5.86-5.86 15.36-5.86 21.21 0l58.52 58.52c5.86 5.86 5.86 15.36 0 21.21l-16 16c-5.86 5.86-15.36 5.86-21.21 0l-58.52-58.52c-5.86-5.85-5.86-15.35 0-21.21zM802.17 493.59v-22.62c0-8.28 6.72-15 15-15h82.76c8.28 0 15 6.72 15 15v22.62c0 8.28-6.72 15-15 15h-82.76c-8.28 0-15-6.72-15-15zM717.24 273.44l-16-16c-5.86-5.86-5.86-15.36 0-21.21l58.52-58.52c5.86-5.86 15.36-5.86 21.21 0l16 16c5.86 5.86 5.86 15.36 0 21.21l-58.52 58.52c-5.86 5.86-15.35 5.86-21.21 0z"
+                              fill="#F9C626" p-id="30985"></path>
+                    </svg>
+                </div>
+            </div>
+            {% if session.userid == user_id %}
+            <a href="/sixin/{{user_ziji.userid}}">
+                <div class="notification icon">
+                    <svg t="1704099090876" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                         xmlns="http://www.w3.org/2000/svg" p-id="33757" width="28" height="28">
+                        <path d="M793.389 806.69h120.208a37.087 37.087 0 0 0 0-74.218h-53.159V445.217a356.307 356.307 0 0 0-267.843-345.132 89.043 89.043 0 1 0-176.75 0 356.307 356.307 0 0 0-267.71 345.132v287.255H103.88a37.087 37.087 0 1 0 0 74.217h149.771v-0.133H793.39v0.133z m-422.69 83.745a134.945 134.945 0 0 0 267.13 0H370.7z"
+                              p-id="33758" fill="#f4ea2a"></path>
+                    </svg>
+                </div>
+            </a>
+
+
+            {# 当前用户正在查看自己的页面 #}
+            <div class="user flex flex-sb" onclick="menuToggle();">
+                <img src="/chat_room/images/{{user_ziji.avatar}}" alt=""/>
+                <p>{{user_ziji.nickname}}</p>
+                <ion-icon name="chevron-down-outline"></ion-icon>
+                <div class="menu-user">
+                    <h3>更多用户操作<br>
+                        More interactions
+                    </h3>
+                    <ul>
+                        <li><a href="/home/{{session.userid}}">数据中心</a></li>
+                        <li class="user_shezhi"><a href="#">用户设置</a></li>
+                        <li><a href="/logout">退出登录</a></li>
+
+                        <li><a href="#">星云文档</a></li>
+                    </ul>
+                </div>
+            </div>
+            {% else %}
+            {# 当前用户正在查看别的用户的页面 #}
+
+            <a>
+                <div class="notification icon">
+                    <svg t="1704099090876" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                         xmlns="http://www.w3.org/2000/svg" p-id="33757" width="28" height="28">
+                        <path d="M793.389 806.69h120.208a37.087 37.087 0 0 0 0-74.218h-53.159V445.217a356.307 356.307 0 0 0-267.843-345.132 89.043 89.043 0 1 0-176.75 0 356.307 356.307 0 0 0-267.71 345.132v287.255H103.88a37.087 37.087 0 1 0 0 74.217h149.771v-0.133H793.39v0.133z m-422.69 83.745a134.945 134.945 0 0 0 267.13 0H370.7z"
+                              p-id="33758" fill="#f4ea2a"></path>
+                    </svg>
+                </div>
+            </a>
+
+
+            <div class="user flex flex-sb" onclick="menuToggle();">
+                <img src="/chat_room/images/{{find_by_user_id(user_id).avatar}}" alt=""/>
+                <p>{{find_by_user_id(user_id).nickname}}</p>
+                <ion-icon name="chevron-down-outline"></ion-icon>
+                <div class="menu-user">
+                    <h3>更多用户操作<br>
+                        <spam>More interactions</spam>
+                    </h3>
+                    <ul>
+                        <li><a href="/home/{{session.userid}}">回到我的首页</a></li>
+                        <li><a href="/logout">退出登录</a></li>
+                        <li><a href="#">星云文档</a></li>
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+            <!-- End Topbar -->
+        </div>
+
+
+        <!-- 用户模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">用户设置</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+
+                    </div>
+                    <div class="modal-body">
+                        <form id="settingForm">
+                            <div class="mb-3 row">
+                                <label for="FileUpload1"
+                                       class="col-sm-3 col-form-label">用户头像：</label>
+                                <div class="col-sm-9" style="height: 200px">
+                                    <input class="form-control form-control-sm custom-file-input visually-hidden"
+                                           type="file" id="FileUpload1" name="FileUpload1"
+                                           onchange="previewImage_user(this)">
+                                    <label class="custom-file-label btn " for="FileUpload1"
+                                           style="width: 300px;"></label>
+                                    <img id="imagePreview" class="preview-image ml-3 mt-2"
+                                         alt="请上传用户头像或使用随机默认图片">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="textInput" class="form-label">用户昵称：</label>
+                                <input class="form-control" id="textInput" rows="4"
+                                       placeholder="请输入您的昵称吧！">
+                            </div>
+                            <div class="mb-3">
+                                <label for="textInput" class="form-label texter">自我介绍：</label>
+                                <textarea class="form-control" id="textInput1" rows="4"
+                                          placeholder="请介绍一下你自己吧！不要超过220个字哦！"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">取消
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="update_usershezhi()">
+                            确定
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(function () {
+                $('#myModal').modal('hide')
+            });
+            // 限制输入框字数
+            document.getElementById('textInput1').addEventListener('input', function () {
+                if (this.value.length > 220) {
+                    this.value = this.value.slice(0, 220);
+                }
+            });
+
+            // 图片预览函数
+            function previewImage_user(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imagePreview').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    // 如果用户移除已选图片，则恢复到默认图片或提示文字
+                    $('#imagePreview').attr('src', '');
+                }
+            }
+
+
+            $(document).ready(function () {
+                $('.user_shezhi').click(function () {
+                    $('#myModal').modal('show');
+                });
+            });
+        </script>
+
+
+        <!-- section -->
+        <div class="section flex flex-sb">
+            <!-- section left -->
+            <div class="section-left">
+                <!-- banner -->
+                <div class="banner flex flex-sb">
+                    <div class="text">
+                        <h2>
+                            星云小窝✨首页<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            学习成长
+                        </h2>
+                        <a href="/" target="_blank" class="Btn"
+                           style="padding: 10px 20px; background-color: green; color: #fff; text-decoration: none; transition: background-color 0.3s;"
+                           onmouseover="this.style.backgroundColor='rgb(57, 104, 73)'"
+                           onmouseout="this.style.backgroundColor='rgb(57, 104, 73)'"
+                           onmousedown="this.style.backgroundColor='#003d7a'"
+                           onmouseup="this.style.backgroundColor='#0056b3'">回到介绍页面</a>
+
+                    </div>
+                    <img src="/home/img/banner.svg" alt=""/>
+                </div>
+                <div class="nfts">
+                    <div class="trending heading flex flex-sb">
+                        <h2 style="color: black">主要功能模块</h2>
+                    </div>
+
+                    <!-- categories -->
+                    <div class="categories flex flex-sb">
+                        <div class="category flex">
+                            <div class="icon">🖍</div> <!--win + .-->
+                            <a href="/ucenter/articleuser/{{user_id}}" target="_blank">
+                                笔记
+                            </a>
+                        </div>
+
+                        <div class="category flex">
+                            <div class="icon">🕴</div> <!--win + .-->
+                            <a href="/person/{{user_id}}">
+                                数据
+                            </a>
+                        </div>
+
+                        <div class="category flex">
+                            <div class="icon">️📺</div> <!--win + .-->
+                            <a href="/chatroom/index" target="_blank">
+                                交流
+                            </a>
+                        </div>
+
+                        <div class="category flex">
+                            <div class="icon">🛠</div> <!--win + .-->
+                            <a href="/tools">
+                                工具
+                            </a>
+                        </div>
+
+                        <div class="category flex">
+                            <div class="icon">🌐</div> <!--win + .-->
+                            <a href="#">
+                                权限
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <!-- browse NFT -->
+                    <div class="browse">
+                        {% for setting in settings %}
+                        <div class="nft">
+                            <img src="/thumb/{{setting.wang_img}}" alt=""/>
+                            <div class="title">{{setting.wang_name}}</div>
+                            <div class="details flex flex-sb">
+                                <div class="author flex">
+                                    <img src="/thumb/{{setting.wang_user_avatar}}" alt=""/>
+                                    <span>{{setting.wang_user_name}}</span>
+                                </div>
+
+                                {% if setting.userid == session.get('userid') %}
+
+                                <button type="button" class="btn btn-dark shezhi-delete"
+                                        data-shezhiid="{{ setting.shezhi_id }}">删除
+                                </button>
+                                <button class="price shezhi-update"
+                                        data-shezhiid="{{ setting.shezhi_id }}"
+                                >更新
+                                </button>
+                                {% endif %}
+
+                                <div class="price"><a href="{{setting.wang_lian}}" target="_blank">前往</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+
+                        {% if user_id == session.get('userid') %}
+                        <div class="nft  bianji" style="cursor: pointer">
+                            <img src="/home/img/新建.png" alt="" style="height: 330px"/>
+                        </div>
+
+                        {% else %}
+                        <div class="nft bian ">
+                            <img src="/home/img/新建.png" alt="" style="height: 330px"/>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            <!-- end section left -->
+
+            <!-- 新建外链模态框（Modal） -->
+            <div class="modal fade" id="myModal_editor" tabindex="-1" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModal_editorLabel">新建外链设置</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+
+                        </div>
+                        <div class="modal-body">
+                            <form id="settingForm_editor">
+                                <div class="mb-3 row">
+                                    <label for="FileUpload1"
+                                           class="col-sm-3 col-form-label">外部网站：</label>
+                                    <div class="col-sm-9" style="height: 200px;margin-bottom: 30px">
+                                        <input class="form-control form-control-sm custom-file-input visually-hidden"
+                                               type="file" id="FileUpload1_editor" name="FileUpload1_editor"
+                                               onchange="previewImage_wang(this)">
+                                        <label class="custom-file-label btn " for="FileUpload1_editor"
+                                               style="width: 280px;"></label>
+                                        <img id="imagePreview_editor" class="preview-image ml-3 mt-2"
+                                             alt="如有需要可自定义图片或使用随机默认图片">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="FileUpload1"
+                                           class="col-sm-3 col-form-label">网站用户：</label>
+                                    <div class="col-sm-9" style="height: 200px;margin-bottom: 30px">
+                                        <input class="form-control form-control-sm custom-file-input visually-hidden"
+                                               type="file" id="FileUpload2_editor" name="FileUpload2_editor"
+                                               onchange="previewImage_wang_user(this)">
+                                        <label class="custom-file-label btn " for="FileUpload2_editor"
+                                               style="width: 280px;"></label>
+                                        <img id="imagePreview2_editor" class="preview-image ml-3 mt-2"
+                                             alt="如有需要可上传用户头像或使用随机默认图片">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="textInput" class="form-label">网站名称：</label>
+                                    <input class="form-control" id="textInput_wang_name" rows="4"
+                                           placeholder="请输入您要展示的网站的名称吧！">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="textInput" class="form-label texter">链接地址：</label>
+                                    <input class="form-control" id="textInput_wang_lian" rows="4"
+                                           placeholder="请输入您展示的网站的链接吧！">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="textInput" class="form-label texter">用户名称：</label>
+                                    <input class="form-control" id="textInput_wang_user_name" rows="4"
+                                           placeholder="请输入您在待展示网站的用户名称吧！">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" onclick="submituser_editor_moren()">默认
+                            </button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">取消
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="handleFileUpload1_editor()">
+                                自定义
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                $(function () {
+                    $('#myModal_editor').modal('hide')
+                });
+
+                // 图片预览函数
+                function previewImage_wang(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#imagePreview_editor').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[0]);
+                    } else {
+                        // 如果用户移除已选图片，则恢复到默认图片或提示文字
+                        $('#imagePreview_editor').attr('src', '');
+                    }
+                }
+
+                function previewImage_wang_user(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#imagePreview2_editor').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[0]);
+                    } else {
+                        // 如果用户移除已选图片，则恢复到默认图片或提示文字
+                        $('#imagePreview2_editor').attr('src', '');
+                    }
+                }
+
+
+                $(document).ready(function () {
+                    $('.bianji').click(function () {
+                        $('#myModal_editor').modal('show');
+                    });
+                });
+            </script>
+
+
+            <!-- 更新外链模态框（Modal） -->
+            <div class="modal fade" id="myModal_update" tabindex="-1" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModal_editorLabel_update">更新外链设置</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+
+                        </div>
+                        <div class="modal-body">
+                            <form id="settingForm_editor_update">
+                                <div class="mb-3 row">
+                                    <label for="FileUpload1"
+                                           class="col-sm-3 col-form-label">外部网站：</label>
+                                    <div class="col-sm-9" style="height: 200px;margin-bottom: 30px">
+                                        <input class="form-control form-control-sm custom-file-input visually-hidden"
+                                               type="file" id="FileUpload1_editor_update"
+                                               name="FileUpload1_editor_update"
+                                               onchange="previewImage_wang_update(this)">
+                                        <label class="custom-file-label btn " for="FileUpload1_editor_update"
+                                               style="width: 280px;"></label>
+                                        <img id="imagePreview_editor_update" class="preview-image ml-3 mt-2"
+                                             alt="上传自定义图片">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="FileUpload1"
+                                           class="col-sm-3 col-form-label">网站用户：</label>
+                                    <div class="col-sm-9" style="height: 200px;margin-bottom: 30px">
+                                        <input class="form-control form-control-sm custom-file-input visually-hidden"
+                                               type="file" id="FileUpload2_editor_update"
+                                               name="FileUpload2_editor_update"
+                                               onchange="previewImage_wang_user_update(this)">
+                                        <label class="custom-file-label btn " for="FileUpload2_editor_update"
+                                               style="width: 280px;"></label>
+                                        <img id="imagePreview2_editor_update" class="preview-image ml-3 mt-2"
+                                             alt="可上传用户头像">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="textInput" class="form-label">网站名称：</label>
+                                    <input class="form-control" id="textInput_wang_name_update" rows="4"
+                                           placeholder="请输入您要修改的网站的名称吧！">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="textInput" class="form-label texter">链接地址：</label>
+                                    <input class="form-control" id="textInput_wang_lian_update" rows="4"
+                                           placeholder="请输入您修改的网站的链接吧！">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="textInput" class="form-label texter">用户名称：</label>
+                                    <input class="form-control" id="textInput_wang_user_name_update" rows="4"
+                                           placeholder="请输入您在修改的网站的用户名称吧！">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">取消
+                            </button>
+                            <button type="button" class="btn btn-primary" onclick="handleFileUpload1_update()">
+                                更新
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                $(function () {
+                    $('#myModal_update').modal('hide')
+                });
+
+                // 图片预览函数
+                function previewImage_wang_update(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#imagePreview_editor_update').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[0]);
+                    } else {
+                        // 如果用户移除已选图片，则恢复到默认图片或提示文字
+                        $('#imagePreview_editor_update').attr('src', '');
+                    }
+                }
+
+                function previewImage_wang_user_update(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#imagePreview2_editor_update').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(input.files[0]);
+                    } else {
+                        // 如果用户移除已选图片，则恢复到默认图片或提示文字
+                        $('#imagePreview2_editor_update').attr('src', '');
+                    }
+                }
+
+
+                $(document).ready(function () {
+                    $('.shezhi-update').click(function () {
+                        $('#myModal_update').modal('show');
+                    });
+                });
+            </script>
+
+
+            <!-- section right -->
+
+            <div class="section-right">
+                 {% if session.userid == user_id %}
+                <div class="top-creators">
+                    <div class="heading flex flex sb">
+                        <h2 style="color: orange">小窝 管理</h2>
+                    </div>
+                    <div class="border-xiaowo"></div>
+                    <div class="follow-admin flex">
+                        <a href="/home/{{user_admin.userid}}">
+
+                        <img src="/chat_room/images/{{user_admin.avatar}}"  alt=""/>
+                        </a>
+                        <div class="creator-details" style="padding-top: 18px">
+                            <h3 style="font-weight:1000;">{{user_admin.nickname}}</h3>
+                            <p>@{{user_admin.introduce|striptags|truncate(18)}}</p>
+                        </div>
+                    </div>
+                    <div style="justify-content: center;display: flex;align-items: center;">
+
+                        <button class="btn-xiaowo follow Following btn-follow"  data-followed-vip-id="{{ user_admin.userid }}"
+                                style="background-color: rgb(0, 200, 0);align-items: center;justify-content: center; margin-bottom: 10px;border: none">
+                            关注
+                        </button>
+
+                    </div>
+                </div>
+                {% else %}
+                <div class="top-creators">
+                    <div class="heading flex flex sb">
+                        <h2 style="color: orange">用户管理</h2>
+                    </div>
+                    <div class="border-xiaowo"></div>
+                    <div class="follow-admin flex">
+                        <a href="/home/{{user_at.userid}}">
+                        <img src="/chat_room/images/{{user_at.avatar}}"  alt=""/>
+
+                            </a>
+                        <div class="creator-details" style="padding-top: 18px" >
+                            <h3 style="font-weight:1000;">{{user_at.nickname}}</h3>
+                            <p>@{{user_at.introduce|striptags|truncate(18)}}</p>
+                        </div>
+                    </div>
+                    <div style="justify-content: center;display: flex;align-items: center;">
+
+                          <button class="btn-xiaowo follow Following btn-follow"  data-followed-vip-id="{{ user_at.userid }}"
+                                style="background-color: rgb(0, 200, 0);align-items: center;justify-content: center; margin-bottom: 10px;border: none">
+                            关注
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+
+
+
+
+
+                <div class="top-creators">
+                    <div class="heading flex flex sb">
+                        <h2 style="color: orange">推荐关注列表</h2>
+                    </div>
+                    <div class="border-tuijian"></div>
+
+
+                    {% for user in user_all %}
+                    <div class="creator flex flex-sb">
+                        <div class="follow-creators flex">
+                            <a href="/home/{{user.userid}}" style="color: #837e7e">
+
+                                <img src="/chat_room/images/{{user.avatar}}" alt=""/>
+                            </a>
+                            <div class="creator-details" style="padding-top: 15px">
+                                <h3>{{user.nickname}}</h3>
+                                <p>@{{user.introduce|striptags|truncate(18)}}</p>
+                            </div>
+
+                        </div>
+
+                        {% if session.userid == user_id %}
+                        {# 当前用户正在查看自己的页面 #}
+                        <button class=" Btn follow Following btn-follow" id="followBtn"
+                                data-followed-vip-id="{{ user.userid }}" style="cursor: pointer">
+                            关注
+                        </button>
+                        {% else %}
+                        {# 当前用户正在查看别的用户的页面 #}
+                        {% if follow_status(user_id,user.userid) == 0 %}
+                        <button class=" Btn follow  Following btnfollow" data-followed-vip-id="{{ user.userid }}">
+                            关注
+                        </button>
+                        {% elif follow_status(user_id,user.userid) == 1 %}
+                        <button class=" Btn follow Following btnfollow " data-followed-vip-id="{{ user.userid }}">
+                            取消关注
+                        </button>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+            <!-- end section right -->
+        </div>
+        <!-- end section -->
+
+    </div>
+
+
+    <!-- End Dashboard content -->
+</div>
+
+
+<!-- End Dashboard -->
+<canvas>
+</canvas>
+<!-- JS -->
+<script src="/home/js/script.js"></script>
+<script>
+
+    //新建外链设置
+    function submituser_editor(wang_img, wang_user_avatar) {
+        var wang_name = $.trim($("#textInput_wang_name").val());
+        var wang_user_name = $.trim($("#textInput_wang_user_name").val());
+        var wang_lian = $.trim($("#textInput_wang_lian").val());
+
+        if (wang_name.length === 0 || wang_user_name.length === 0 || wang_lian.length === 0) {
+            bootbox.alert({title: "错误提示", message: "内容不能少哦！请输入有效内容."})
+            return false;
+        }
+
+        var param = "wang_name=" + encodeURIComponent(wang_name);
+        param += "&wang_user_name=" + encodeURIComponent(wang_user_name);
+        param += "&wang_lian=" + encodeURIComponent(wang_lian);
+        param += "&wang_img=" + wang_img; // 添加第一个图片编码参数
+        param += "&wang_user_avatar=" + wang_user_avatar // 添加第二个图片编码参数
+
+        $.post('/editor_user_shezhi', param, function (data) {
+            if (data == 'perm-denied') {
+                bootbox.alert({title: "错误提示", message: "权限不足，无法编辑"});
+            } else if (data == 'add-fail') {
+                bootbox.alert({title: "错误提示", message: "编辑失败，请联系管理员"});
+            } else if (data == 'add-pass') {
+                bootbox.alert({title: "信息提示", message: "编辑成功！"});
+                setTimeout(function () {
+                    location.href = '/home/{{session.get("userid")}}';
+                }, 1000);
+            } else {
+                bootbox.alert({title: "错误提示", message: "编辑失败,可能出现错误."});
+
+            }
+        }).fail(function () {
+            // 处理AJAX请求失败的情况
+            console.error('AJAX request failed');
+        });
+    }
+
+
+    //新建外链默认设置
+    function submituser_editor_moren() {
+        var wang_name = $.trim($("#textInput_wang_name").val());
+        var wang_user_name = $.trim($("#textInput_wang_user_name").val());
+        var wang_lian = $.trim($("#textInput_wang_lian").val());
+        if (wang_name.length === 0 || wang_user_name.length === 0 || wang_lian.length === 0) {
+            bootbox.alert({title: "错误提示", message: "内容不能少哦！请输入有效内容."})
+            return false;
+        }
+
+        var param = "wang_name=" + encodeURIComponent(wang_name);
+        param += "&wang_user_name=" + encodeURIComponent(wang_user_name);
+        param += "&wang_lian=" + encodeURIComponent(wang_lian);
+        param += "&wang_img=" + null; // 添加第一个图片编码参数
+        param += "&wang_user_avatar=" + null // 添加第二个图片编码参数
+
+        $.post('/editor_user_shezhi', param, function (data) {
+            if (data == 'perm-denied') {
+                bootbox.alert({title: "错误提示", message: "权限不足，无法编辑"});
+            } else if (data == 'add-fail') {
+                bootbox.alert({title: "错误提示", message: "编辑失败，请联系管理员"});
+            } else if (data == 'add-pass') {
+                bootbox.alert({title: "信息提示", message: "编辑成功！"});
+                // window.reload()
+                setTimeout(function () {
+                    location.href = '/home/{{session.get("userid")}}';
+                }, 1000);
+            } else {
+                bootbox.alert({title: "错误提示", message: "编辑失败,可能出现错误."});
+
+            }
+        }).fail(function () {
+            // 处理AJAX请求失败的情况
+            console.error('AJAX request failed');
+        });
+    }
+
+    // 定义一个全局变量来存储 shezhi_id
+    var shezhiId = null;
+
+    $(function () {
+        $('.shezhi-update').click(function () {
+            shezhiId = $(this).data('shezhiid'); // 捕获 shezhi_id
+            // 阻止默认行为（如果有的话）
+            return false;
+        });
+    });
+
+   //更新外链设置
+    function submituser_editor_update(wang_img, wang_user_avatar) {
+        var wang_name = $.trim($("#textInput_wang_name_update").val());
+        var wang_user_name = $.trim($("#textInput_wang_user_name_update").val());
+        var wang_lian = $.trim($("#textInput_wang_lian_update").val());
+
+        var param = "wang_name=" + encodeURIComponent(wang_name);
+        param += "&wang_user_name=" + encodeURIComponent(wang_user_name);
+        param += "&wang_lian=" + encodeURIComponent(wang_lian);
+        // 只在 wang_img 不为 null 时添加图片编码参数
+        if (wang_img !== null) {
+            param += "&wang_img=" + wang_img;
+        }
+
+        // 只在 wang_user_avatar 不为 null 时添加图片编码参数
+        if (wang_user_avatar !== null) {
+            param += "&wang_user_avatar=" + wang_user_avatar;
+        }
+        param += "&shezhi_id=" + shezhiId
+
+
+        $.post('/update_user_shezhi', param, function (data) {
+            if (data == 'perm-denied') {
+                bootbox.alert({title: "错误提示", message: "权限不足，无法更新"});
+            } else if (data == 'add-fail') {
+                bootbox.alert({title: "错误提示", message: "更新失败，请联系管理员"});
+            } else if (data == 'add-pass') {
+                bootbox.alert({title: "信息提示", message: "更新成功！"});
+                setTimeout(function () {
+                    location.href = '/home/{{session.get("userid")}}';
+                }, 1000);
+            } else {
+                bootbox.alert({title: "错误提示", message: "更新失败,可能出现错误."});
+
+            }
+        }).fail(function () {
+            // 处理AJAX请求失败的情况
+            console.error('AJAX request failed');
+        });
+    }
+
+
+    //删除编辑设置
+    $(function () {
+        $('.shezhi-delete').click(function () {
+            var shezhiId = $(this).data('shezhiid');
+            bootbox.confirm({
+                title: "删除",
+                message: "您确定要删除这个外链吗？",
+                buttons: {
+                    confirm: {
+                        label: '确认',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: '取消',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: '/editor_user_shezhi/delete',
+                            type: 'POST',
+                            data: {shezhi_id: shezhiId},
+                            success: function (data) {
+                                if (data === 'delete-success') {
+                                    bootbox.alert({
+                                        title: "信息提示",
+                                        message: "外链删除成功.",
+                                        callback: function () {
+                                            location.reload();
+                                        }
+                                    }).find('.modal-dialog').addClass('success-dialog');
+                                } else {
+                                    bootbox.alert({title: "错误提示", message: "删除失败，请重试！"});
+                                }
+                            },
+                            error: function (xhr, textStatus, errorThrown) {
+                                bootbox.alert({title: "错误提示", message: "删除失败，请重试！"});
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    });
+
+
+     //更新用户设置
+    function user_update(avatar) {
+        var nickname = $.trim($("#textInput").val());
+        var introduce = $.trim($("#textInput1").val());
+
+        var param = "nickname=" + encodeURIComponent(nickname);
+        param += "&introduce=" + encodeURIComponent(introduce);
+        if (avatar !== null) {
+            param += "&avatar=" + avatar;
+        }
+        $.post('/update_user', param, function (data) {
+            if (data == 'perm-denied') {
+                bootbox.alert({title: "错误提示", message: "权限不足，无法更新"});
+            } else if (data == 'add-fail') {
+                bootbox.alert({title: "错误提示", message: "更新失败，请联系管理员"});
+            } else if (data == 'add-pass') {
+                bootbox.alert({title: "信息提示", message: "用户更新成功！"});
+                setTimeout(function () {
+                    location.href = '/home/{{session.get("userid")}}';
+                }, 1000);
+            } else {
+                bootbox.alert({title: "错误提示", message: "更新失败,可能出现错误."});
+
+            }
+        }).fail(function () {
+            // 处理AJAX请求失败的情况
+            console.error('AJAX request failed');
+        });
+    }
+
+    //显示更多用户操作的下拉菜单
+    function menuToggle() {
+        const toggleMenu = document.querySelector(".menu-user")
+        toggleMenu.classList.toggle('active')
+    }
+
+    //搜索用户
+    function doSearch_byuser(event) {
+        if (event != null && event.keyCode != 13) {
+            return false;
+        }
+
+        var keyword = $.trim($("#keyuser").val());
+        if (keyword.length == 0 || keyword.length > 20 || keyword.indexOf('%') >= 0) {
+            bootbox.alert({"title": "错误提示！", "message": "您输入的查询名字不规范."})
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/home/search",
+            data: {keyword: keyword},
+            success: function (response) {
+                if (response.success) {
+                    var userId = response.result.userid;
+                    location.href = "/home/" + userId;
+                } else {
+
+                    bootbox.alert({"title": "错误提示！", "message": "您输入的查询名字未找到"})
+                }
+            },
+            error: function () {
+                bootbox.alert({"title": "错误提示！", "message": "您输入的查询名字未找到"})
+            }
+        });
+
+    }
+
+    var arr = []; // 全局变量，存储用户昵称数据
+
+    $.ajax({
+        type: "GET",
+        url: "/home/nickname",
+        success: function (response) {
+            arr = response.nickname;
+
+        },
+        error: function () {
+            bootbox.alert({"title": "错误提示！", "message": "获取用户昵称数据失败."})
+
+            // alert("获取用户昵称数据失败");
+        }
+    });
+
+
+    var search = document.getElementsByClassName("blue-input")[0];
+    var autocompleteList = document.getElementById("autocomplete-list");
+
+    function showList() {
+        autocompleteList.innerHTML = ""; // 清空之前的搜索结果
+
+        var res = searchByIndexOf(search.value, arr);
+
+        // 如果搜索结果大于6个，随机选择6个
+        if (res.length > 6) {
+            res = res.slice(0, 6); // 取前6个结果
+        }
+
+        for (var i = 0; i < res.length; i++) {
+            createLinkElement(res[i]);
+        }
+    }
+
+    function createLinkElement(keyword) {
+        var li = document.createElement("li");
+        var link = document.createElement("a");
+        link.innerText = keyword; // 设置链接文本
+
+        $.ajax({
+            type: "POST",
+            url: "/home/search",
+            data: {keyword: keyword},
+            success: function (response) {
+                if (response.success) {
+                    var userId = response.result.userid;
+                    var href = "/home/" + userId;
+                    link.setAttribute("href", href); // 设置链接地址
+
+                } else {
+                    bootbox.alert({"title": "错误提示！", "message": "您输入的查询名字未找到."})
+                }
+            },
+            error: function () {
+                bootbox.alert({"title": "错误提示！", "message": "您输入的查询名字未找到."})
+            }
+        });
+
+        // 点击链接时跳转，并清空自动补全列表
+        link.addEventListener("click", function (event) {
+            event.preventDefault(); // 阻止默认链接跳转行为
+            search.value = this.innerText;
+            autocompleteList.innerHTML = "";
+            window.location.href = this.getAttribute("href");
+        });
+
+        li.appendChild(link);
+        autocompleteList.appendChild(li);
+    }
+
+
+    search.oninput = function getMoreContents() {
+        showList();
+    }
+    //
+    search.onfocus = function () {
+        showList();
+    }
+
+
+    function searchByIndexOf(keyWord, list) {
+        if (!(list instanceof Array)) {
+            return [];
+        }
+        if (keyWord === "") {
+            return [];
+        } else {
+            var len = list.length;
+            var arr = [];
+            for (var i = 0; i < len; i++) {
+                if (list[i].indexOf(keyWord) >= 0) {
+                    arr.push(list[i]);
+                }
+            }
+            return arr;
+        }
+    }
+
+
+    $(function () {
+        // 初始化所有关注按钮的状态
+        $('.btn-follow').each(function () {
+            var $btn = $(this);
+            var followed_vip_id = $btn.data('followed-vip-id');
+            var isFollowing = localStorage.getItem('follow_' + followed_vip_id + '_switch');
+
+            if (isFollowing === 'true') {
+                $btn.addClass('following').text('取消关注');
+            } else {
+                $btn.removeClass('following').text('关注');
+            }
+        });
+
+        // 关注按钮点击事件
+        $('.btn-follow').on('click', function () {
+            var $btn = $(this);
+            var followed_vip_id = $btn.data('followed-vip-id');
+
+            if ($btn.hasClass('following')) {
+                // 取消关注
+                $.ajax({
+                    url: '/home/unfollow',
+                    type: 'POST',
+                    data: {followed_vip_id: followed_vip_id},
+                    success: function (response) {
+                        if (response === 'success') {
+
+                            // alert('取消关注成功！');
+                            bootbox.alert({'title': '信息提示！', 'message': "取消关注成功！"});
+
+                            $btn.removeClass('following').text('关注');
+                            localStorage.setItem('follow_' + followed_vip_id + '_switch', 'false');
+                        } else {
+                            // alert('操作失败，请重试！');
+                            bootbox.alert({'title': '错误提示！', 'message': "操作失败，请重试！"});
+
+                        }
+                    },
+                    error: function () {
+                        // alert('操作失败，请重试！');
+                        bootbox.alert({'title': '错误提示！', 'message': "操作失败，请重试！"});
+
+                    }
+                });
+            } else {
+                // 进行关注
+                $.ajax({
+                    url: '/home/follow',
+                    type: 'POST',
+                    data: {followed_vip_id: followed_vip_id},
+                    success: function (response) {
+                        if (response === 'success') {
+                            // alert('关注成功！');
+                            bootbox.alert({'title': '信息提示！', 'message': "关注成功！"});
+
+                            $btn.addClass('following').text('取消关注');
+                            localStorage.setItem('follow_' + followed_vip_id + '_switch', 'true');
+                        } else {
+                            // alert('操作失败，请重试！');
+                            bootbox.alert({'title': '错误提示！', 'message': "操作失败，请重试！"});
+
+                        }
+                    },
+                    error: function () {
+                        // alert('操作失败，请重试！');
+                        bootbox.alert({'title': '错误提示！', 'message': "操作失败，请重试！"});
+
+                    }
+                });
+            }
+        });
+    });
+
+    function openSettingWindow() {
+        var modal = document.getElementById("settingModal");
+        modal.style.display = "block";
+    }
+
+    function closeSettingWindow() {
+        var modal = document.getElementById("settingModal");
+        modal.style.display = "none";
+    }
+
+    function updateContent() {
+        var imageInput = document.getElementById("imageInput").value;
+        var textInput = document.getElementById("textInput").value;
+        var linkInput = document.getElementById("linkInput").value;
+
+        document.querySelector('.nft img').src = imageInput;
+        document.querySelector('.nft .title').innerText = textInput;
+        document.querySelector('.nft .price a').href = linkInput;
+
+        closeSettingWindow(); // 关闭设置窗口
+    }
+</script>
+
+</body>
+
+</html>

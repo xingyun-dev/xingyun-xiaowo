@@ -1,0 +1,12 @@
+{% extends "/xingyun-notebook/base.html" %}   {#将当前页面继承至base.html母版#}
+{% block content %}
+<div class="col-10" style="margin: auto">
+<img src="/img/404.jpg" class="img-fluid"/>
+</div>
+
+<script>
+    setTimeout(function (){
+        location.href = '/home/{{session.userid}}';
+    },2000)
+</script>
+{% endblock %}

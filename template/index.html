@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星云小窝🔥介绍</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap4.min.css">
+    <link rel="stylesheet" href="/css/lbt.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/yj.css">
+    <link rel="stylesheet" href="/qita/login.css">
+    <link rel="icon" href="/images/xingshixiaowo.ico">
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/login.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+
+    <style>
+        wenzi {
+           /* 让弹出来的文字不被选中,影响操作体验 */
+           user-select: none;
+           cursor: default;
+           font-size: 20px;
+           color: blanchedalmond;
+           position: absolute;
+           transition: 1s;
+        }
+    </style>
+
+</head>
+
+<body>
+<!-- 登录首页 -->
+<header class="header daohanglan">
+    <div class="container">
+        <!-- 导航栏缓慢缩小 小导航栏缩小 下拉导航栏变白-->
+        <div class="row smdaohanglan justify-content-between">
+
+            <a href="/" class="logo"
+               style="color: #74745a;font-weight: 2000;font-size: 20px;letter-spacing: 5px;">STAR💫<br>CLOUD</a>
+            <nav class="nav">
+                <a href="#home">首页介绍</a>
+                <a href="#pricing">页面轮播</a>
+                <a href="#courses">星云笔记</a>
+                <a href="#panel">数据中心</a>
+<!--                <a href="#zixun">学习资讯</a>-->
+                <a href="#communicate">交流评论</a>
+                <a href="#tools">工具仓库</a>
+                <a href="#shezhi">权限设置</a>
+            </nav>
+            <!-- 小导航栏菜单按钮 -->
+            <div id="menu-btn" class="fas fa-bars"></div>
+        </div>
+    </div>
+</header>
+<!-- 第一页面背景图 -->
+<section class="home" id="home">
+    <!-- 居中 -->
+    <div class="container">
+        <!-- 缓慢缩小 缩小 -->
+        <div class="row smdaohanglan">
+            <div class="col-md-6 login text-center text-md-center"
+                 style="margin-bottom: 80px">
+                <div class="box">
+                    <div class="container-login" style=" width:90%;">
+                        <div class="form">
+                            <!-- 与登录和注册窗口的ID进行关联 -->
+                            <div class="tab-pane" id="tabs" style="text-align: center">
+                                <button></button>
+                                <ul class="nav nav-tabs" role="tablist"
+                                    style="font-size: 20px;margin-right: 12%; margin-top:8%;letter-spacing:10px">
+                                    <li id="login " class="nav-item " onclick="showLogin()">
+                                        <a href="#loginpane" data-toggle="tab" class="nav-link "
+                                           style="color: rgb(45, 154, 243);"><span>登录</span></a>
+                                    </li>
+                                    <li id="reg" class="nav-item" onclick="showReg()">
+                                        <a href="#regpane" data-toggle="tab" class="nav-link "
+                                           style="color:rgb(45, 154, 243)"><span>注册</span></a>
+                                    </li>
+                                    <li id="find" class="nav-item" onclick="showReset()">
+                                        <a href="#findpane" data-toggle="tab" class="nav-link "
+                                           style="color: rgb(45, 154, 243)"><span>找回密码</span></a>
+                                    </li>
+                                </ul>
+
+                                <div style="margin-top: 130px;"></div>
+
+                                <div class="tab-content">
+                                    <!-- 登录窗口 -->
+                                    <div id="loginpanel" class="tab-pane active container">
+                                        <div class="inputBox row">
+                                            <label for="loginname" class="col-2" style="font-size:26px">✉</label>
+                                            <input class="col-10" type="text" id="loginname"
+                                                   placeholder="请输入你的邮箱地址">
+                                        </div>
+                                        <div class="inputBox row">
+                                            <label for="loginpass" class="col-2" style="font-size:22px">🔏</label>
+                                            <input class="col-10" type="password" id="loginpass"
+                                                   placeholder="请输入你的登录密码">
+                                        </div>
+                                        <div class="inputBox row" style="text-align: center;">
+                                            <label for="logincode" class="col-2" style="font-size:22px">💳</label>
+                                            <input class="col-10" type="text" id="logincode"
+                                                   placeholder="请输入图形验证码"
+                                                   onkeyup="doLogin(event)"/>
+                                            <div style="margin-top: 20px;text-align:right; width:100% ">
+                                                <img src="/vcode" id="loginvcode" class="col-9"
+                                                     style="cursor:pointer; margin-top: 10px; width:30%; border-radius:30%; background-image: white"
+                                                     onclick="this.src='/vcode?'+Math.random()"/>
+                                            </div>
+                                        </div>
+                                        <div class="inputBox">
+                                            <input type="submit" value="登录" onclick="doLogin(null)"/>
+                                            <!--                                    <button type="submit" class="btn btn-primary" onclick="doLogin(null)">登录</button>-->
+
+                                        </div>
+                                    </div>
+
+
+                                    <!-- 注册窗口 -->
+                                    <div class="tab-pane container" id="regpanel">
+                                        <div class="inputBox row">
+                                            <label for="regname" class="col-2" style="font-size:26px">✉</label>
+
+                                            <input class = 'col-10' type="text" id="regname" placeholder="请输入你的注册邮箱"/>
+                                        </div>
+                                        <div class="inputBox row">
+                                            <label for="regpass" class="col-2" style="font-size:22px">🔏</label>
+                                            <input class='col-10' type="password" id="regpass" placeholder="请输入你的注册密码"/>
+                                        </div>
+                                        <div class="inputBox row" style="text-align: center;">
+                                            <label for="regcode" class="col-2" style="font-size:20px">💳</label>
+                                            <input class="col-10"  type="text" id="regcode" placeholder="请输入邮箱验证码"
+                                                   onkeyup="doReg(event)"/>
+
+                                            <div style="text-align: right; margin-top:20px;width:100% ;height:60px">
+                                                <button style="margin-top: 10px;margin-right:6%; width:25%;height:70%; border-radius:20%;font-size:16px"
+                                                        type="button"
+                                                        class="btn btn-primary col-3 "
+                                                        onclick="doSendMail(this)">
+                                                    发送邮件
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="inputBox">
+                                            <input type="submit" value="注册" onclick="doReg(null)">
+
+                                        </div>
+                                    </div>
+
+
+                                    <!-- 找回密码窗口 -->
+                                    <div class="tab-pane container " id="findpanel">
+
+                                        <div class="inputBox row">
+                                            <label for="username" class="col-2" style="font-size:26px">✉</label>
+                                            <input class="col-10" type="text" id="username" placeholder="请输入你的邮箱地址">
+                                        </div>
+
+                                        <div class="inputBox row">
+                                            <label for="newpass" class="col-2" style="font-size:22px">🔏</label>
+                                            <input class="col-10" type="password" id="newpass" placeholder="请输入新的登录密码">
+                                        </div>
+                                        <div class="inputBox row">
+                                            <label for="findcode" class="col-2" style="font-size:20px">💳</label>
+                                            <input class="col-10" type="text" placeholder="请输入邮箱验证码" id="findcode"
+                                                   onkeyup="doReset(event)">
+                                            <div style="text-align: right; margin-top:20px;width:100% ;height:60px">
+                                                <button style="margin-top: 10px;margin-right:6%; width:25%;height:70%; border-radius:20%;font-size:16px"
+                                                        type="button"
+                                                        class="btn btn-primary col-3 "
+                                                        onclick="SendMail(this)">
+                                                    发送邮件
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="inputBox">
+                                            <input type="submit" value="重置密码" onclick="doReset(null)">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 text-center text-md-left" style="margin-bottom:290px">
+                <span>登录/注册</span>
+                <h3>请选择登录注册或是游客模式</h3>
+
+                <p></p>
+                <h3>在这里 一起体验</h3>
+
+                <a href="/youke_home" class="link-btn">游客模式</a>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+<!-- 首页介绍 -->
+<section class="about">
+    <div class="container">
+        <div class="row align-items-center flex-wrap-reverse">
+            <div class="col-md-6">
+                <span>首页介绍</span>
+                <h2>星云小窝🔥首页</h2>
+                <p>
+                    星云小窝，是一款基于flask+bootstrap的学习交流网站，主要面向共同学习者，方便学习和交流，同时也方便记录和分享自己日常的学习。
+                </p>
+                <p>
+                    星云小窝首页作为登录后进入的第一个页面，展示了网站的主要功能，包括：星云笔记、数据中心、交流评论、工具仓库、权限设置等。下面的模块将对这些功能页面进行具体介绍！</p>
+                <ul>
+                    <li><i class="far fa-check-square"></i> CSDN，&nbsp;&nbsp; @星石传说</li>
+                    <li><i class="far fa-check-square"></i> Bilibili，&nbsp;&nbsp; @云梦山心触</li>
+                    <li><i class="far fa-check-square"></i> 知乎，&nbsp;&nbsp; @生只灵</li>
+                    <p></p>
+                    <li style="color: aqua;"><i class="far fa-check-square" style="color: aquamarine;"></i>
+                        星云文档，分享项目知识&nbsp;&nbsp; @星云文档！
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <!-- <img src="./images/转天图片包/user-4.png" alt=""> -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 过渡图 -->
+<section class="counter" style="margin-top: 50px;">
+    <div class="container box-container">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+</section>
+
+
+<!-- 页面轮播 -->
+<section class="pricing" id="pricing" style="margin-top: 100px;">
+    <div class="heading">
+        <span>页面轮播</span>
+        <h3 style="color: aqua;">星云小窝主要功能页面的轮播图展示</h3>
+    </div>
+    <div class="lunbotu">
+        <div class="baodi">
+            <div class="LBT">
+                <div id="slide">
+                    <div class="item" style="background-image: url(images/转天图片包/IN_troduce.png);">
+                        <div class="lhx">
+                            <div class="name">星云小窝🔥介绍</div>
+                            <div class="des" style="font-size: 20px;">IN troduce</div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url(images/转天图片包/HomePage.png);">
+                        <div class="lhx">
+                            <div class="name">星云小窝🔥首页</div>
+                            <div class="des" style="font-size: 20px;">Home page</div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url(images/转天图片包/notebook.png);">
+                        <div class="lhx">
+                            <div class="name">星云小窝🔥星云笔记</div>
+                            <div class="des" style="font-size: 20px;">Nebula Notes</div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url(images/转天图片包/shuju.png);">
+                        <div class="lhx">
+                            <div class="name">星云小窝🔥数据中心</div>
+                            <div class="des" style="font-size: 20px;">Data panel</div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url(images/转天图片包/communicate.png);">
+                        <div class="lhx">
+                            <div class="name">星云小窝🔥交流评论</div>
+                            <div class="des" style="font-size: 20px;">Exchange Comments</div>
+                        </div>
+                    </div>
+
+                    <div class="item" style="background-image: url(images/转天图片包/tools.png);">
+                        <div class="lhx">
+                            <div class="name">星云小窝🔥工具仓库</div>
+                            <div class="des" style="font-size: 20px;">Tools Warehouse</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="buttons">
+                    <div class="s_button">&lt;</div>
+                    <div class="s_button">&gt;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 星云笔记 -->
+<section class="courses" id="courses">
+    <div class="heading">
+        <span>星云笔记</span>
+        <h3 style="color: aqua;">主要实现博客网站功能，欢迎大家发表文章，共同创建学习知识库</h3>
+    </div>
+    <div class="box-container container">
+        <div class="box">
+            <div class="image">
+                <img src="images/转天图片包/notebook.png" alt="">
+            </div>
+            <div class="content">
+                <h3>星云笔记🔥文章列表</h3>
+<!--                <a href="" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/转天图片包/read.png" alt="">
+            </div>
+            <div class="content">
+                <h3>星云笔记🔥阅读界面</h3>
+<!--                <a href="" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+
+        <div class="box">
+            <div class="image">
+                <img src="images/转天图片包/notebook_article.png" alt="">
+            </div>
+            <div class="content">
+                <h3>星云笔记🔥用户中心</h3>
+<!--                <a href="" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/转天图片包/notebook_admin.png" alt="">
+            </div>
+            <div class="content">
+                <h3>星云笔记🔥系统管理</h3>
+<!--                <a href="" class="link-btn">管理者</a>-->
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/转天图片包/notebook_post.png" alt="">
+            </div>
+            <div class="content">
+                <h3>星云笔记🔥新建文章</h3>
+<!--                <a href="" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+         <div class="box">
+            <div class="image">
+                <img src="images/转天图片包/notebook_zhanshi.png" alt="">
+            </div>
+            <div class="content">
+                <h3>星云笔记🔥我的文章</h3>
+<!--                <a href="" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+
+<section class="about" id="panel" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row align-items-center flex-wrap-reverse">
+
+            <div class="col-md-6 flip">
+                <span>数据中心</span>
+                <h3></h3>
+                <p>星云小窝🔥数据面板主要是对于每个注册的用户在星云小窝中的相关数据的展示,包括有关注用户数量、星云笔记所发文章数、工具数量等数据统计并最终用图表形式显示，另外还有私信数等;
+                </p>
+
+                <p>同时也公开了网站的大部分数据信息，使网站更加透明化.</p>
+                <ul>
+                    <li><i class="far fa-check-square"></i> 用户数据统计图表</li>
+                    <li><i class="far fa-check-square"></i> 数据透明化</li>
+                    <li><i class="far fa-check-square"></i>便于用户的操作,提升体验</li>
+                    <p></p>
+                </ul>
+            </div>
+            <div class="col-md-6">
+<!--                <img src="./images/转天图片包/user-4.png" alt="">-->
+            </div>
+        </div>
+    </div>
+</section>
+
+<p></p>
+<p></p>
+
+
+
+<!-- 交流评论 -->
+<section class="about" id="communicate" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row align-items-center flex-wrap-reverse">
+            <div class="col-md-6">
+                <span>交流评论</span>
+                <h2></h2>
+                <p>
+                    星云小窝是自制的一个用于学习交流的网站，该网站秉持共同学习，一起交流的原则，所以特实现此评论区，让各位大佬们能够在这里畅所欲言，分享自己的学习心得，共同进步！
+                </p>
+                <p>
+                    另外，也十分欢迎大家能在评论区提出对本网站的用户体验以及修改意见。你们的每一条宝贵的意见都是对星云小窝的支持。</p>
+                <ul>
+                    <li><i class="far fa-check-square"></i>提出修改意见和用户体验</li>
+                    <li><i class="far fa-check-square"></i> 交流学习问题</li>
+                    <li><i class="far fa-check-square"></i> 收获更多学习伙伴</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <!-- <img src="./images/转天图片包/user-4.png" alt=""> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- 工具仓库 -->
+<section class="courses" id="tools" style="margin-top: 150px;">
+    <div class="heading">
+        <span>工具仓库</span>
+        <h3 style="color: aqua;">欲善其事，先利其器：收录一些常用的软件或网页</h3>
+    </div>
+    <div class="box-container container">
+        <div class="box">
+            <div class="image">
+                <img src="images/转天图片包/tools.png" alt="">
+            </div>
+            <div class="content">
+                <h3>工具仓库🔮工具首页</h3>
+<!--                <a href="/tools" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/转天图片包/tools_type.png" alt="">
+            </div>
+            <div class="content">
+                <h3>工具仓库🔮工具分类</h3>
+<!--                <a href="/tools/type/2" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+
+        <div class="box">
+            <div class="image">
+                <img src="images/转天图片包/tools_introduce.png" alt="">
+            </div>
+            <div class="content">
+                <h3>工具仓库🔮工具介绍</h3>
+<!--                <a href="/tools/type/3" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="images/转天图片包/tools_submit.png" alt="">
+            </div>
+            <div class="content">
+                <h3>工具仓库🔮工具提交</h3>
+<!--                <a href="/tools/type/4" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+         <div class="box">
+            <div class="image">
+                <img src="images/转天图片包/tools_all.png" alt="">
+            </div>
+            <div class="content">
+                <h3>工具仓库🔮所有工具</h3>
+<!--                <a href="/tools/type/5" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+
+
+    </div>
+</section>
+
+
+<!-- 权限设置 -->
+<section class="about" id="shezhi" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row align-items-center flex-wrap-reverse">
+            <div class="col-md-6">
+                <span>权限设置</span>
+                <h2></h2>
+                <p>
+                    添加此模块功能是为了方便注册后的用户对属于自己的权限进行设置，默认情况下,用户的大部分页面是公开的，如有需要，可限制其它用户访问。
+                </p>
+                <p>
+                    该功能鄙人还未添加，由于时间原因，再加上此功能也不是必须需要，故先放置!</p>
+                <ul>
+                    <li><i class="far fa-check-square"></i> 已经注册后的用户</li>
+                    <li><i class="far fa-check-square"></i> 权限的设置,限制访问</li>
+                    <li><i class="far fa-check-square"></i> 暂未实现</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
+    </div>
+</section>
+<div style="margin-bottom: 100px"></div>
+
+
+
+
+
+<!--底部-->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 left">
+                <p>版权所有 &copy; 星云小窝</p>
+                <p>备案号：<a href="https://beian.miit.gov.cn" target="_blank">赣ICP备2024019505号-1</a></p>
+            </div>
+            <div class="col-md-4 center">
+                <p>友情提示</p>
+                <p>本站所有资源均来源于互联网，若有侵权，请联系站长删除;本站所有资源全部开放,仅用于学习交流,
+                    请谨慎加入！</p>
+            </div>
+            <div class="col-md-4 right">
+                <p>更多关于</p>
+                 <a href="https://github.com/xingyun-dev">&nbsp;&nbsp;&nbsp;<img src="/img/logo_github.png" style="width:30px;height:30px">
+                </a>
+                <a href="https://gitee.com/wht050106">&nbsp;&nbsp;&nbsp;<img src="/img/gitee.png" style="width:30px;height:30px">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/script.js"></script>
+<script type="text/javascript" src="/js/lbt.js"></script>
+
+</body>
+
+
+</html>

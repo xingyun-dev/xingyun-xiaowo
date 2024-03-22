@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>管理员后台数据中心🔥文章数据</title>
+        <link rel="icon" href="/images/xingshixiaowo.ico">
+
+    <link href="/person/css/float-chart.css" rel="stylesheet"/>
+    <link href="/person/css/style.min.css" rel="stylesheet"/>
+    <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+    <style>
+        .font-light {
+            font-size: 16px;
+        }
+    </style>
+
+</head>
+<body>
+{% include '/shujumianbang/side-header.html' %}
+
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">管理后台文章数据</h4>
+                <div class="ms-auto text-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li id="time" style="font-size: 15px"></li>
+
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex align-items-center">
+                            <div>
+                                <h4 class="card-title">管理后台详细文章数据</h4>
+                                <h5 class="card-subtitle">公开展示文章数据的信息,透明化</h5>
+                            </div>
+                        </div>
+                        <div class="row" style="text-align: center;">
+
+                            <div class="col-lg-5" style="text-align: center">
+                                <div class="row">
+                                    <div class="col-6 mt-3">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                            <i class="mdi mdi-pencil fs-3 mb-1 font-16"></i>
+                                            <h5 class="mb-0 mt-1">{{article_count}}</h5>
+                                            <small class="font-light">文章总量</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mt-3">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                            <i class="mdi mdi-nature fs-3 mb-1 font-16"></i>
+                                            <h5 class="mb-0 mt-1">{{drafted_count}}</h5>
+                                            <small class="font-light">草稿总量</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mt-3">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                            <i class="mdi mdi-fan fs-3 font-16"></i>
+                                            <h5 class="mb-0 mt-1">{{favorited_count}}</h5>
+                                            <small class="font-light">网站被收藏文章总量</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mt-3">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                            <i class="mdi mdi-read fs-3 mb-1 font-16"></i>
+                                            <h5 class="mb-0 mt-1">{{read_count}}</h5>
+                                            <small class="font-light">文章阅读总量</small>
+                                        </div>
+                                    </div>
+
+                                    <!--                                    <div class="col-6 mt-3">-->
+                                    <!--                                        <div class="bg-dark p-10 text-white text-center">-->
+                                    <!--                                            <i class="mdi mdi-facebook fs-3 font-16"></i>-->
+                                    <!--                                            <h5 class="mb-0 mt-1">{{favorited_count}}</h5>-->
+                                    <!--                                            <small class="font-light">文章被收藏数量</small>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
+
+                                </div>
+                            </div>
+                            <!-- column -->
+                            <!-- column -->
+                            <div class="col-lg-2" style="margin: 10px 0">
+
+
+                            </div>
+
+                            <div class="col-lg-5" style="text-align: center;">
+                                <div class="row">
+                                    <div class="col-6 mt-3">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                            <i class="mdi mdi-file-hidden fs-3 mb-1 font-16"></i>
+                                            <h5 class="mb-0 mt-1">{{hide_count}}</h5>
+                                            <small class="font-light">被隐藏文章总量</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mt-3">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                            <i class="mdi mdi-sale fs-3 mb-1 font-16"></i>
+                                            <h5 class="mb-0 mt-1">{{recommend_count}}</h5>
+                                            <small class="font-light">被推荐文章总量</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6 mt-3">
+                                        <div class="bg-dark p-10 text-white text-center">
+                                            <i class="mdi mdi-comment fs-3 mb-1 font-16"></i>
+                                            <h5 class="mb-0 mt-1">{{comment_count}}</h5>
+                                            <small class="font-light">评论总量</small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--    </div>-->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row" style="text-align: center;">
+                            <div class="col-6">
+                                <div class="d-md-flex align-items-center " style="width:900px">
+                                    <h2>网站不同类文章的数量</h2>
+                                </div>
+                                <div id="pie-article" style="width:900px; height:500px;"></div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="d-md-flex align-items-center " style="width:900px">
+                                    <h2>网站文章信息</h2>
+                                </div>
+                                <div id="bar-article" style="width:900px; height:500px;"></div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-md-flex align-items-center " style="width:900px">
+                                    <h2>网站文章的时间记录</h2>
+                                </div>
+                                <div id="time-article" style="width:900px; height:500px;">
+                                    {{tl_bar | safe}}
+                                </div>
+                                <div id="time-article-year" style="width:900px; height:500px;">
+                                    {{tl_pie |safe}}
+                                </div>
+
+                            </div>
+                             <div class="col-6">
+                                <div class="d-md-flex align-items-center " style="width:900px">
+                                        <h2>网站近二十天文章量</h2>
+                                </div>
+                                <div id="time-article-day" style="width:900px; height:500px;">
+                                    {{chart_bar |safe}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+<script>
+    //顶部时间
+    function getTime() {
+        var myDate = new Date();
+        var myYear = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
+        var myMonth = myDate.getMonth() + 1; //获取当前月份(0-11,0代表1月)
+        var myToday = myDate.getDate(); //获取当前日(1-31)
+        var myDay = myDate.getDay(); //获取当前星期X(0-6,0代表星期天)
+        var myHour = myDate.getHours(); //获取当前小时数(0-23)
+        var myMinute = myDate.getMinutes(); //获取当前分钟数(0-59)
+        var mySecond = myDate.getSeconds(); //获取当前秒数(0-59)
+        var week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        var nowTime;
+
+        nowTime = myYear + '年' + fillZero(myMonth) + '月' + fillZero(myToday) + '日' + '&nbsp;&nbsp;' + fillZero(myHour) + ':' + fillZero(myMinute) + ':' + fillZero(mySecond) + '&nbsp;&nbsp;' + week[myDay] + '&nbsp;&nbsp;';
+        //console.log(nowTime);
+        $('#time').html(nowTime);
+    };
+
+    function fillZero(str) {
+        var realNum;
+        if (str < 10) {
+            realNum = '0' + str;
+        } else {
+            realNum = str;
+        }
+        return realNum;
+    }
+
+    //大屏
+    setInterval(getTime, 1000);
+
+
+    //文章不同类型数量的饼图
+    var chart = echarts.init(document.getElementById('pie-article'), 'white', {renderer: 'canvas'});
+    $(
+        function () {
+            fetchData(chart);
+
+        }
+    );
+
+    function fetchData() {
+        $.ajax({
+            type: "GET",
+            url: "/py_echarts/pie-article-admin",
+            dataType: "json",
+            success: function (result) {
+                chart.setOption(result);
+            }
+        });
+    }
+
+
+    //文章总结的条形图
+    var chart_bar = echarts.init(document.getElementById('bar-article'), 'white', {renderer: 'canvas'});
+    $(
+        function () {
+            fetchData_bar(chart_bar);
+
+        }
+    );
+
+    function fetchData_bar() {
+        $.ajax({
+            type: "GET",
+
+            url: "/py_echarts/bar-article-admin",
+            dataType: "json",
+            success: function (result) {
+                chart_bar.setOption(result);
+            }
+        });
+    }
+
+
+</script>
+
+<script src="/person/js/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>-->
+
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/person/js/bootstrap.bundle.min.js"></script>
+<script src="/person/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="/person/js/sparkline.js"></script>
+<!--Wave Effects -->
+<script src="/person/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/person/js/sidebarmenu.js"></script>
+<!--Custom JavaScript -->
+<script src="/person/js/custom.min.js"></script>
+<!--This page JavaScript -->
+<!-- <script src="../dist/js/pages/dashboards/dashboard1.js"></script> -->
+<!-- Charts js Files -->
+<script src="/person/js/excanvas.js"></script>
+<script src="/person/js/jquery.flot.js"></script>
+<script src="/person/js/jquery.flot.pie.js"></script>
+<script src="/person/js/jquery.flot.time.js"></script>
+<script src="/person/js/jquery.flot.stack.js"></script>
+<script src="/person/js/jquery.flot.crosshair.js"></script>
+<script src="/person/js/jquery.flot.tooltip.min.js"></script>
+<script src="/person/js/chart-page-init.js"></script>
+</body>
+
+</html>

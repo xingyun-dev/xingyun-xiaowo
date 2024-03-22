@@ -1,0 +1,274 @@
+{% extends "/xingyun-notebook/base.html" %}   {#将当前页面继承至base.html母版#}
+{% block content %}
+
+
+{# 按需引入mymodal.html,首页需要引入侧边栏 #}
+
+{% include '/xingyun-notebook/mymodal.html' %}
+
+
+<script src="/lib/uploadImg.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/lib/css/editormd.css"/>
+<script src="/lib/editormd.js"></script>
+
+
+<script type="text/javascript">
+    var contextEditor;
+    // var ARTICLEID = 0;    //定义全局变量用于临时保存articleid
+    var currentUrl = window.location.href;
+    // 分割URL获取最后一个斜杠后面的内容作为articleid
+    var ARTICLEID = parseInt(currentUrl.split('/').pop(), 10);
+
+    // 如果需要确保 ARTICLEID 是一个有效的整数，可以添加以下检查
+    if (isNaN(ARTICLEID)) {
+        // 如果 ARTICLEID 不是一个有效的整数，可以设置一个默认值
+        ARTICLEID = 0; // 默认值为0，或者任何您认为合适的值
+    }
+
+    $(function () {
+        contextEditor = editormd("editormd", {
+            width: "100%",
+            height: "1040px",
+            syncScrolling: "single",
+            emoji: true,
+            path: "/lib/lib/",
+            toolbarModes: 'full',
+            saveHTMLToTextarea: true,//这个配置，方便post提交表单，表单字段会自动加上一个字段content-html-code,形式为html格式
+            watch: true,
+            theme: "dark",//工具栏主题
+            previewTheme: "dark",//预览主题样式 黑色
+            editorTheme: "pastel-on-dark",//编辑主题
+            tex: true,                   // 开启科学公式TeX语言支持，默认关闭
+
+            /**图片上传配置*/
+            imageUpload: true,//开启图片上传
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"], //图片上传格式
+            imageUploadURL: "/upload_md",//图片上传的后端路径
+            onload: function () {
+                initPasteDragImg(this); //必须
+                // 加载时检查本地存储
+                var draftHeadline = localStorage.getItem('draftHeadline');
+                var draftMarkdownContent = localStorage.getItem('draftMarkdownContent');
+                if (draftHeadline && draftMarkdownContent) {
+                    $("#headline").val(draftHeadline);
+                    contextEditor.setMarkdown(draftMarkdownContent);
+
+                }
+            },
+            /*指定需要显示的功能按钮*/
+            toolbarIcons: function () {
+                return ["undo", "redo", "|",
+                    "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|",
+                    "h1", "h2", "h3", "h4", "h5", "h6", "|",
+                    "list-ul", "list-ol", "hr", "|",
+                    "link", "reference-link", "image", "code", "preformatted-text",
+                    "code-block", "table", "datetime", "emoji", "html-entities", "pagebreak", "|",
+                    "goto-line", "watch", "preview", "fullscreen", "clear", "search", "|",
+                    "help", "info", "index", "ueditor", "releaseIcon", "baocun", "article_guanli"]
+            },
+
+            /*自定义功能按钮*/
+            toolbarIconTexts: {
+                baocun: "<span bgcolor=\"blue\">保存草稿</span>",
+                releaseIcon: "<span bgcolor=\"gray\">发布</span>",
+                index: "<span bgcolor=\"red\">返回首页</span>",
+                article_guanli: "<span bgcolor=\"yellow\">我的文章</span>",
+                ueditor: "<span bgcolor=\"green\">富文本编辑器</span>",
+
+            },
+            /*给自定义按钮指定回调函数*/
+            toolbarHandlers: {
+                releaseIcon: function () {
+                    var headline = $.trim($("#headline").val());
+                    var markdownContent = contextEditor.getMarkdown(); // 获取 Markdown 内容
+                    if (headline.length === 0) {
+                        bootbox.alert({title: "错误提示", message: "标题不能少哦！"})
+
+                        return false;
+                    } else if (markdownContent.length < 100) {
+                        bootbox.alert({title: "错误提示", message: "内容不能低于100个字"})
+
+                        return false;
+                    } else {
+                        // 如果标题和内容长度都符合要求，显示模态框
+                        $('#myModal').modal('show');
+                    }
+                },
+                index: function () {
+                    // 清空本地存储的草稿内容
+                    localStorage.removeItem('draftHeadline');
+                    localStorage.removeItem('draftMarkdownContent');
+                    window.location.href = '/notebook';//返回首页
+                },
+                ueditor: function () {
+                    // 清空本地存储的草稿内容
+                    localStorage.removeItem('draftHeadline');
+                    localStorage.removeItem('draftMarkdownContent');
+                    window.location.href = '/prepost';//使用富文本编辑器
+                },
+                article_guanli: function () {
+                    // 清空本地存储的草稿内容
+                    localStorage.removeItem('draftHeadline');
+                    localStorage.removeItem('draftMarkdownContent');
+                    window.location.href = '/ucenter/article';//返回个人的文章管理后台
+                },
+                baocun: function () {
+
+                    var intro = $.trim($("#textInput").val());
+
+
+                    var headline = $.trim($("#headline").val());
+                    var markdownContent = contextEditor.getMarkdown(); // 获取 Markdown 内容
+                    // var htmlContent = contextEditor.getHTML(); // 获取 HTML 内容
+                    if (headline.length === 0) {
+                        bootbox.alert({title: "错误提示", message: "标题不能少哦！"})
+
+                        return false;
+                    } else if (markdownContent.length < 100) {
+                        bootbox.alert({title: "错误提示", message: "内容不能低于100个字"})
+
+                        return false;
+                    }
+
+                    // 保存到本地存储
+                    localStorage.setItem('draftHeadline', headline);
+                    localStorage.setItem('draftMarkdownContent', markdownContent);
+                    var param = "headline=" + encodeURIComponent(headline);
+                    param += "&content=" + encodeURIComponent(markdownContent);
+                    param += "&type=" + $("#type").val();
+                    param += "&drafted=1&checked=1&is_markdown=1&articleid=" + ARTICLEID;
+                    param += "&article_introduce=" + encodeURIComponent(intro);
+                    param += "&thumbnail=" + null;
+                    $.post('/editor_article', param, function (data) {
+                        if (data == 'perm-denied') {
+                            bootbox.alert({title: "错误提示", message: "权限不足，无法保存草稿."})
+
+                        } else if (data == 'post-fail') {
+                            bootbox.alert({title: "错误提示", message: "保存草稿失败,请联系管理员."})
+
+                        } else if (data.match(/^\d+$/)) {
+                            bootbox.alert({title: "信息提示", message: "保存草稿成功."})
+
+                            ARTICLEID = parseInt(data);
+                        } else {
+                            bootbox.alert({title: "错误提示", message: "保存草稿失败，可能没有权限."})
+
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+
+    // 提交文章的函数
+    function submitArticle(encodedThumbnail) {
+        var intro = $.trim($("#textInput").val());
+        var headline = $.trim($("#headline").val());
+        var markdownContent = contextEditor.getMarkdown();
+
+        var param = "headline=" + encodeURIComponent(headline);
+        param += "&content=" + encodeURIComponent(markdownContent);
+        param += "&type=" + $("#type").val();
+        param += "&drafted=0&checked=1&is_markdown=1&articleid=" + ARTICLEID;
+        param += "&article_introduce=" + encodeURIComponent(intro);
+        param += "&thumbnail=" + encodedThumbnail;
+
+        $.post('/editor_article', param, function (data) {
+            if (data == 'perm-denied') {
+                bootbox.alert({title: "错误提示", message: "权限不足，无法投稿"});
+            } else if (data == 'post-fail') {
+                bootbox.alert({title: "错误提示", message: "投稿失败，请联系管理员"});
+            } else if (data.match(/^\d+$/)) {
+                bootbox.alert({title: "信息提示", message: "投稿成功，审核后即可发布"});
+                setTimeout(function () {
+                    location.href = '/notebook/md_article/' + data;
+                }, 1000);
+            } else {
+                bootbox.alert({title: "错误提示", message: "投稿失败，可能没有权限."});
+
+            }
+        }).fail(function () {
+            // 处理AJAX请求失败的情况
+            console.error('AJAX request failed');
+        });
+    }
+
+
+    function submitArticle_moren() {
+        var intro = $.trim($("#textInput").val());
+        var headline = $.trim($("#headline").val());
+        var markdownContent = contextEditor.getMarkdown();
+
+
+        var param = "headline=" + encodeURIComponent(headline);
+        param += "&content=" + encodeURIComponent(markdownContent);
+        param += "&type=" + $("#type").val();
+        param += "&drafted=0&checked=1&is_markdown=1&articleid=" + ARTICLEID;
+        param += "&article_introduce=" + encodeURIComponent(intro);
+        param += "&thumbnail=" + null;
+
+        $.post('/editor_article', param, function (data) {
+            if (data == 'perm-denied') {
+                bootbox.alert({title: "错误提示", message: "权限不足，无法投稿"});
+            } else if (data == 'post-fail') {
+                bootbox.alert({title: "错误提示", message: "投稿失败，请联系管理员"});
+            } else if (data.match(/^\d+$/)) {
+                bootbox.alert({title: "信息提示", message: "投稿成功，审核后即可发布"});
+                setTimeout(function () {
+                    location.href = '/notebook/md_article/' + data;
+                }, 1000);
+            } else {
+                bootbox.alert({title: "错误提示", message: "投稿失败，可能没有权限."});
+
+            }
+        }).fail(function () {
+            // 处理AJAX请求失败的情况
+            console.error('AJAX request failed');
+        });
+    }
+
+</script>
+
+
+<!-- 中部区域布局 -->
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <div class="container" style="margin-top: 20px; background-color: white; padding: 20px;">
+            <div class="row form-group">
+                <label for="headline" class="col-1">文章标题</label>
+                <input type="text" class="col-11" id="headline" value="{{article.headline}}"
+                       style="border-width: 1px; border-style: solid; border-color: #ccc; border-radius: 8px;"/>
+            </div>
+            <div class="row form-group" style="margin-top: 20px; padding-top: 10px;">
+                <label for="type" class="col-1">类型：</label>
+                <select class="form-control col-2" id="type">
+                    <option value="1">R语言应用</option>
+                    <option value="2">设计美化</option>
+                    <option value="3">Python学习</option>
+                    <option value="4">生信分析</option>
+                    <option value="5">人工智能</option>
+                    <option value="6">web开发</option>
+                    <option value="7">项目实战</option>
+                    <option value="8">其它</option>
+                </select>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div style=" margin: 20px auto;  width: 100%; ">
+    <div id="editormd">
+<textarea style="display:none;">
+{{ article.content }}
+                    </textarea>
+    </div>
+
+</div>
+
+
+{% endblock %}
+

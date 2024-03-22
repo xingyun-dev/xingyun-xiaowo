@@ -1,0 +1,197 @@
+ #myModal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1050;
+    }
+
+
+    /* 模态框整体样式 */
+    #myModal .modal-content {
+        background-color: #ffffff;
+        border-radius: 30px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 600px;
+        margin: 10% auto;
+        /* 使其在垂直方向上居中 */
+        z-index: 1080;
+    }
+
+    .modal-backdrop {
+        z-index: 1040; /* 将遮罩层的z-index值设置为比模态框内容层小一些 */
+    }
+
+
+    /* 表单元素样式 */
+    #myModal label {
+        display: block;
+        font-weight: bold;
+    }
+
+    #myModal input[type="text"] {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        transition: border-color 0.2s ease-in-out;
+        margin-bottom: 15px;
+    }
+
+    #myModal input[type="text"]:focus {
+        outline: none;
+        border-color: #66afe9;
+    }
+
+
+    /* 添加图片预览区域样式 */
+    .preview-image {
+        position: relative; /* 设置为固定定位 */
+        width: 300px; /* 图片容器宽度 */
+        height: 200px; /* 图片容器高度 */
+        overflow: hidden; /* 可选，处理图片尺寸超出容器的情况 */
+    }
+
+    /* 当有文件被选中时，更新.custom-file-label的内容为所选文件名 */
+    .custom-file-input ~ .custom-file-label::after {
+        content: "";
+    }
+
+    .custom-file-input:lang(en) ~ .custom-file-label::after {
+        content: "Choose";
+    }
+
+    .custom-file-input ~ .custom-file-label[data-browse]:not([data-browse=""])::after {
+        content: attr(data-browse);
+    }
+
+    /* 选中文件后，更新.custom-file-label的颜色 */
+    .custom-file-input:valid ~ .custom-file-label,
+    .custom-file-input:focus ~ .custom-file-label {
+        color: #495057;
+        border-color: #adb5bd;
+    }
+
+    /* 点击时聚焦效果 */
+    .custom-file-input:focus {
+        outline: none;
+    }
+
+    /* 隐藏默认的input[type=file]样式 */
+    .visually-hidden {
+        position: absolute !important;
+        clip: rect(0 0 0 0) !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        border: 0 !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+    }
+
+
+
+    #myModal_editor {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1050;
+    }
+
+
+    /* 模态框整体样式 */
+    #myModal_editor .modal-content {
+        background-color: #ffffff;
+        border-radius: 30px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 600px;
+        margin: 10% auto;
+        /* 使其在垂直方向上居中 */
+        z-index: 1080;
+    }
+
+    .modal-backdrop {
+        z-index: 1040; /* 将遮罩层的z-index值设置为比模态框内容层小一些 */
+    }
+
+
+    /* 表单元素样式 */
+    #myModal_editor label {
+        display: block;
+        font-weight: bold;
+    }
+
+    #myModal_editor input[type="text"] {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        transition: border-color 0.2s ease-in-out;
+        margin-bottom: 15px;
+    }
+
+    #myModal_editor input[type="text"]:focus {
+        outline: none;
+        border-color: #66afe9;
+    }
+
+
+
+
+
+
+
+    #myModal_update {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1050;
+    }
+
+
+    /* 模态框整体样式 */
+    #myModal_update .modal-content {
+        background-color: #ffffff;
+        border-radius: 30px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 600px;
+        margin: 10% auto;
+        /* 使其在垂直方向上居中 */
+        z-index: 1080;
+    }
+
+    .modal-backdrop {
+        z-index: 1040; /* 将遮罩层的z-index值设置为比模态框内容层小一些 */
+    }
+
+
+    /* 表单元素样式 */
+    #myModal_update label {
+        display: block;
+        font-weight: bold;
+    }
+
+    #myModal_update input[type="text"] {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        transition: border-color 0.2s ease-in-out;
+        margin-bottom: 15px;
+    }
+
+    #myModal_update input[type="text"]:focus {
+        outline: none;
+        border-color: #66afe9;
+    }

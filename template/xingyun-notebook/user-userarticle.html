@@ -1,0 +1,353 @@
+<!--<title>个人用户中心</title>-->
+{% extends "/xingyun-notebook/base.html" %}   {#将当前页面继承至base.html母版#}
+{% block content %}
+<style>
+
+    @media (max-width: 1000px ) {
+        .liulan {
+            display: none;
+        }
+
+        .pinglun {
+            display: none;
+        }
+
+        .caozuo {
+            display: none;
+        }
+    }
+
+</style>
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+
+        <!-- 中部区域布局 -->
+        <div class="container" style="margin-top: 10px;">
+            <div class="row">
+
+                <div class="col-sm-12 col-12" style="padding: 0px 10px">
+                    <div class="col-12 admin-main">
+                        <!--搜索栏-->
+                        <div class="col-12 search-bar row">
+                            <div class="col-2">
+                                <select id="category" class="form-control" onchange="doSearch()">
+                                    <option value="" style="display: none">请选择分类</option>
+                                    <option value="all">全部分类</option>
+                                    {% for key, value in article_type.items() %}
+                                    <option value="{{ key }}">{{ value }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <input type="text" class="form-control" id="keyword" placeholder="搜索文章"
+                                       onkeyup="doSearchBykeyword(event)">
+                            </div>
+                            <div class="col-2" style="text-align:left;">
+                                <button type="button" class="btn btn-dark" onclick="doSearchBykeyword(null)">搜索
+                                </button>
+                            </div>
+                            <div class="col-5" style="font-size: 20px;color: #917fd3;text-align: right">
+                                <a href="/home/{{user_info.userid}}" style="font-size: 20px;color: #917fd3;text-align: right">
+                               用户&nbsp;&nbsp;:{{user_info.nickname}}&nbsp;&nbsp;
+                                    </a>
+                            </div>
+
+                        </div>
+
+
+                        {% for article,users in result%}
+
+                        <!--文章列表-->
+                        <div class="col-12 row article-list">
+                            <div class="col-sm-3 col-3 thumb d-none d-sm-block">
+                                <img src="/thumb/{{article.thumbnail}}"
+                                     class="img-fluid" alt="" style="height: 150px;width: 270px"/>
+                            </div>
+                            <div class="col-sm-9 col-xs-12 detail">
+                                <div class="title"><a
+                                        href="/notebook/{{is_markdown(article.articleid)}}/{{article.articleid}}">{{article.headline}}</a>
+                                </div>
+                                <div class="info">作者：{{users}}&nbsp;&nbsp;&nbsp;类别：{{article_type[article.category |
+                                    string]}}&nbsp;&nbsp;&nbsp;
+                                    日期：{{article.createtime}}&nbsp;&nbsp;&nbsp;阅读：{{article.readcount}} 次&nbsp;&nbsp;&nbsp
+                                </div>
+                                <div class="intro">
+                                    {% if article.article_introduce %}
+                                    {{article.article_introduce|striptags|truncate(180)}}
+                                    {% else %}
+                                    {{article.content|striptags|truncate(180)}}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!-- 分页导航栏 -->
+                        <div class="col-12 paginate">
+                            {% if page==1%}
+                            <!-- 如果是第1页，则上一页也是第1页，否则上一页为当前页-1 -->
+                            <a href="/ucenter/articleuser/{{user_id}}--1">上一页</a>&nbsp;&nbsp;
+                            {% else %}
+                            <a href="/ucenter/articleuser/{{user_id}}--{{page-1}}">上一页</a>&nbsp;&nbsp;
+                            {% endif %}
+
+                            <!-- 根据总页数循环填充页码，并为其添加超链接进行导航 -->
+                            {% for i in range(total) %}
+                            <a href="/ucenter/articleuser/{{user_id}}--{{i+1}}">{{i+1}}</a>&nbsp;&nbsp;
+                            {% endfor %}
+
+                            {% if page==total%}
+                            <!-- 如果是最后一页，则下一页也是最后页，否则下一页为当前页+1 -->
+                            <a href="/ucenter/articleuser/{{user_id}}--{{total}}">下一页</a>
+                            {% else %}
+                            <a href="/ucenter/articleuser/{{user_id}}--{{page+1}}">下一页</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 对应的操作函数的代码 -->
+        <script type="text/javascript">
+
+            // 分类搜索
+            function doSearch(event) {
+                if (event != null && event.keyCode !== 13) {
+                    return false;
+                }
+                var category = $.trim($("#category").val());
+                if (category === "all") {  // 当选择项为"全部分类"时
+                    location.href = "/ucenter/articleuser/{{user_id}}";  // 跳转到 "/admin" 页面
+                } else {
+                    location.href = "/ucenter/articleuser/{{user_id}}/type/" + category + "--1";  // 其他选项跳转到相应的链接地址
+                }
+            }
+
+            // 关键字搜索
+            function doSearchBykeyword(event) {
+                if (event != null && event.keyCode != 13) {
+                    return false;
+                }
+
+                var keyword = $.trim($("#keyword").val());
+                if (keyword.length == 0 || keyword.length > 10 || keyword.indexOf('%') >= 0) {
+                    bootbox.alert({'title': '错误提示！', 'message': "您输入的关键字不合理"});
+                    $("#keyword").focus();
+                    return false;
+                }
+                location.href = "/ucenter/articleuser/{{user_id}}/search/" + keyword;
+
+            }
+
+            $('#newArticleBtn').click(function () {
+                // 清空本地存储的草稿内容
+                localStorage.removeItem('draftHeadline');
+                localStorage.removeItem('draftMarkdownContent');
+                // localStorage.removeItem('draftHtmlContent');
+
+            });
+
+            $(document).ready(function () {
+                $('.editor').click(function () {
+                    // 清空本地存储的草稿内容
+                    localStorage.removeItem('draftHeadline');
+                    localStorage.removeItem('draftMarkdownContent');
+                });
+            });
+            //删除文章
+            $(function () {
+                $('.btn-delete').click(function () {
+                    var articleId = $(this).data('articleid');
+                    bootbox.confirm({
+                        title: "删除文章",
+                        message: "您确定要删除这篇文章吗？",
+                        buttons: {
+                            confirm: {
+                                label: '确认',
+                                className: 'btn-success'
+                            },
+                            cancel: {
+                                label: '取消',
+                                className: 'btn-danger'
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: '/article/delete',
+                                    type: 'POST',
+                                    data: {articleid: articleId},
+                                    success: function (data) {
+                                        if (data === 'delete-success') {
+                                            bootbox.alert({
+                                                title: "信息提示",
+                                                message: "文章删除成功.",
+                                                callback: function () {
+                                                    location.reload();
+                                                }
+                                            }).find('.modal-dialog').addClass('success-dialog');
+                                        } else {
+                                            bootbox.alert({title: "错误提示", message: "删除失败，请重试！"});
+                                        }
+                                    },
+                                    error: function (xhr, textStatus, errorThrown) {
+                                        bootbox.alert({title: "错误提示", message: "删除失败，请重试！"});
+                                    }
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+
+
+            //隐藏切换
+            $(function () {
+                $('.btn-hidden').each(function () {
+                    var articleId = $(this).data('articleid');
+                    var $hideBtn = $(this); // 保存隐藏按钮元素
+
+                    // 检查本地存储中是否有对应文章ID的状态
+                    var isHidden = localStorage.getItem('article_' + articleId);
+                    if (isHidden === 'true') {
+                        $hideBtn.text('取消隐藏');
+                    } else {
+                        $hideBtn.text('隐藏');
+                    }
+
+                    $hideBtn.click(function () {
+                        bootbox.confirm({
+                            title: "信息提示",
+                            message: "您确定要进行此操作吗？",
+                            buttons: {
+                                confirm: {
+                                    label: '确认',
+                                    className: 'btn-success'
+                                },
+                                cancel: {
+                                    label: '取消',
+                                    className: 'btn-danger'
+                                }
+                            },
+                            callback: function (result) {
+                                if (result) {
+                                    $.ajax({
+                                        url: '/article/hidden',
+                                        type: 'POST',
+                                        data: {articleid: articleId},
+                                        success: function (data) {
+                                            if (data === 'hidden-success') {
+                                                // 更新文章状态为已隐藏
+                                                localStorage.setItem('article_' + articleId, 'true');
+                                                // $hideBtn.text('已隐藏');
+                                                bootbox.alert({
+                                                    title: "隐藏",
+                                                    message: "文章隐藏成功.",
+                                                    callback: function () {
+                                                        location.reload();
+                                                    }
+                                                }).find('.modal-dialog').addClass('success-dialog');
+                                            } else if (data === "hidden-cancel") {
+                                                // 更新文章状态为隐藏
+                                                localStorage.setItem('article_' + articleId, 'false');
+                                                // $hideBtn.text('隐藏');
+                                                bootbox.alert({
+                                                    title: "取消隐藏",
+                                                    message: "文章取消隐藏成功.",
+                                                    callback: function () {
+                                                        location.reload();
+                                                    }
+                                                }).find('.modal-dialog').addClass('success-dialog');
+                                            }
+                                        },
+                                        error: function (xhr, textStatus, errorThrown) {
+                                            bootbox.alert({title: "错误提示", message: "隐藏失败，请重试！"});
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    });
+                });
+            });
+
+
+            // $(function () {
+            //
+            //     $('.btn-hidden').click(function () {
+            //         let message;
+            //         let title;
+            //         let is_hidden = "0";
+            //         const articleId = $(this).data('articleid');
+            //         const $hideBtn = $(this); // 保存隐藏按钮元素
+            //         if (is_hidden === "0") {
+            //             title = "隐藏文章";
+            //             message = "您确定要隐藏这篇文章吗？";
+            //         } else {
+            //             title = "取消隐藏";
+            //             message = "您确定要取消隐藏这篇文章吗？";
+            //         }
+            //         bootbox.confirm({
+            //             title: title,
+            //             message: message,
+            //             buttons: {
+            //                 confirm: {
+            //                     label: '确认',
+            //                     className: 'btn-success'
+            //                 },
+            //                 cancel: {
+            //                     label: '取消',
+            //                     className: 'btn-danger'
+            //                 }
+            //             },
+            //
+            //             callback: function (result) {
+            //                 if (result) {
+            //                     $.ajax({
+            //                         url: '/article/hidden',
+            //                         type: 'POST',
+            //                         data: {articleid: articleId},
+            //                         success: function (data) {
+            //                             if (data === 'hidden-success') {
+            //                                 // 更新文章状态为已隐藏
+            //                                 is_hidden = "1";
+            //                                 $hideBtn.text('已隐藏');
+            //                                 bootbox.alert({
+            //                                     title: "信息提示",
+            //                                     message: "文章隐藏成功.",
+            //                                     callback: function () {
+            //                                         location.reload();
+            //                                     }
+            //                                 }).find('.modal-dialog').addClass('success-dialog');
+            //                             }
+            //                             if (data === "hidden-cancel") {
+            //                                 //更新文章状态为隐藏
+            //                                 is_hidden = "0";
+            //                                 $hideBtn.text('隐藏');
+            //                                 bootbox.alert({
+            //                                     title: "信息提示",
+            //                                     message: "取消隐藏成功.",
+            //                                     callback: function () {
+            //                                         location.reload();
+            //                                     }
+            //                                 }).find('.modal-dialog').addClass('success-dialog');
+            //                             }
+            //                         },
+            //                         error: function (xhr, textStatus, errorThrown) {
+            //                             bootbox.alert({title: "错误提示", message: "隐藏失败，请重试！"});
+            //                         }
+            //                     });
+            //                 }
+            //             }
+            //         });
+            //     });
+            // });
+
+
+        </script>
+
+
+    </div>
+</div>
+{% endblock %}

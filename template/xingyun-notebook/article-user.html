@@ -1,0 +1,433 @@
+{% extends "/xingyun-notebook/base.html" %}   {#将当前页面继承至base.html母版#}
+{% block content %}
+
+<div class="col-sm-9 col-12" id="left" style="padding-right: 0px">
+    <div class="col-12 row article-detail">
+        <div class="col-9 title">
+            {{article.headline}}
+        </div>
+        <div class="col-3 favorite">
+            {% if is_favorited==True %}
+            <label class="favorite-btn" onclick="cancelFavorite('{{article.articleid}}')"><span
+                    aria-hidden="true"></span>取消收藏</label>
+            {% else %}
+            <label class="favorite-btn" onclick="addFavorite('{{article.articleid}}')"><span
+                    aria-hidden="true"></span>收藏本文</label>
+            {% endif %}
+
+        </div>
+        <div class="col-12 info " style="display: flex">
+            <a href="/home/{{user_info.userid}}" target="_blank">
+                {{article.nickname}}&nbsp;
+            </a>
+            &nbsp;&nbsp;{{article_type[article.category | string]}}&nbsp;&nbsp;&nbsp;
+             <span class="hide_time">
+            日期：{{article.createtime}}&nbsp;&nbsp;&nbsp;
+         </span>
+            阅读：{{article.readcount}} 次&nbsp;&nbsp;&nbsp;
+            <div style="margin-left: auto; display: flex ">
+
+                <button class="btn-xiaowo follow Following btn-follow" data-followed-vip-id="{{ user_info.userid }}"
+                        style=" background:none; margin-bottom: 10px;border: none;color: #0d8ddb">
+                    关注作者
+                </button>
+            </div>
+        </div>
+
+        <div class="col-12 content" id="content">
+            {{article.content | safe}}
+        </div>
+
+
+    </div>
+
+    <div class="col-12 row  article-nav">
+        <div  class="hide_link">星云笔记: https://www.whtuu.cn/notebook/{{is_markdown(article.articleid)}}/{{article.articleid}}</div>
+        <div>
+            <a href="/notebook/{{is_markdown(prev_next.prev_id)}}/{{prev_next.prev_id}}">上一篇：{{prev_next.prev_headline}}</a>
+        </div>
+        <div>
+            <a href="/notebook/{{is_markdown(prev_next.next_id)}}/{{prev_next.next_id}}">下一篇：{{prev_next.next_headline}}</a>
+        </div>
+    </div>
+
+
+    <!--评论-->
+    <div class="col-12 article-comment" style="margin-left: -12px">
+        <div class="col-12 row">
+            <div class="col-2">
+                <label for="nickname" style="margin-left: 30px; font-weight: bold" class="hide_nickname">你的昵称：</label>
+            </div>
+            <div class="col-10">
+                {% if session.get('islogin')=='true'%}
+                <input type="text" class="form-control" id="nickname" value="{{session.get('nickname')}}" readonly/>
+                {% else %}
+                <input type="text" class="form-control" id="nickname" value="你还未登录,双击此处可登录."
+                       ondblclick="showLogin()" readonly/>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-12 row">
+            <div class="col-2">
+                <label for="comment" style="margin-left: 30px; font-weight: bold" class="hide_comment">你的评论：</label>
+            </div>
+            <div class="col-10">
+                        <textarea class="form-control" style="height: 120px;" id="comment"
+                                  placeholder="请输入你的评论"></textarea>
+            </div>
+        </div>
+        <div class="col-12 row">
+            <div class="col-12" style="text-align:right;">
+                {% if session.get('islogin')=='true'%}
+                <button class="btn btn-primary" onclick="addComment('{{article.articleid}}')" id="submitBtn">发表评论
+                </button>
+                <button class="btn btn-primary" type="button" onclick="replyComment('{{article.articleid}}')"
+                        id="replyBtn" style="display: none;">回复评论
+                </button>
+                {% else %}
+                <button class="btn btn-primary" onclick="showLogin()">点此登录</button>
+                {% endif %}
+            </div>
+        </div>
+
+
+        <div id="commentDIV"></div>
+
+
+        <!--由于使用Ajax进行分页,分页导航时不能再使用超链接 -->
+        {% if total>1 %}
+        <div class="col-12 paginate">
+            <label onclick="gotoPage('{{article.articleid}}','prev')">上一页</label>&nbsp;&nbsp;
+
+            {% for i in range(total) %}
+            <label onclick="gotoPage('{{article.articleid}}','{{i+1}}')">{{i+1}}</label>&nbsp;&nbsp;
+            {% endfor %}
+
+            <label onclick="gotoPage('{{article.articleid}}','next')">下一页</label>
+
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% include "/xingyun-notebook/side-jquery.html" %}
+<script>
+
+
+    // 添加收藏
+    function addFavorite(articleid) {
+        var param = 'articleid=' + articleid;
+        $.post('/favorite', param, function (data) {
+            if (data == 'not-login') {
+                bootbox.alert({title: "错误提示", message: "你还未登录,请先登录后再收藏本文"});
+            } else if (data == 'favorite-pass') {
+                bootbox.alert({title: "信息提示", message: "文章收藏成功,可在我的收藏中查看"});
+                //菜单名称修改为：感谢收藏
+                $(".favorite-btn").html('<span  aria-hidden="true" ></span>感谢收藏');
+                //取消收藏按钮的单击事件
+                $(".favorite-btn").attr('onclick', '').unbind('click');
+            } else {
+                bootbox.alert({title: "错误提示", message: "文章收藏失败,请联系管理员"});
+            }
+
+        })
+    }
+
+    //取消收藏
+    function cancelFavorite(articleid) {
+        var param = 'articleid=' + articleid;
+        $.ajax({
+            url: '/favorite/' + articleid,
+            type: 'delete',
+            success: function (data) {
+                if (data == 'not-login') {
+                    bootbox.alert({title: "错误提示", message: "你还未登录,请先登录后再取消收藏"});
+                } else if (data == 'cancel-pass') {
+                    bootbox.alert({title: "信息提示", message: "文章取消收藏成功"});
+                    $(".favorite-btn").html('<span  aria-hidden="true" ></span>欢迎再来');
+
+                    $(".favorite-btn").attr('onclick', '').unbind('click');
+
+                }
+            }
+        })
+    }
+
+
+    function addComment(articleid) {
+        var content = $.trim($("#comment").val());
+        if (content.length > 1000) {
+            bootbox.alert({title: "错误提示", message: "评论内容不能超过1000个字符"});
+            return false;
+        }
+
+        var param = 'articleid=' + articleid + '&content=' + content;
+        $.post('/comment', param, function (data) {
+            if (data == 'content-invalid') {
+                bootbox.alert({title: "错误提示", message: "评论内容不能超过1000个字符"});
+            } else if (data == 'add-pass') {
+                location.reload();
+            } else if (data == "not-login") {
+                bootbox.alert({title: "错误提示", message: "你还未登录,请先登录后再评论"});
+            } else {
+                bootbox.alert({title: "错误提示", message: "评论失败,请联系管理员"});
+            }
+
+        });
+    }
+
+
+    //通过什么样的方式来传递commentid呢？
+    //1.使用全局变量
+    //2. 使用一个临时的DIV或隐藏的表单元素做中转 <div id='temp' style='display:none'>12345</div>
+
+    var COMMENTID = 0;
+
+
+    function gotoReply(commentid) {
+        $("#submitBtn").hide();     // 隐藏发表评论按钮
+        $("#replyBtn").show();      // 显示回复评论按钮
+        $("#nickname").val("请在此回复编号为 " + commentid + " 的评论");
+        $("#comment").focus();      // 让文本域获取焦点
+        COMMENTID = commentid;  // 修改全局变量的值为当前被回复评论的iD
+    }
+
+    function hideComment(commentid) {
+        var param = '&commentid=' + commentid
+        $.post('/delete', param, function (data) {
+            if (data == 'delete-pass') {
+                bootbox.alert({title: "信息提示", message: "隐藏评论成功."});
+                location.reload();
+            } else if (data == 'delete-fail') {
+                bootbox.alert({title: "错误提示", message: "隐藏评论出错，请联系管理员."});
+            } else if (data == 'not-login') {
+                bootbox.alert({title: "错误提示", message: "你还未登录,请先登录后再回复"});
+            }
+        });
+    }
+
+    function replyComment(articleid) {
+        var content = $.trim($("#comment").val());
+        if (content.length > 1000) {
+            bootbox.alert({title: "错误提示", message: "评论内容在1000字之内."});
+            return false;
+        }
+        var param = 'articleid=' + articleid;
+        param += '&content=' + content;
+        param += '&commentid=' + COMMENTID;
+        $.post('/reply', param, function (data) {
+            if (data == 'content-invalid') {
+                bootbox.alert({title: "错误提示", message: "评论内容在1000字之内."});
+            } else if (data == 'reply-pass') {
+                location.reload();
+            } else if (data == 'reply-fail') {
+                bootbox.alert({title: "错误提示", message: "回复评论出错，请联系管理员."});
+            } else if (data == 'not-login') {
+                bootbox.alert({title: "错误提示", message: "你还未登录,请先登录后再回复"});
+            }
+        });
+    }
+
+    var PAGE = 1;   // 定义全局变量用于记录前面在哪一页，默认在第1页
+    var TOTAL = '{{total}}'
+    ;  // 定义总页数，由模板引擎先引填充
+
+    // 添加gotoPage函数对应的代码
+    function gotoPage(articleid, type) {
+        // 如果当前面是第1页，则上一页还是第1页
+        if (type == 'prev') {
+            if (PAGE > 1)
+                PAGE -= 1;
+        }
+        // 如果当前页是是后一页，则下一页还是最后一页
+        else if (type == 'next') {
+            if (PAGE < TOTAL)
+                PAGE += 1;
+        } else {
+            PAGE = parseInt(type);
+        }
+        fillComment(articleid, PAGE);
+    }
+
+
+    // 填充分页评论数据，注意其中的DOM元素的拼接操作
+    function fillComment(articleid, pageid) {
+        $("#commentDIV").empty();   // 先清空现有评论区内容
+        var content = '';           // 用于拼接评论区元素与内容
+        $.get('/comment/' + articleid + '-' + pageid, function (data) {
+            var comment = data;
+            for (var i in comment) {
+                content += '<div class="col-12 list row">';
+                content += '<div class="col-2 icon">';
+                content += '<a href="/home/' + comment[i]['userid'] + '"><img src="/chat_room/images/' + comment[i]['avatar'] + '" class="img-fluid" style="width: 70px;border-radius: 50%"/></a>';
+                content += '</div>';
+                content += '<div class="col-10 comment">';
+                content += '<div class="col-12 row" style="padding: 0px;">';
+                content += '<div class="col-7 commenter">';
+                content += comment[i]['nickname'];
+                content += '&nbsp;&nbsp;&nbsp;' + comment[i]['createtime'];
+                content += '</div>';
+                content += '<div class="col-5 reply">';
+                <!-- 文章作者、管理员和评论者只能回复和隐藏，不能点赞-->
+                <!-- 此处的判断内容由模板引擎先行填充，字符串的比较在外面加 "" -->
+                if ("{{article.userid}}" == "{{session.get('userid')}}" ||
+                    "{{session.get('role')}}" == "admin" ||
+                    comment[i]['userid'] + "" == "{{session.get('userid')}}") {
+                    content += '<label onclick="gotoReply(' + comment[i]['commentid'] + ')">';
+                    content += '<span  aria-hidden="true"></span>';
+                    content += '♻回复</label>&nbsp;&nbsp;&nbsp;';
+                    content += '<label onclick="hideComment(' + comment[i]['commentid'] + ')">';
+                    content += '<span  aria-hidden="true"></span>🗑隐藏</label>';
+                } else {
+                    <!-- 其他用户只能回复和点赞，不能隐藏 -->
+                    content += '<label onclick="gotoReply(' + comment[i]['commentid'] + ')">';
+                    content += '<span  aria-hidden="true"></span>♻回复';
+                    content += '</label>&nbsp;&nbsp;';
+                    // content += '<label onclick="agreeComment(this, ' + comment[i]['commentid'] + ')">';
+                    // content += '<span class="oi oi-chevron-bottom" aria-hidden="true"></span>赞成(<span>' + comment[i]['agreecount'] + '</span>)';
+                    // content += '</label>&nbsp;&nbsp;';
+                    // content += '<label onclick="opposeComment(this, ' + comment[i]['commentid'] + ')">';
+                    // content += '<span class="oi oi-x" aria-hidden="true"></span>反对(<span>' + comment[i]['opposecount'] + '</span>)';
+                    // content += '</label>';
+                }
+                content += '</div>';
+                content += '</div>';
+                content += '<div class="col-12 content">';
+                content += comment[i]['content'];     <!-- 填充原始评论内容 -->
+                content += '</div>';
+                content += '</div>';
+                content += '</div>';
+
+                <!-- 在当前评论下方填充回复评论,如果当前评论有回复才填充 -->
+                if (comment[i]['reply_list'].length > 0) {
+                    var reply = comment[i]['reply_list'];
+                    for (var j in reply) {
+                        content += '<div class="col-12 list row">';
+                        content += '<div class="col-2 icon">';
+                        content += '<a href="/home/' + reply[j]['userid'] + '"><img src="/chat_room/images/' + reply[j]['avatar'] + '" class="img-fluid" style="width: 50px;border-radius: 50%"/></a>';
+                        content += '</div>';
+                        content += '<div class="col-10 comment" style="border: solid 1px #ccc;">';
+                        content += '<div class="col-12 row" style="padding-left: 50px;">';
+                        content += '<div  class="col-7 commenter" style=" color: #ff0505">';
+                        content += reply[j]['nickname'];
+                        content += '&nbsp;&nbsp;回复&nbsp;&nbsp;';
+                        content += comment[i]['nickname'];
+                        content += '&nbsp;&nbsp;&nbsp;';
+                        content += reply[j]['createtime'];
+                        content += '</div>';
+                        content += '<div class="col-5 reply">';
+                        <!-- 回复的评论不能继续回复，但是可以隐藏和点赞 -->
+                        if ("{{article.userid}}" == "{{session.get('userid')}}" ||
+                            "{{session.get('role')}}" == "admin" ||
+                            reply[j]['userid'] + "" == "{{session.get('userid')}}") {
+                            content += '<label onclick="hideComment( ' + reply[j]['commentid'] + ')">';
+                            content += '<span aria-hidden="true"></span>🗑隐藏';
+                            content += '</label>&nbsp;&nbsp;&nbsp;';
+                        }
+                        content += '<label onclick="gotoReply(' + comment[i]['commentid'] + ')">';
+                        content += '<span  aria-hidden="true"></span>♻回复';
+                        content += '</label>&nbsp;&nbsp;';
+                        // content += '<label onclick="agreeComment(this, ' + reply[j]['commentid'] + ')">';
+                        // content += '<span class="oi oi-chevron-bottom" aria-hidden="true"></span>赞成(<span>' + reply[j]['agreecount'] + '</span>)';
+                        // content += '</label>&nbsp;&nbsp;&nbsp;';
+                        // content += '<label onclick="opposeComment(this, ' + reply[j]['commentid'] + ')">';
+                        // content += '<span class="oi oi-x" aria-hidden="true"></span>反对(<span>' + reply[j]['opposecount'] + '</span>)';
+                        // content += '</label>';
+
+                        content += '</div>';
+                        content += '</div>';
+                        content += '<div  class="col-12 content" style="padding-left: 50px;">';
+                        content += reply[j]['content'];
+                        content += '</div>';
+                        content += '</div>';
+                        content += '</div>';
+                    }
+                }
+            }
+            $("#commentDIV").html(content);    // 填充到评论区域
+        });
+    }
+
+    window.onload = function () {
+        fillComment('{{article.articleid}}', '1');
+    }
+
+
+    $(function () {
+        // 初始化所有关注按钮的状态
+        $('.btn-follow').each(function () {
+            var $btn = $(this);
+            var followed_vip_id = $btn.data('followed-vip-id');
+            var isFollowing = localStorage.getItem('follow_' + followed_vip_id + '_switch');
+
+            if (isFollowing === 'true') {
+                $btn.addClass('following').text('取消关注');
+            } else {
+                $btn.removeClass('following').text('关注');
+            }
+        });
+
+        // 关注按钮点击事件
+        $('.btn-follow').on('click', function () {
+            var $btn = $(this);
+            var followed_vip_id = $btn.data('followed-vip-id');
+
+            if ($btn.hasClass('following')) {
+                // 取消关注
+                $.ajax({
+                    url: '/home/unfollow',
+                    type: 'POST',
+                    data: {followed_vip_id: followed_vip_id},
+                    success: function (response) {
+                        if (response === 'success') {
+
+                            // alert('取消关注成功！');
+                            bootbox.alert({'title': '信息提示！', 'message': "取消关注成功！"});
+
+                            $btn.removeClass('following').text('关注');
+                            localStorage.setItem('follow_' + followed_vip_id + '_switch', 'false');
+                        } else {
+                            // alert('操作失败，请重试！');
+                            bootbox.alert({'title': '错误提示！', 'message': "操作失败，请重试！"});
+
+                        }
+                    },
+                    error: function () {
+                        // alert('操作失败，请重试！');
+                        bootbox.alert({'title': '错误提示！', 'message': "操作失败，请重试！"});
+
+                    }
+                });
+            } else {
+                // 进行关注
+                $.ajax({
+                    url: '/home/follow',
+                    type: 'POST',
+                    data: {followed_vip_id: followed_vip_id},
+                    success: function (response) {
+                        if (response === 'success') {
+                            // alert('关注成功！');
+                            bootbox.alert({'title': '信息提示！', 'message': "关注成功！"});
+
+                            $btn.addClass('following').text('取消关注');
+                            localStorage.setItem('follow_' + followed_vip_id + '_switch', 'true');
+                        } else {
+                            // alert('操作失败，请重试！');
+                            bootbox.alert({'title': '错误提示！', 'message': "操作失败，请重试！"});
+
+                        }
+                    },
+                    error: function () {
+                        // alert('操作失败，请重试！');
+                        bootbox.alert({'title': '错误提示！', 'message': "操作失败，请重试！"});
+
+                    }
+                });
+            }
+        });
+    });
+
+</script>
+
+
+{% endblock %}

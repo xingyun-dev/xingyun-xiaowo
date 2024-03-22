@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>星云小窝🔥交流评论 </title>
+
+<!--        <link href="../static/css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css">
+<!--    <link href="/css/materialdesignicons.min.css" rel="stylesheet">-->
+    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link rel="icon" href="/images/xingshixiaowo.ico">
+
+<!--    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">-->
+    <!--        <link href="/css/animate.css" rel="stylesheet">-->
+<!--    <link rel="stylesheet" href="/css/jquery-confirm.min.css">-->
+    <link href="/css/style_chat.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+
+
+
+</head>
+
+<body>
+{% include '/home/xuanfukuang.html' %}
+
+
+<div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <img alt="image" class="rounded-circle" id="ft_img" style="height: 80px;weight:80px"
+                             src='/chat_room/images/{{ user_one.avatar }}'/>
+                        <div class="s_box" id="sbox">
+                        </div>
+                        <a href="/home/{{user_one.userid}}">
+                            <span class="block m-t-xs font-bold">{{ user_one.nickname }} </span>
+
+                        </a>
+                    </div>
+                    <div class="logo-element">
+                        <img alt="image" class="rounded-circle" style="height: 40px;weight:40px"
+                             src='/chat_room/images/{{ user_one.avatar }}'/>
+                    </div>
+                </li>
+
+                <li class="active">
+                    <a href="/chatroom/index"><i class="fa fa-address-card"></i> <span
+                            class="nav-label">联系人</span></a>
+                </li>
+                <li class="active">
+                    <a href="/chatroom/chatroom"><i class="fa fa-wechat"></i> <span class="nav-label">聊天室</span></a>
+                </li>
+                  <li class="active">
+                    <a href="/sixin/{{session.get('userid')}}"><i class="fa fa-book"></i> <span class="nav-label">私信板</span></a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0 ;">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i>
+                    </a>
+
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">欢迎您！{{ user_one.nickname }}</span>
+                    </li>
+
+                    <li>
+                        <a href="/home/{{user_one.userid}}">
+                            <i class="fa fa-sign-out"></i> 回到首页
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-9">
+                <h2>通讯录</h2>
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                {% for row in user_guanzhu %}
+                <div class="col-lg-3">
+                    <div class="contact-box center-version">
+
+                        <a href="/home/{{row.userid}}" style="margin: 0px 20%">
+
+                            <img alt="image" class="rounded-circle" src="/chat_room/images/{{row['avatar']}}">
+
+                        </a>
+                        <h3 class="m-b-xs"><strong>{{row['nickname']}}</strong></h3>
+
+                        <!--<address class="m-t-md">-->
+                        <!--    <strong>联系方式</strong><br>-->
+                        <!--    邮箱 {{ row['username'] }}<br>-->
+                        <!--</address>-->
+
+
+                        <div class="contact-box-footer">
+                            <div class="m-t-xs btn-group">
+                                <a href="" class="btn btn-xs btn-white btn-follow"
+                                   data-followed-vip-id="{{ row.userid }}"><i class="fa fa-deafness"></i> 拉黑 </a>
+                                <a href="/chatroom/{{session.get('userid')}}--{{row.userid}}" class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> 发信息</a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Mainly scripts -->
+<script src="/chat_room/js/popper.min.js"></script>
+<script src="/chat_room/js/jquery.metisMenu.js"></script>
+<script src="/chat_room/js/jquery.slimscroll.min.js"></script>
+<!-- Custom and plugin javascript -->
+<script src="/chat_room/js/inspinia.js"></script>
+<script src="/chat_room/js/plugins/pace/pace.min.js"></script>
+<!--对话框-->
+<script src="/chat_room/js/jquery-confirm.min.js"></script>
+<script type="text/javascript" src="/chat_room/js/main.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script> -->
+<!--<script src="/chat_room/js/socket.io.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+
+
+<script type="text/javascript">
+    // 拉黑按钮点击事件
+    $('.btn-follow').on('click', function () {
+
+        var $btn = $(this);
+        var followed_vip_id = $btn.data('followed-vip-id');
+
+
+        // 取消关注
+        $.ajax({
+            url: '/home/unfollow',
+            type: 'POST',
+            data: {followed_vip_id: followed_vip_id},
+            success: function (response) {
+                if (response === 'success') {
+
+                    // alert('拉黑成功！');
+                    bootbox.alert({title: "信息提示", message: "拉黑成功！"})
+
+                    $btn.removeClass('following').text('关注');
+                    localStorage.setItem('follow_' + followed_vip_id + '_switch', 'false');
+                    window.reload()
+
+                } else {
+                    alert('操作失败，请重试！');
+                    // bootbox.alert({title: "错误提示", message: "操作失败，请重试！"})
+
+
+                }
+            },
+            error: function () {
+                alert('操作失败，请重试！');
+                // bootbox.alert({title: "错误提示", message: "操作失败，请重试！"})
+
+
+            }
+        });
+
+    })
+
+
+
+
+
+</script>
+
+</body>
+
+</html>

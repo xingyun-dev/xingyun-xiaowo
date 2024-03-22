@@ -1,0 +1,194 @@
+<!--<title>个人用户中心</title>-->
+{% extends "/xingyun-notebook/base.html" %}   {#将当前页面继承至base.html母版#}
+{% block content %}
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <!-- 中部区域布局 -->
+        <div class="container" style="margin-top: 10px;">
+            <div class="row">
+                <div class="col-sm-2 col-12" style="padding: 0px 10px; ">
+                    <div class="col-12 admin-side" style="height: 320px">
+                        <!-- 绘制左侧菜单栏并添加正确的超链接 -->
+                        <ul>
+                            <li><a href="/ucenter" style="align-items:center;"><span></span>&nbsp;&nbsp;我的收藏</a>
+                            </li>
+                            <li><a id="newArticleBtn" href="/mdpost"><span></span>&nbsp;&nbsp;新建文章</a></li>
+                            <li><a href="/ucenter/article"><span></span>&nbsp;&nbsp;我的文章</a></li>
+                            <li><a href="/ucenter/drafted"><span></span>&nbsp;&nbsp;我的草稿</a></li>
+                            <li><a href="/ucenter/tools"><span></span>&nbsp;&nbsp;我的工具</a></li>
+                            <li><a href="/person/{{session.userid}}"><span></span>&nbsp;&nbsp;个人信息</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-12" style="padding: 0px 10px">
+                    <div class="col-12 admin-main">
+                        <!--搜索栏-->
+                        <div class="col-12 search-bar row">
+                            <div class="col-3">
+                                <input type="text" class="form-control" id="keyword" placeholder="搜索工具"
+                                       onkeyup="doSearchBykeyword(event)">
+                            </div>
+                            <div class="col-2" style="text-align:left;">
+                                <button type="button" class="btn btn-dark" onclick="doSearchBykeyword(null)">搜索
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="col-12" style="padding: 10px;">
+                            <table class="table col-12">
+                                <thead style="font-weight: bold">
+                                <tr>
+                                    <td width="12%" align="center">编号</td>
+                                    <td width="34%">名称</td>
+                                    <td width="18%" align="center">类型</td>
+                                    <td width="36%" align="center">操作</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {%for tools,users in result%}
+                                <tr>
+                                    <td align="center">{{ tools.tools_id}}</td>
+                                    <td>
+                                        <a class="newdraftedBtn"
+                                           href="/tools/jieshao/{{tools.tools_id}}" target="_blank">
+                                            {{tools.tools_name}}
+                                        </a>
+                                    </td>
+                                    {% if ming_tools_by_type(tools.tools_type)[1] %}
+                                    <td align="center">{{ming_tools_by_type(tools.tools_type)[0]}}&nbsp;&nbsp;|&nbsp;&nbsp;{{ming_tools_by_type(tools.tools_type)[1]}}</td>
+                                    {% else %}
+                                    <td align="center">{{ming_tools_by_type(tools.tools_type)[0]}}</td>
+                                    {% endif %}
+
+                                    <td align="center">
+                                        <button class="editor btn-success btn"><a class="newdraftedBtn"
+                                                                                  style="color: #eeeeee"
+                                                                                  href="/tools/tools_editor/{{tools.tools_id}}"
+                                                                                  target="_blank">
+                                            编辑</a></button>
+                                        <button class="btn-delete btn-danger btn"
+                                                data-tools_id="{{ tools.tools_id}}">
+                                            删除
+                                        </button>
+
+                                    </td>
+                                </tr>
+
+                                {%endfor%}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- 分页导航栏 -->
+                        <div class="col-12 paginate">
+                            {% if page==1%}
+                            <!-- 如果是第1页，则上一页也是第1页，否则上一页为当前页-1 -->
+                            <a href="/ucenter/tools/1">上一页</a>&nbsp;&nbsp;
+                            {% else %}
+                            <a href="/ucenter/tools/{{page-1}}">上一页</a>&nbsp;&nbsp;
+                            {% endif %}
+
+                            <!-- 根据总页数循环填充页码，并为其添加超链接进行导航 -->
+                            {% for i in range(total) %}
+                            <a href="/ucenter/tools/{{i+1}}">{{i+1}}</a>&nbsp;&nbsp;
+                            {% endfor %}
+
+                            {% if page==total%}
+                            <!-- 如果是最后一页，则下一页也是最后页，否则下一页为当前页+1 -->
+                            <a href="/ucenter/tools/{{total}}">下一页</a>
+                            {% else %}
+                            <a href="/ucenter/tools/{{page+1}}">下一页</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 对应的函数的代码 -->
+        <script type="text/javascript">
+
+            $('#newArticleBtn').click(function () {
+                // 清空本地存储的草稿内容
+                localStorage.removeItem('draftHeadline');
+                localStorage.removeItem('draftMarkdownContent');
+
+            });
+
+            $(document).ready(function () {
+                $('.newdraftedBtn').click(function () {
+                    // 清空本地存储的草稿内容
+                    localStorage.removeItem('draftHeadline');
+                    localStorage.removeItem('draftMarkdownContent');
+                });
+            });
+
+            //删除工具
+            $(function () {
+                $('.btn-delete').click(function () {
+                    var tools_id = $(this).data('tools_id');
+                    bootbox.confirm({
+                        title: "删除工具",
+                        message: "您确定要删除这个提交的工具吗？",
+                        buttons: {
+                            confirm: {
+                                label: '确认',
+                                className: 'btn-success'
+                            },
+                            cancel: {
+                                label: '取消',
+                                className: 'btn-danger'
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: '/tools/delete',
+                                    type: 'POST',
+                                    data: {tools_id: tools_id},
+                                    success: function (data) {
+                                        if (data === 'delete-success') {
+                                            bootbox.alert({
+                                                title: "信息提示",
+                                                message: "工具删除成功.",
+                                                callback: function () {
+                                                    location.reload();
+                                                }
+                                            }).find('.modal-dialog').addClass('success-dialog');
+                                        } else {
+                                            bootbox.alert({title: "错误提示", message: "删除失败，请重试！"});
+                                        }
+                                    },
+                                    error: function (xhr, textStatus, errorThrown) {
+                                        bootbox.alert({title: "错误提示", message: "删除失败，请重试！"});
+                                    }
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+
+            // 关键字搜索
+            function doSearchBykeyword(event) {
+                if (event != null && event.keyCode != 13) {
+                    return false;
+                }
+
+                var keyword = $.trim($("#keyword").val());
+                if (keyword.length == 0 || keyword.length > 20 || keyword.indexOf('%') >= 0) {
+                    bootbox.alert({'title': '错误提示！', 'message': "您输入的关键字不合理"});
+                    $("#keyword").focus();
+                    return false;
+                }
+                location.href = "/ucenter/tools/search/" + keyword;
+            }
+
+        </script>
+
+
+    </div>
+</div>
+{% endblock %}

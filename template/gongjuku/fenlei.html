@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="io-white-mode" version="4" style="transform: none;">
+
+<head>
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>分类界面 | 工具仓库 </title>
+    <meta name="theme-color" content="#f9f9f9">
+
+    <style id="classic-theme-styles-inline-css" type="text/css">
+        /*! This file is auto-generated */
+        .wp-block-button__link {
+            color: #fff;
+            background-color: #32373c;
+            border-radius: 9999px;
+            box-shadow: none;
+            text-decoration: none;
+            padding: calc(.667em + 2px) calc(1.333em + 2px);
+            font-size: 1.125em
+        }
+
+        .wp-block-file__button {
+            background: #32373c;
+            color: #fff;
+            text-decoration: none
+        }
+    </style>
+        <link rel="icon" href="/images/xingshixiaowo.ico">
+
+    <link rel="stylesheet" id="iconfont-css"
+          href="https://www.aizhinan.cn/wp-content/themes/onenav/css/iconfont.css?ver=4.1031" type="text/css"
+          media="all">
+    <link rel="stylesheet" id="iconfont-io-1-css" href="//at.alicdn.com/t/font_1620678_18rbnd2homc.css" type="text/css"
+          media="all">
+    <link rel="stylesheet" id="iconfont-io-2-css" href="//at.alicdn.com/t/font_2811503_rz4zraeosal.css" type="text/css"
+          media="all">
+    <link rel="stylesheet" id="bootstrap-css"
+          href="https://www.aizhinan.cn/wp-content/themes/onenav/css/bootstrap.min.css?ver=4.1031" type="text/css"
+          media="all">
+    <link rel="stylesheet" id="style-css"
+          href="https://www.aizhinan.cn/wp-content/themes/onenav/css/style.min.css?ver=4.1031" type="text/css"
+          media="all">
+    <link rel="stylesheet" id="QAPress-css"
+          href="https://www.aizhinan.cn/wp-content/plugins/qapress/css/style.css?ver=4.8.0" type="text/css" media="all">
+    <style id="QAPress-inline-css" type="text/css">
+        :root {
+            --qa-color: #1471CA;
+            --qa-hover: #0D62B3;
+        }
+    </style>
+    <script type="text/javascript" src="https://www.aizhinan.cn/wp-content/themes/onenav/js/jquery.min.js?ver=4.1031"
+            id="jquery-js"></script>
+    <script type="text/javascript"
+            id="jquery-js-after">/* <![CDATA[ *//* <![CDATA[ */
+    function loadFunc(func) {
+        if (document.all) {
+            window.attachEvent("onload", func);
+        } else {
+            window.addEventListener("load", func, false);
+        }
+    } /* ]]]]><![CDATA[> *//* ]]> */</script>
+    <script id="wpcp_disable_selection"
+            type="text/javascript">//<![CDATA[var image_save_msg='You Can Not Save images!'; var no_menu_msg='Context Menu disabled!'; var smessage = "Content is protected !!";function disableEnterKey(e){ var elemtype = e.target.tagName; elemtype = elemtype.toUpperCase(); if (elemtype == "TEXT" || elemtype == "TEXTAREA" || elemtype == "INPUT" || elemtype == "PASSWORD" || elemtype == "SELECT" || elemtype == "OPTION" || elemtype == "EMBED") { elemtype = 'TEXT'; } if (e.ctrlKey){ var key; if(window.event) key = window.event.keyCode; //IE else key = e.which; //firefox (97) //if (key != 17) alert(key); if (elemtype!= 'TEXT' && (key == 97 || key == 65 || key == 67 || key == 99 || key == 88 || key == 120 || key == 26 || key == 85 || key == 86 || key == 83 || key == 43)) { show_wpcp_message('啦啦啦'); return false; }else return true; }}//////////////////////////////////////////////////////////////////////////////////////function disable_copy(e){ var elemtype = e.target.tagName; elemtype = elemtype.toUpperCase(); if (elemtype == "TEXT" || elemtype == "TEXTAREA" || elemtype == "INPUT" || elemtype == "PASSWORD" || elemtype == "SELECT" || elemtype == "OPTION" || elemtype == "EMBED") { elemtype = 'TEXT'; } var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor); var checker_IMG = ''; if (elemtype == "IMG" && checker_IMG == 'checked' && e.detail >= 2) {show_wpcp_message(alertMsg_IMG);return false;} if (elemtype != "TEXT") { if (smessage !== "" && e.detail == 2) show_wpcp_message(smessage); if (isSafari) return true; else return false; } }//////////////////////////////////////////////////////////////////////////////////////function disable_copy_ie(){ var elemtype = window.event.srcElement.nodeName; elemtype = elemtype.toUpperCase(); if (elemtype == "IMG") {show_wpcp_message(alertMsg_IMG);return false;} if (elemtype != "TEXT" && elemtype != "TEXTAREA" && elemtype != "INPUT" && elemtype != "PASSWORD" && elemtype != "SELECT" && elemtype != "OPTION" && elemtype != "EMBED") { return false; }} function reEnable(){ return true;}document.onkeydown = disableEnterKey;document.onselectstart = disable_copy_ie;if(navigator.userAgent.indexOf('MSIE')==-1){ document.onmousedown = disable_copy; document.onclick = reEnable;}function disableSelection(target){ //For IE This code will work if (typeof target.onselectstart!="undefined") target.onselectstart = disable_copy_ie; //For Firefox This code will work else if (typeof target.style.MozUserSelect!="undefined") {target.style.MozUserSelect="none";} //All other (ie: Opera) This code will work else target.onmousedown=function(){return false} target.style.cursor = "default";}//Calling the JS function directly just after body loadwindow.onload = function(){disableSelection(document.body);};//]]></script>
+    <script id="wpcp_disable_Right_Click"
+            type="text/javascript"> //<![CDATA[ document.ondragstart = function() { return false;} /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Disable context menu on images by GreenLava Version 1.0 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */ function nocontext(e) { return false; } document.oncontextmenu = nocontext; //]]> </script>
+    <style>
+        .unselectable {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            cursor: default;
+        }
+
+        html {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+    </style>
+    <script id="wpcp_css_disable_selection"
+            type="text/javascript">var e = document.getElementsByTagName('body')[0];
+    if (e) {
+        e.setAttribute('unselectable', on);
+    }</script>
+    <style>
+        .io.icon-fw,
+        .iconfont.icon-fw {
+            width: 1.15em;
+        }
+
+        .screenshot-carousel .img_wrapper a {
+            display: contents
+        }
+
+        .fancybox-slide--iframe .fancybox-content {
+            max-width: 1280px;
+            margin: 0
+        }
+
+        .fancybox-slide--iframe.fancybox-slide {
+            padding: 44px 0
+        }
+
+        .navbar-nav .menu-item-286 a {
+            background: #ff8116;
+            border-radius: 50px !important;
+            padding: 5px 10px !important;
+            margin: 5px 0 !important;
+            color: #fff !important;
+        }
+
+        .navbar-nav .menu-item-286 a i {
+            position: absolute;
+            top: 0;
+            right: -10px;
+            color: #f13522;
+        }
+
+        .io-black-mode .navbar-nav .menu-item-286 a {
+            background: #ce9412;
+        }
+
+        .io-black-mode .navbar-nav .menu-item-286 a i {
+            color: #fff;
+        }
+
+        .customize-width {
+            max-width: 1900px
+        }
+
+        .sidebar-nav {
+            width: 210px
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 210px;
+            }
+
+            .main-content .page-header {
+                left: 210px;
+            }
+        }
+    </style><!-- 自定义代码 -->
+
+    <style id="theia-sticky-sidebar-stylesheet-TSS">
+        .theiaStickySidebar:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+    <meta http-equiv="origin-trial"
+          content="AymqwRC7u88Y4JPvfIF2F37QKylC04248hLCdJAsh8xgOfe/dVJPV3XS3wLFca1ZMVOtnBfVjaCMTVudWM//5g4AAAB7eyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1RoaXJkUGFydHkiOnRydWV9">
+</head>
+
+<body class="archive tax-sitetag term-prompt-directive term-337 sidebar_right unselectable" style="transform: none;">
+
+
+{% include '/gongjuku/sidebar.html' %}
+
+    <div id="content" class="container container-lg" style="transform: none;">
+        <div class="content-wrap">
+            <div class="content-layout">
+                {% if ming_tools_by_type(type)[1] %}
+
+                <h4 class="text-gray text-lg mb-4"><i class="site-tag mr-1"
+                >{{ming_tools_by_type(type)[0]}}</i>&nbsp;| &nbsp;{{ming_tools_by_type(type)[1]}}</h4>
+
+                <div class="row">
+                    {% for tools in get_tools_by_type(type) %}
+                    <div class="url-card col-sm-6 col-md-4 col-lg-6 col-xl-4 ">
+                        <div class="url-body max "><a href="/tools/jieshao/{{tools.tools_id}}" data-id="2405"
+                                                      data-url="/tools/jieshao/{{tools.tools_id}}"
+                                                      class="card mb-4 site-2405"
+                                                      data-toggle="tooltip"
+                                                      data-placement="bottom" title=""
+                                                      data-original-title="{{tools.tools_jianjie}}">
+                            <div class="card-body py-2 px-3">
+                                <div class="url-content align-items-center d-flex flex-fill">
+                                    <div
+                                            class="url-img rounded-circle mr-2 d-flex align-items-center justify-content-center">
+                                        <img class="lazy unfancybox loaded"
+                                             src="/tools/img/{{tools.tools_avatar}}"
+                                             data-src="/tools/img/{{tools.tools_avatar}}"
+                                             height="auto" width="auto" alt="PromptVine"
+                                             data-was-processed="true">
+                                    </div>
+                                    <div class="url-info flex-fill">
+                                        <div class="text-sm overflowClip_1"><strong>{{tools.tools_name}}</strong></div>
+                                        <p class="overflowClip_1 text-muted text-xs">
+                                            {{tools.tools_jianjie}}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="url-goto-after mt-2"></div>
+                            </div>
+                        </a>
+                            <div class="url-goto px-3 pb-1">
+                                <div class="d-flex align-items-center" style="white-space:nowrap">
+                                    <div class="tga text-xs py-1">
+                                        {% if ming_tools_by_type(tools.tools_type)[1] %}
+
+                                        <span class="mr-1"><a
+                                                href="/tools/type/{{type}}"
+                                                rel="tag">{{ming_tools_by_type(type)[1]}}</a>
+                                        </span>
+                                        {% endif %}
+
+
+                                        <span class="mr-1"><a
+                                                href="/tools/type/{{tools.tools_type[0]}}"
+                                                rel="tag">{{ming_tools_by_type(type)[0]}}</a>
+                                        </span>
+
+                                        <span class="mr-1"><a
+                                                href="/tools/type/all"
+                                                rel="tag">所有工具</a>
+                                        </span>
+                                    </div>
+                                    <a
+                                            href="{{tools.tools_link}}"
+                                            target="_blank" rel="external nofollow" title=""
+                                            class="togo text-center text-muted is-views" data-id="2405"
+                                            data-toggle="tooltip" data-placement="right" data-original-title="直达">
+                                        <svg t="1710054258274" class="icon" viewBox="0 0 1024 1024"
+                                             version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7847"
+                                             width="16" height="16">
+                                            <path d="M743.793108 1023.201047c-79.702449-127.967514-187.611755-299.908793-195.374667-310.66115a103.328705 103.328705 0 0 0-96.433696-48.216848c-18.033101 0-186.358117-4.146649-336.408947-3.760914-0.723253-0.964337-58.631687-44.600584 9.64337-101.737549 30.955216-25.796014 679.857553-505.360781 735.065844-546.393318a40.646803 40.646803 0 0 1 68.323273 39.441381c-5.35207 49.422269-98.121285 854.065024-106.077065 911.828808a68.805442 68.805442 0 0 1-78.738112 59.49959z"
+                                                  fill="#515151" p-id="7848"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <h4 class="text-gray text-lg mb-4"><i class="site-tag mr-1"
+                >{{ming_tools_by_type(type)[0]}}</i></h4>
+                <div class="row">
+                    {% for tools in get_tools_by_majortype(type) %}
+                    <div class="url-card col-sm-6 col-md-4 col-lg-6 col-xl-4 ">
+                        <div class="url-body max "><a href="/tools/jieshao/{{tools.tools_id}}" data-id="2405"
+                                                      data-url="/tools/jieshao/{{tools.tools_id}}"
+                                                      class="card mb-4 site-2405"
+                                                      data-toggle="tooltip"
+                                                      data-placement="bottom" title=""
+                                                      data-original-title="{{tools.tools_jianjie}}">
+                            <div class="card-body py-2 px-3">
+                                <div class="url-content align-items-center d-flex flex-fill">
+                                    <div
+                                            class="url-img rounded-circle mr-2 d-flex align-items-center justify-content-center">
+                                        <img class="lazy unfancybox loaded"
+                                             src="/tools/img/{{tools.tools_avatar}}"
+                                             data-src="/tools/img/{{tools.tools_avatar}}"
+                                             height="auto" width="auto" alt="PromptVine"
+                                             data-was-processed="true">
+                                    </div>
+                                    <div class="url-info flex-fill">
+                                        <div class="text-sm overflowClip_1"><strong>{{tools.tools_name}}</strong></div>
+                                        <p class="overflowClip_1 text-muted text-xs">
+                                            {{tools.tools_jianjie}}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="url-goto-after mt-2"></div>
+                            </div>
+                        </a>
+                            <div class="url-goto px-3 pb-1">
+                                <div class="d-flex align-items-center" style="white-space:nowrap">
+                                    <div class="tga text-xs py-1">
+                                        {% if ming_tools_by_type(tools.tools_type)[1] %}
+
+                                        <span class="mr-1"><a
+                                                href="/tools/type/{{tools.tools_type}}"
+                                                rel="tag">{{ming_tools_by_type(tools.tools_type)[1]}}</a>
+                                        </span>
+                                        {% endif %}
+
+
+                                        <span class="mr-1"><a
+                                                href="/tools/type/{{tools.tools_type[0]}}"
+                                                rel="tag">{{ming_tools_by_type(type)[0]}}</a>
+                                        </span>
+
+                                        <span class="mr-1"><a
+                                                href="/tools/type/all"
+                                                rel="tag">所有工具</a></span></div>
+                                    <a
+                                            href="{{tools.tools_link}}"
+                                            target="_blank" rel="external nofollow" title=""
+                                            class="togo text-center text-muted is-views" data-id="2405"
+                                            data-toggle="tooltip" data-placement="right" data-original-title="直达">
+                                        <svg t="1710054258274" class="icon" viewBox="0 0 1024 1024"
+                                             version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7847"
+                                             width="16" height="16">
+                                            <path d="M743.793108 1023.201047c-79.702449-127.967514-187.611755-299.908793-195.374667-310.66115a103.328705 103.328705 0 0 0-96.433696-48.216848c-18.033101 0-186.358117-4.146649-336.408947-3.760914-0.723253-0.964337-58.631687-44.600584 9.64337-101.737549 30.955216-25.796014 679.857553-505.360781 735.065844-546.393318a40.646803 40.646803 0 0 1 68.323273 39.441381c-5.35207 49.422269-98.121285 854.065024-106.077065 911.828808a68.805442 68.805442 0 0 1-78.738112 59.49959z"
+                                                  fill="#515151" p-id="7848"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+                {% endif %}
+
+                <div class="posts-nav mb-4"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div><!-- main-content end -->
+<div style="height: 100px;"></div>
+
+<footer>
+    <div id="footer-tools" class="d-flex flex-column">
+        <a href="javascript:" id="go-to-up" class="btn rounded-circle go-up m-1" rel="go-top"
+           style="display: inline;"> 🚀 </a>
+
+        <a href="javascript:" id="switch-mode" class="btn rounded-circle switch-dark-mode m-1" data-toggle="tooltip"
+           data-placement="left" title="" data-original-title="夜间模式">❄
+        </a>
+
+    </div>
+</footer>
+<div id="wpcp-error-message" class="msgmsg-box-wpcp warning-wpcp hideme"><span>error: </span>Content is protected !!
+</div>
+<script> var timeout_result;
+
+function show_wpcp_message(smessage) {
+    if (smessage !== "") {
+        var smessage_text = '<span>Alert: </span>' + smessage;
+        document.getElementById("wpcp-error-message").innerHTML = smessage_text;
+        document.getElementById("wpcp-error-message").className = "msgmsg-box-wpcp warning-wpcp showme";
+        clearTimeout(timeout_result);
+        timeout_result = setTimeout(hide_message, 3000);
+    }
+}
+
+function hide_message() {
+    document.getElementById("wpcp-error-message").className = "msgmsg-box-wpcp warning-wpcp hideme";
+} </script>
+<style>
+    @media print {
+        body * {
+            display: none !important;
+        }
+
+        body:after {
+            content: "You are not allowed to print preview this page, Thank you";
+        }
+    }
+</style>
+<style type="text/css">
+    #wpcp-error-message {
+        direction: ltr;
+        text-align: center;
+        transition: opacity 900ms ease 0s;
+        z-index: 99999999;
+    }
+
+    .hideme {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .showme {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .msgmsg-box-wpcp {
+        border-radius: 10px;
+        color: #555;
+        font-family: Tahoma;
+        font-size: 11px;
+        margin: 10px;
+        padding: 10px 36px;
+        position: fixed;
+        width: 255px;
+        top: 50%;
+        left: 50%;
+        margin-top: -10px;
+        margin-left: -130px;
+        -webkit-box-shadow: 0px 0px 34px 2px rgba(242, 191, 191, 1);
+        -moz-box-shadow: 0px 0px 34px 2px rgba(242, 191, 191, 1);
+        box-shadow: 0px 0px 34px 2px rgba(242, 191, 191, 1);
+    }
+
+    .msgmsg-box-wpcp span {
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .error-wpcp {
+        background: #ffecec url('https://www.aizhinan.cn/wp-content/plugins/wp-content-copy-protector/images/error.png') no-repeat 10px 50%;
+        border: 1px solid #f5aca6;
+    }
+
+    .success {
+        background: #e9ffd9 url('https://www.aizhinan.cn/wp-content/plugins/wp-content-copy-protector/images/success.png') no-repeat 10px 50%;
+        border: 1px solid #a6ca8a;
+    }
+
+    .warning-wpcp {
+        background: #ffecec url('https://www.aizhinan.cn/wp-content/plugins/wp-content-copy-protector/images/warning.png') no-repeat 10px 50%;
+        border: 1px solid #f5aca6;
+    }
+
+    .notice {
+        background: #e3f7fc url('https://www.aizhinan.cn/wp-content/plugins/wp-content-copy-protector/images/notice.png') no-repeat 10px 50%;
+        border: 1px solid #8ed9f6;
+    }
+</style>
+<script type="text/javascript" src="https://www.aizhinan.cn/wp-content/themes/onenav/js/popper.min.js?ver=4.1031"
+        id="popper-js"></script>
+<script type="text/javascript" src="https://www.aizhinan.cn/wp-content/themes/onenav/js/bootstrap.min.js?ver=4.1031"
+        id="bootstrap-js"></script>
+<script type="text/javascript"
+        src="https://www.aizhinan.cn/wp-content/themes/onenav/js/theia-sticky-sidebar.js?ver=4.1031"
+        id="sidebar-js"></script>
+<script type="text/javascript" src="https://www.aizhinan.cn/wp-content/themes/onenav/js/lazyload.min.js?ver=4.1031"
+        id="lazyload-js"></script>
+<script type="text/javascript"
+        id="appjs-js-extra">/* <![CDATA[ */
+var theme = {
+    "ajaxurl": "https:\/\/www.aizhinan.cn\/wp-admin\/admin-ajax.php",
+    "uri": "https:\/\/www.aizhinan.cn\/wp-content\/themes\/onenav",
+    "loginurl": "https:\/\/www.aizhinan.cn\/login\/?redirect_to=https:\/\/www.aizhinan.cn\/tool-tags\/prompt-directive",
+    "sitesName": "AI\u6307\u5357\u5b98\u7f51",
+    "addico": "https:\/\/www.aizhinan.cn\/wp-content\/themes\/onenav\/images\/add.png",
+    "order": "asc",
+    "formpostion": "top",
+    "defaultclass": "io-white-mode",
+    "isCustomize": "0",
+    "icourl": "https:\/\/api.iowen.cn\/favicon\/",
+    "icopng": ".png",
+    "urlformat": "1",
+    "customizemax": "10",
+    "newWindow": "0",
+    "lazyload": "1",
+    "minNav": "0",
+    "loading": "0",
+    "hotWords": "baidu",
+    "classColumns": " col-2a col-sm-2a col-md-2a col-lg-3a col-xl-5a col-xxl-6a ",
+    "apikey": "TWpBeU1USTJNemd4TWpZM0d6RS9oY2tWdVZYWTVNR2hJU0Zkd2FIZHVOR2xKVjJoVGIwMU5iM0JIZVV4RA==",
+    "isHome": "",
+    "version": "4.1031"
+};
+var localize = {
+
+};/* ]]> */</script>
+<script type="text/javascript" src="https://www.aizhinan.cn/wp-content/themes/onenav/js/app.min.js?ver=4.1031"
+        id="appjs-js"></script>
+<script type="text/javascript"
+        id="appjs-js-after">/* <![CDATA[ *//* <![CDATA[ */
+$(document).ready(function () {
+    if ($("#search-text")[0]) {
+        $("#search-text").focus();
+    }
+}); /* ]]]]><![CDATA[> *//* ]]> */</script>
+<script type="text/javascript"
+        id="QAPress-js-js-extra">/* <![CDATA[ */
+var QAPress_js = {
+    "ajaxurl": "https:\/\/www.aizhinan.cn\/wp-admin\/admin-ajax.php",
+    "ajaxloading": "https:\/\/www.aizhinan.cn\/wp-content\/plugins\/qapress\/images\/loading.gif",
+    "max_upload_size": "2097152",
+    "compress_img_size": "1920",
+    "lang": {
+        "delete": "\u5220\u9664",
+        "nocomment": "\u6682\u65e0\u56de\u590d",
+        "nocomment2": "\u6682\u65e0\u8bc4\u8bba",
+        "addcomment": "\u6211\u6765\u56de\u590d",
+        "submit": "\u53d1\u5e03",
+        "loading": "\u6b63\u5728\u52a0\u8f7d...",
+        "error1": "\u53c2\u6570\u9519\u8bef\uff0c\u8bf7\u91cd\u8bd5",
+        "error2": "\u8bf7\u6c42\u5931\u8d25\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5\uff01",
+        "confirm": "\u5220\u9664\u64cd\u4f5c\u65e0\u6cd5\u6062\u590d\uff0c\u5e76\u5c06\u540c\u65f6\u5220\u9664\u5f53\u524d\u56de\u590d\u7684\u8bc4\u8bba\u4fe1\u606f\uff0c\u60a8\u786e\u5b9a\u8981\u5220\u9664\u5417\uff1f",
+        "confirm2": "\u5220\u9664\u64cd\u4f5c\u65e0\u6cd5\u6062\u590d\uff0c\u60a8\u786e\u5b9a\u8981\u5220\u9664\u5417\uff1f",
+        "confirm3": "\u5220\u9664\u64cd\u4f5c\u65e0\u6cd5\u6062\u590d\uff0c\u5e76\u5c06\u540c\u65f6\u5220\u9664\u5f53\u524d\u95ee\u9898\u7684\u56de\u590d\u8bc4\u8bba\u4fe1\u606f\uff0c\u60a8\u786e\u5b9a\u8981\u5220\u9664\u5417\uff1f",
+        "deleting": "\u6b63\u5728\u5220\u9664...",
+        "success": "\u64cd\u4f5c\u6210\u529f\uff01",
+        "denied": "\u65e0\u64cd\u4f5c\u6743\u9650\uff01",
+        "error3": "\u64cd\u4f5c\u5f02\u5e38\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5\uff01",
+        "empty": "\u5185\u5bb9\u4e0d\u80fd\u4e3a\u7a7a",
+        "submitting": "\u6b63\u5728\u63d0\u4ea4...",
+        "success2": "\u63d0\u4ea4\u6210\u529f\uff01",
+        "ncomment": "0\u6761\u8bc4\u8bba",
+        "login": "\u62b1\u6b49\uff0c\u60a8\u9700\u8981\u767b\u5f55\u624d\u80fd\u8fdb\u884c\u56de\u590d",
+        "error4": "\u63d0\u4ea4\u5931\u8d25\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5\uff01",
+        "need_title": "\u8bf7\u8f93\u5165\u6807\u9898",
+        "need_cat": "\u8bf7\u9009\u62e9\u5206\u7c7b",
+        "need_content": "\u8bf7\u8f93\u5165\u5185\u5bb9",
+        "success3": "\u66f4\u65b0\u6210\u529f\uff01",
+        "success4": "\u53d1\u5e03\u6210\u529f\uff01",
+        "need_all": "\u6807\u9898\u3001\u5206\u7c7b\u548c\u5185\u5bb9\u4e0d\u80fd\u4e3a\u7a7a",
+        "length": "\u5185\u5bb9\u957f\u5ea6\u4e0d\u80fd\u5c11\u4e8e10\u4e2a\u5b57\u7b26",
+        "load_done": "\u56de\u590d\u5df2\u7ecf\u5168\u90e8\u52a0\u8f7d",
+        "load_fail": "\u52a0\u8f7d\u5931\u8d25\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5\uff01",
+        "load_more": "\u70b9\u51fb\u52a0\u8f7d\u66f4\u591a",
+        "approve": "\u786e\u5b9a\u8981\u5c06\u5f53\u524d\u95ee\u9898\u8bbe\u7f6e\u4e3a\u5ba1\u6838\u901a\u8fc7\u5417\uff1f",
+        "end": "\u5df2\u7ecf\u5230\u5e95\u4e86",
+        "upload_fail": "\u56fe\u7247\u4e0a\u4f20\u51fa\u9519\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5\uff01",
+        "file_types": "\u4ec5\u652f\u6301\u4e0a\u4f20jpg\u3001png\u3001gif\u683c\u5f0f\u7684\u56fe\u7247\u6587\u4ef6",
+        "file_size": "\u56fe\u7247\u5927\u5c0f\u4e0d\u80fd\u8d85\u8fc72M",
+        "uploading": "\u6b63\u5728\u4e0a\u4f20...",
+        "upload": "\u63d2\u5165\u56fe\u7247"
+    }
+};/* ]]> */</script>
+<script type="text/javascript" src="https://www.aizhinan.cn/wp-content/plugins/qapress/js/scripts.js?ver=4.8.0"
+        id="QAPress-js-js"></script>
+<script type="text/javascript" src="https://www.aizhinan.cn/wp-content/plugins/qapress/js/icons-2.7.7.js?ver=4.8.0"
+        id="wpcom-icons-js"></script> <!-- 自定义代码 --><!-- end 自定义代码 -->
+
+
+</body>
+
+</html>
+</html>

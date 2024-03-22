@@ -1,0 +1,132 @@
+<!--右侧栏-->
+<div class="col-sm-3 col-12" style="border: none;padding-top: 15px;position: relative">
+    <!--搜索栏-->
+    <div class="col-12 search-bar row">
+        <div class="col-8">
+            <input type="text" class="form-control" id="keyword" placeholder="请输入关键字" onkeyup="doSearch(event)"/>
+        </div>
+        <div class="col-4" style="text-align:right;">
+            <button type="button" class="btn btn-dark" onclick="doSearch(null)">搜索</button>
+        </div>
+    </div>
+    <!--最新文章-->
+    <div class="col-12 side">
+        <div class="col-12 top">最新文章</div>
+        <ul id="new">
+        </ul>
+    </div>
+
+    <div class="col-12 side">
+        <div class="col-12 top">最多阅读</div>
+        <ul id="most">
+        </ul>
+    </div>
+
+
+    <div class="col-12 side" id="fixedmenu">
+        <div class="col-12 top">特别推荐</div>
+        <ul id="recommend">
+        </ul>
+    </div>
+
+
+
+</div>
+
+
+<script type="text/javascript">
+
+
+    // 点击搜索按钮，跳转到搜索页面
+    function doSearch(event) {
+        if (event != null && event.keyCode != 13) {
+            return false;
+        }
+
+        var keyword = $.trim($("#keyword").val());
+        if (keyword.length == 0 || keyword.length > 10 || keyword.indexOf('%') >= 0) {
+            bootbox.alert({'title': '错误提示！', 'message': "您输入的关键字不合理"});
+            $("#keyword").focus();
+            return false;
+        }
+
+        location.href = "/notebook/search/1--" + keyword;
+    }
+
+    //利用JS来截取字符串,中文1个,英文0.5个
+    function truncate(headline, len) {
+        var count = 0;
+        var new_str = "";
+        if (headline.length <= len) {
+            return headline;
+        }
+
+        for (var i in headline) {
+            new_str += headline.charAt(i);
+            var code = headline.charCodeAt(i);
+            if (code >= 0 && code <= 128) {
+                count += 0.5;
+            } else {
+                count += 1;
+            }
+            if (count > len) {
+                break;
+            }
+        }
+        return new_str + "...";
+    }
+
+
+    // 在JQuery中表示文档加载完成后开始执行(不需要按钮或事件触发),等价于window.load=function(){}
+    $(document).ready(function () {
+        //第一步：发送Ajax请求去访问recommend接口,获取JSON
+        $.get('/recommend', function (data) {
+            // 获取响应并动态填充到对应的推荐栏中
+            var newdata = data[0];
+            var mostdata = data[1];
+            var recommenddata = data[2];
+
+            for (var i in newdata) {
+                var articleid = newdata[i][0];
+                var headline = newdata[i][1];
+                var is_markdown = newdata[i][2]
+                var id = parseInt(i) + 1
+                var articleType = is_markdown === 1 ? "md_article" : "article";
+                $('#new').append('<li><a href="/notebook/' + articleType + '/' + articleid + '">' + id + '. ' + truncate(headline, 16) + '</a></li>');
+
+            }
+
+            for (var i in mostdata) {
+                var articleid = mostdata[i][0];
+                var headline = mostdata[i][1];
+                var is_markdown = mostdata[i][2]
+                var id = parseInt(i) + 1
+                var articleType = is_markdown === 1 ? "md_article" : "article";
+                $('#most').append('<li><a href="/notebook/' + articleType + '/' + articleid + '">' + id + '. ' + truncate(headline, 16) + '</a></li>');
+
+            }
+
+            for (var i in recommenddata) {
+                var articleid = recommenddata[i][0];
+                var headline = recommenddata[i][1];
+                var is_markdown = recommenddata[i][2]
+                var id = parseInt(i) + 1
+                var articleType = is_markdown === 1 ? "md_article" : "article";
+                $('#recommend').append('<li><a href="/notebook/' + articleType + '/' + articleid + '">' + id + '. ' + truncate(headline, 16) + '</a></li>');
+
+            }
+        });
+    });
+
+
+</script>
+
+
+
+
+
+
+
+
+
+

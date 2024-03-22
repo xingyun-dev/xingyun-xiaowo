@@ -1,0 +1,102 @@
+{% extends "/xingyun-notebook/base.html" %}   {#将当前页面继承至base.html母版#}
+{% block content %}
+
+<div class="col-sm-9 col-12" style="border: none" id="left">
+    <!--轮播图-->
+    <div class="col-12" style="padding: 15px 0">
+        <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/img/委屈兔.jfif" class="d-block w-100" alt="..." style="height: 400px">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img/撒娇兔.jfif" class="d-block w-100" alt="..." style="height: 400px">
+                </div>
+                <div class="carousel-item">
+                    <img src="/img/无奈兔.jfif" class="d-block w-100" alt="..." style="height: 400px">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+
+    {% for article,nickname in result%}
+
+    <!--文章列表-->
+    <div class="col-12 row article-list">
+        <div class="col-sm-3 col-3 thumb d-none d-sm-block">
+           <img src="/thumb/{{article.thumbnail}}"
+                 class="img-fluid" alt="" style="height: 150px;width: 270px"/>
+        </div>
+        <div class="col-sm-9 col-xs-12 detail">
+            <div class="title"><a href="/notebook/{{is_markdown(article.articleid)}}/{{article.articleid}}">{{article.headline}}</a></div>
+            <div class="info">作者：{{nickname}}&nbsp;&nbsp;&nbsp;类别：{{article_type[article.category | string]}}&nbsp;&nbsp;&nbsp;
+                日期：{{article.createtime}}&nbsp;&nbsp;&nbsp;阅读：{{article.readcount}} 次&nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="intro">
+               {% if article.article_introduce %}
+                {{article.article_introduce|striptags|truncate(180)}}
+            {% else %}
+                {{article.content|striptags|truncate(180)}}
+            {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+
+    <!-- 分页导航栏 -->
+    <div class="col-12 paginate">
+
+        {% if page==1%}
+        <!-- 如果是第1页，则上一页也是第1页，否则上一页为当前页-1 -->
+        <a href="/notebook/type/{{type}}--1">上一页</a>&nbsp;&nbsp;
+        {% else %}
+        <a href="/notebook/type/{{type}}--{{page-1}}">上一页</a>&nbsp;&nbsp;
+        {% endif %}
+
+        <!-- 根据总页数循环填充页码，并为其添加超链接进行导航 -->
+        {% for i in range(total) %}
+        <a href="/notebook/type/{{type}}--{{i+1}}">{{i+1}}</a>&nbsp;&nbsp;
+        {% endfor %}
+
+        {% if page==total%}
+        <!-- 如果是最后一页，则下一页也是最后页，否则下一页为当前页+1 -->
+        <a href="/notebook/type/{{type}}--{{total}}">下一页</a>
+        {% else %}
+        <a href="/notebook/type/{{type}}--{{page+1}}">下一页</a>
+        {% endif %}
+
+    </div>
+</div>
+
+{# 按需引入side.html,首页需要引入侧边栏 #}
+
+{% include '/xingyun-notebook/side-jquery.html' %}
+
+
+
+{% endblock %}
+
+
+
+

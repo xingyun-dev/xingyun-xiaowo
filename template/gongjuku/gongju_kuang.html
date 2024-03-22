@@ -1,0 +1,68 @@
+   <div
+                                        class="url-card io-px-2 col-1a col-sm-1a col-md-2a col-lg-3a col-xl-5a col-xxl-6a ">
+                                    <div class="url-body max "><a href="/tools/jieshao/{{tools.tools_id}}"
+                                                                  data-id="2402" data-url="#"
+                                                                  class="card mb-4 site-2402" data-toggle="tooltip"
+                                                                  data-placement="bottom"
+                                                                  title=""
+                                                                  data-original-title="{{tools.tools_jianjie}} ">
+                                        <div class="card-body py-2 px-3">
+                                            <div class="url-content align-items-center d-flex flex-fill">
+                                                <div
+                                                        class="url-img rounded-circle mr-2 d-flex align-items-center justify-content-center">
+                                                    <img class="lazy unfancybox loaded"
+                                                         src="/tools/img/{{tools.tools_avatar}}"
+                                                         height="auto" width="auto" alt="{{tools.tools_name}}"
+                                                         data-was-processed="true">
+                                                </div>
+
+                                                <div class="url-info flex-fill">
+                                                    <div class="text-sm overflowClip_1">
+                                                        <strong>{{tools.tools_name}}</strong></div>
+                                                    <p class="overflowClip_1 text-muted text-xs">{{tools.tools_jianjie}}
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="url-goto-after mt-2"></div>
+                                        </div>
+                                    </a>
+                                        <div class="url-goto px-3 pb-1">
+                                            <div class="d-flex align-items-center" style="white-space:nowrap">
+                                                <div class="tga text-xs py-1">
+                                                    {% if ming_tools_by_type(tools.tools_type)[1] %}
+
+                                                    <span class="mr-1"><a
+                                                            href="/tools/type/{{tools.tools_type}}"
+                                                            rel="tag">{{ming_tools_by_type(tools.tools_type)[1]}}</a>
+                                        </span>
+                                                    {% endif %}
+
+
+                                                    <span class="mr-1"><a
+                                                            href="/tools/type/{{tools.tools_type[0]}}"
+                                                            rel="tag">{{ming_tools_by_type(tools.tools_type)[0]}}</a>
+                                        </span>
+
+                                                    <span class="mr-1"><a
+                                                            href="/tools/type/all"
+                                                            rel="tag">所有工具</a>
+                                        </span>
+                                                </div>
+                                                <a
+                                                        href="{{tools.tools_link}}"
+                                                        target="_blank" rel="external nofollow" title=""
+                                                        class="togo text-center text-muted is-views" data-id="2402"
+                                                        data-toggle="tooltip" data-placement="right"
+                                                        data-original-title="直达">
+                                                    <svg t="1710054258274" class="icon" viewBox="0 0 1024 1024"
+                                                         version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7847"
+                                                         width="16" height="16">
+                                                        <path d="M743.793108 1023.201047c-79.702449-127.967514-187.611755-299.908793-195.374667-310.66115a103.328705 103.328705 0 0 0-96.433696-48.216848c-18.033101 0-186.358117-4.146649-336.408947-3.760914-0.723253-0.964337-58.631687-44.600584 9.64337-101.737549 30.955216-25.796014 679.857553-505.360781 735.065844-546.393318a40.646803 40.646803 0 0 1 68.323273 39.441381c-5.35207 49.422269-98.121285 854.065024-106.077065 911.828808a68.805442 68.805442 0 0 1-78.738112 59.49959z"
+                                                              fill="#515151" p-id="7848"></path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>

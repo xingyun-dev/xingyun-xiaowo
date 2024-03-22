@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="/css/mymodal.css">
+<script type="text/javascript" src="/js/mymodal.js"></script>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">设置内容</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            <div class="modal-body">
+                <form id="settingForm">
+                    <div class="mb-3 row">
+                        <label for="FileUpload1" class="col-sm-3 col-form-label">文章缩略图：</label>
+                        <div class="col-sm-9" style="height: 200px">
+                            <input class="form-control form-control-sm custom-file-input visually-hidden"
+                                   type="file" id="FileUpload1" name="FileUpload1" onchange="previewImage(this)">
+                            <label class="custom-file-label btn " for="FileUpload1" style="width: 300px;"></label>
+                            <img id="imagePreview" class="preview-image ml-3 mt-2"
+                                 alt="请选取文章的缩略图,或使用默认图片">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="textInput" class="form-label">介绍内容：</label>
+                        <textarea class="form-control" id="textInput" rows="4"
+                                  placeholder="如有需要,请输入文章的介绍内容,或者默认截取文章的开头内容"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="submitArticle_moren()">默认发布</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="handleFileUpload()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#myModal').modal('hide')
+    });
+    // 限制输入框字数
+    document.getElementById('textInput').addEventListener('input', function () {
+        if (this.value.length > 130) {
+            this.value = this.value.slice(0, 130);
+        }
+    });
+    // 图片预览函数
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            // 如果用户移除已选图片，则恢复到默认图片或提示文字
+            $('#imagePreview').attr('src', '');
+        }
+    }
+</script>

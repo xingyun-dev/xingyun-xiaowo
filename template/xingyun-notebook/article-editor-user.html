@@ -1,0 +1,319 @@
+{% extends "/xingyun-notebook/base.html" %}   {#将当前页面继承至base.html母版#}
+{% block content %}
+
+{# 按需引入mymodal.html,首页需要引入侧边栏 #}
+
+{% include '/xingyun-notebook/mymodal.html' %}
+
+<script type="text/javascript" src="/ueditor/dist/utf8-php/ueditor.config.js"></script>
+<script type="text/javascript" src="/ueditor/dist/utf8-php/ueditor.all.min.js"></script>
+<script type="text/javascript" src="/ueditor/dist/utf8-php/lang/zh-cn/zh-cn.js"></script>
+<script>
+    var ue = UE.getEditor('content', {
+        initialFrameHeight: 1000, //编辑器初始高度
+        autoHeightEnabled: false, //根据内容自动调整高度
+        serverUrl: '/uedit', //图片上传路径
+        //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义
+    toolbars: [
+      [
+        "fullscreen", //全屏
+        "source", //源码
+        "|",
+        "undo", // 撤销
+        "redo", // 重做
+        "|",
+        "bold", // 加粗
+        "italic", // 斜体
+        "underline",   // 下划线
+        "fontborder",  // 字体边框
+        "strikethrough",  // 删除线
+        "superscript", // 上标
+        "subscript",  // 下标
+        "removeformat", // 清除格式
+        "formatmatch", // 格式刷
+        "autotypeset",  // 自动排版
+        "blockquote", // 引用
+        "pasteplain", // 纯文本粘贴
+        "|",
+        "forecolor",  // 字体颜色
+        "backcolor",  // 背景色
+        "insertorderedlist", // 有序列表
+        "insertunorderedlist", // 无序列表
+        "selectall", // 全选
+        "cleardoc",  // 清空文档
+        "|",
+        "rowspacingtop", // 段前距
+        "rowspacingbottom", // 段后距
+        "lineheight",  // 行高
+        "|",
+        "customstyle", // 自定义样式
+        "paragraph",  // 段落格式
+        "fontfamily",   // 字体
+        "fontsize",   // 字号
+        "|",
+        "directionalityltr",  // 从左向右输入
+        "directionalityrtl",  // 从右向左输入
+        "indent",  // 首行缩进
+        "|",
+        "justifyleft",  // 居左对齐
+        "justifycenter",  // 居中对齐
+        "justifyright",  // 居右对齐
+        "justifyjustify",  // 两端对齐
+        "|",
+        "touppercase", // 大写
+        "tolowercase",  // 小写
+        "|",
+        "link",  // 插入链接
+        "unlink",   // 取消链接
+        "anchor",  // 锚点
+        "|",
+        "imagenone", // 图片默认
+        "imageleft",  // 图片左浮动
+        "imageright",  // 图片右浮动
+        "imagecenter", // 图片居中
+        "|",
+        "simpleupload", // 简单上传
+        "insertimage",  // 插入图片
+        "emotion", //表情
+        // "scrawl",  // 涂鸦
+        // "insertvideo", // 插入视频
+        // "music",   // 音乐
+        // "attachment",  // 附件
+        // "map",   // 地图
+        // "gmap",  // 百度地图
+        // "insertframe",  // 插入iframe
+        "insertcode",  // 插入代码
+        "webapp", // 微应用
+        "pagebreak",  // 分页
+        "template",   // 模板
+        "background", // 背景
+        "|",
+        "horizontal",  // 水平线
+        "date",  // 日期
+        "time",  // 时间
+        "spechars", // 特殊字符
+        // "snapscreen", // 截图
+        // "wordimage", // Word图片
+        "|",
+        "inserttable", // 插入表格
+        "deletetable", // 删除表格
+        "insertparagraphbeforetable", // 表格前插行
+        "insertrow", // 插入行
+        "deleterow", // 删除行
+        "insertcol",  // 插入列
+        "deletecol", // 删除列
+        "mergecells", // 合并单元格
+        "mergeright",  // 向右合并单元格
+        "mergedown",  // 向下合并单元格
+        "splittocells", // 拆分成单元格
+        "splittorows", // 拆分成行
+        "splittocols", // 拆分成列
+        // "charts", // 图表
+        "|",
+        // "print", // 打印
+        "preview", // 预览
+        "searchreplace",// 查找替换
+        "drafts",  // 草稿箱
+        "help"
+      ]
+    ]
+
+    });
+
+</script>
+
+<!-- 中部区域布局 -->
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+
+
+        <div class="container" style="margin-top: 20px; background-color: white; padding: 20px;">
+            <div class="row form-group">
+                <label for="headline" class="col-1">文章标题</label>
+                <input type="text" class="col-11" id="headline"
+                       style="border-width: 1px; border-style: solid; border-color: #ccc; border-radius: 8px;"/>
+            </div>
+
+            <div class="row form-group" style="margin-top: 20px; padding-top: 10px;">
+                <label for="type" class="col-1">类型：</label>
+                <select class="form-control col-2" id="type">
+                    <option value="1">R语言应用</option>
+                    <option value="2">设计美化</option>
+                    <option value="3">Python学习</option>
+                    <option value="4">生信分析</option>
+                    <option value="5">人工智能</option>
+                    <option value="6">web开发</option>
+                    <option value="7">项目实战</option>
+                    <option value="8">其它</option>
+                </select>
+            </div>
+            <div style="margin-top: 50px; display: flex; justify-content: center;">
+                <button class="form-control btn  btn-success " onclick="doDraft()" style="margin: 20px ; width: 20%">保存草稿</button>
+                <button class="form-control btn btn-primary " onclick="doPost()" style="margin: 20px ;width: 20%" >发布文章</button>
+                <button class="form-control btn btn-dark " onclick="domark()" style="margin: 20px ;width: 20%" >Markdown编辑器</button>
+                <button class="form-control btn btn-danger " onclick="dofang()" style="margin: 20px ;width: 20%" >返回首页</button>
+                <button class="form-control btn btn-danger " onclick="fang_article()" style="margin: 20px ;width: 20%" >我的文章</button>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div>
+    <script id="content" name="content" type="text/plain" style=" margin: 20px auto;  width: 100%; ">
+         {{article.content | safe}}
+
+    </script>
+</div>
+
+<script type="text/javascript">
+
+
+      function domark(){
+        window.location.href='/mdpost';
+    }
+
+    function dofang(){
+        window.location.href='/notebook'
+    }
+
+    function fang_article(){
+          window.location.href  = '/ucenter/article'
+    }
+    // var ARTICLEID = 0;    //定义全局变量用于临时保存articleid
+      var currentUrl = window.location.href;
+    // 分割URL获取最后一个斜杠后面的内容作为articleid
+    var ARTICLEID = parseInt(currentUrl.split('/').pop(), 10);
+
+    // 如果需要确保 ARTICLEID 是一个有效的整数，可以添加以下检查
+    if (isNaN(ARTICLEID)) {
+        // 如果 ARTICLEID 不是一个有效的整数，可以设置一个默认值
+        ARTICLEID = 0; // 默认值为0，或者任何您认为合适的值
+    }
+
+    // 用户投稿
+    function doPost() {
+        var headline = $.trim($("#headline").val());
+        var contentPlain = UE.getEditor("content").getContentTxt();
+
+        if (headline.length ===0) {
+            bootbox.alert({title: "错误提示", message: "标题不能少"});
+            return false;
+        } else if (contentPlain.length < 100) {
+            bootbox.alert({title: "错误提示", message: "内容不能低于100个字"});
+            return false;
+        }
+        else {
+            // 如果标题和内容长度都符合要求，显示模态框
+            $('#myModal').modal('show');
+        }
+
+    }
+
+
+    // 提交文章的函数
+    function submitArticle(encodedThumbnail) {
+        var intro = $.trim($("#textInput").val());
+        var headline = $.trim($("#headline").val());
+
+        var param = "headline=" + encodeURIComponent(headline);
+        param += "&content=" + encodeURIComponent(UE.getEditor("content").getContent());
+        param += "&type=" + $("#type").val();
+        param += "&drafted=0&checked=1&is_markdown=0&articleid=" + ARTICLEID;
+        param += "&article_introduce=" + encodeURIComponent(intro);
+        param += "&thumbnail=" + encodedThumbnail;
+
+        $.post('/editor_article', param, function (data) {
+            if (data == 'perm-denied') {
+                bootbox.alert({title: "错误提示", message: "权限不足，无法投稿"});
+            } else if (data == 'post-fail') {
+                bootbox.alert({title: "错误提示", message: "投稿失败，请联系管理员"});
+            } else if (data.match(/^\d+$/)) {
+                bootbox.alert({title: "信息提示", message: "投稿成功，审核后即可发布"});
+                setTimeout(function () {
+                    location.href = '/notebook/article/' + data;
+                }, 1000);
+            } else {
+                bootbox.alert({title: "错误提示", message: "投稿失败，可能没有权限."});
+
+            }
+        }).fail(function () {
+            // 处理AJAX请求失败的情况
+            console.error('AJAX request failed');
+        });
+    }
+
+
+    function submitArticle_moren() {
+        var intro = $.trim($("#textInput").val());
+        var headline = $.trim($("#headline").val());
+
+        var param = "headline=" + encodeURIComponent(headline);
+        param += "&content=" + encodeURIComponent(UE.getEditor("content").getContent());
+        param += "&type=" + $("#type").val();
+        param += "&drafted=0&checked=1&is_markdown=0&articleid=" + ARTICLEID;
+        param += "&article_introduce=" + encodeURIComponent(intro);
+        param += "&thumbnail=" + null;
+
+        $.post('/editor_article', param, function (data) {
+            if (data === 'perm-denied') {
+                bootbox.alert({title: "错误提示", message: "权限不足，无法投稿"});
+            } else if (data === 'post-fail') {
+                bootbox.alert({title: "错误提示", message: "投稿失败，请联系管理员"});
+            } else if (data.match(/^\d+$/)) {
+                bootbox.alert({title: "信息提示", message: "投稿成功，审核后即可发布"});
+                setTimeout(function () {
+                    location.href = '/notebook/article/' + data;
+                }, 1000);
+            } else {
+                bootbox.alert({title: "错误提示", message: "投稿失败，可能没有权限."});
+
+            }
+        }).fail(function () {
+            // 处理AJAX请求失败的情况
+            console.error('AJAX request failed');
+        });
+    }
+
+
+
+
+
+    //保存草稿
+    function doDraft() {
+          var intro = $.trim($("#textInput").val());
+        var headline = $.trim($("#headline").val());
+        var contentPlain = UE.getEditor("content").getContentTxt();
+
+        if (headline.length ===0) {
+            bootbox.alert({title: "错误提示", message: "标题不能少"});
+            return false;
+        } else if (contentPlain.length < 30) {
+            bootbox.alert({title: "错误提示", message: "草稿内容不能低于30个字"});
+            return false;
+        }
+        var param = "headline=" + headline;
+        param += "&content=" + encodeURIComponent(UE.getEditor("content").getContent());
+        param += "&type=" + $("#type").val();
+        param += "&drafted=1&checked=1&is_markdown=0&articleid=" + ARTICLEID;
+        param += "&article_introduce=" + encodeURIComponent(intro);
+        param += "&thumbnail=" + null;
+        $.post('/editor_article', param, function (data) {
+            if (data === 'perm-denied') {
+                bootbox.alert({title: "错误提示", message: "权限不足，无法保存草稿."});
+            } else if (data === 'post-fail') {
+                bootbox.alert({title: "错误提示", message: "保存草稿失败，请联系管理员."});
+            } else if (data.match(/^\d+$/)) {
+                bootbox.alert({title: "信息提示", message: "保存草稿成功."});
+                // 保存草稿后,不跳转页面,重新为全局变量赋值
+                ARTICLEID = parseInt(data);
+            } else {
+                bootbox.alert({title: "错误提示", message: "保存草稿失败，可能没有权限."});
+            }
+        });
+    }
+</script>
+{% endblock %}
+

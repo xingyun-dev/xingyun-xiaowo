@@ -1,0 +1,135 @@
+.Box_xuanfu {
+            /* position: relative; */
+            font-size: 18px;
+            border-radius: 50%;
+            cursor: move;
+            /*position: absolute;*/
+            position: fixed;
+            z-index: 9999;
+            user-select: none; /* 禁止文本选择 */
+            top: 0; /* 将top设置为0，使其位于顶部 */
+            left: 0; /* 将left设置为0，使其位于左侧 */
+
+
+        }
+
+        .box_xuanfu {
+            content: "";
+            background:orangered ;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 4em;
+            height: 4em;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 1em rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .box_xuanfu ion-icon {
+            color: #fff;
+            font-size: 1.3em;
+        }
+
+        .panel {
+            background: rgba(0, 0, 0, 0.5);
+            text-decoration: none;
+            width: 11.7em;
+            height: 8em;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            color: #fff;
+            transform-origin: top center;
+            transition: width 0.1s, height 0.1s, opacity 0.1s;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            backdrop-filter: blur(2px);
+        }
+
+        .panel:nth-child(1) {
+            transform: translateX(-50%);
+        }
+
+        .panel:nth-child(1) ion-icon {
+            transform: translateX(-50%);
+        }
+
+        .panel:nth-child(2) {
+            transition-delay: 0.1s;
+            transform: translateX(-50%) rotate(60deg);
+        }
+
+        .panel:nth-child(2) ion-icon {
+            transition-delay: 0.1s;
+            transform: translateX(-50%) rotate(-60deg);
+        }
+
+        .panel:nth-child(3) {
+            transition-delay: 0.2s;
+            transform: translateX(-50%) rotate(120deg);
+        }
+
+        .panel:nth-child(3) ion-icon {
+            transition-delay: 0.2s;
+            transform: translateX(-50%) rotate(-120deg);
+        }
+
+        .panel:nth-child(4) {
+            transition-delay: 0.3s;
+            transform: translateX(-50%) rotate(180deg);
+        }
+
+        .panel:nth-child(4) ion-icon {
+            transition-delay: 0.2s;
+            transform: translateX(-50%) rotate(-180deg);
+        }
+
+        .panel:nth-child(5) {
+            transition-delay: 0.3s;
+            transform: translateX(-50%) rotate(240deg);
+        }
+
+        .panel:nth-child(5) ion-icon {
+            transition-delay: 0.4s;
+            transform: translateX(-50%) rotate(-240deg);
+        }
+
+        .panel:nth-child(6) {
+            transition-delay: 0.5s;
+            transform: translateX(-50%) rotate(300deg);
+        }
+
+        .panel:nth-child(6) ion-icon {
+            transition-delay: 0.5s;
+            transform: translateX(-50%) rotate(-300deg);
+        }
+
+        .panel:hover {
+            /*background: rgba(0, 0, 0, 0.8);*/
+            background:orangered;
+        }
+
+        .panel ion-icon {
+            font-size: 2.5em;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+
+        .panel {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .Box_xuanfu:hover .panel {
+
+            opacity: 1;
+            height: 6em;
+            width: 6em;
+        }
