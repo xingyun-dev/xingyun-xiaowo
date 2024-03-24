@@ -10,7 +10,6 @@ app = Flask(__name__,template_folder="template",static_folder="resource",static_
 app.config['SECRET_KEY'] = os.urandom(24)
 
 # 使用集成方式处理SQLAlchemy
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:wht050106@localhost:3306/flaskvue?charset=utf8'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://数据库的账号:密码@localhost:3306/数据库名?charset=utf8mb4'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True  # 关闭对模型的修改检测,如果为True,则会跟踪数据库的修改,及时发送信号
 
